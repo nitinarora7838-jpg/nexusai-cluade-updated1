@@ -1,8 +1,223 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Activity, TriangleAlert as AlertTriangle, Eye, TrendingUp } from 'lucide-react';
+
+// ── per-camera config ────────────────────────────────────────────────
+interface BoxDef { top: string; left: string; w: string; h: string; color: string; label: string; conf?: string; pulse?: boolean }
+interface CamConfig {
+  id: number;
+  name: string;
+  location: string;
+  status: 'LIVE' | 'ALERT' | 'OK';
+  statusColor: string;
+  boxes: BoxDef[];
+  scanColor: string;
+  showScan?: boolean;
+  /** Stock video (Pexels CDN — free for commercial use). Replace with self-hosted /public/cameras/*.mp4 for production. */
+  videoSrc: string;
+}
+
+const CAM_CONFIGS: CamConfig[] = [
+  {
+    id: 1, name: 'Camera 1', location: 'Outdoor Zone — Garden', status: 'OK', statusColor: '#96CEB4',
+    scanColor: '#00D4FF',
+    videoSrc: '/cameras/cam1-entrance.mp4',
+    boxes: [
+      { top: '8%',  left: '18%', w: '58%', h: '80%', color: '#00D4FF',  label: 'PERSON', conf: '96%' },
+      { top: '55%', left: '8%',  w: '22%', h: '30%', color: '#FFEAA7',  label: 'PLANT',  conf: '82%' },
+    ],
+  },
+  {
+    id: 2, name: 'Camera 2', location: 'Conference Room — Zone A', status: 'OK', statusColor: '#96CEB4',
+    scanColor: '#6C63FF',
+    videoSrc: '/cameras/cam2-zone-a.mp4',
+    boxes: [
+      { top: '4%',  left: '32%', w: '34%', h: '38%', color: '#6C63FF',  label: 'PERSON', conf: '94%' },
+      { top: '40%', left: '4%',  w: '28%', h: '52%', color: '#6C63FF',  label: 'PERSON', conf: '91%' },
+      { top: '38%', left: '68%', w: '28%', h: '54%', color: '#6C63FF',  label: 'PERSON', conf: '93%' },
+      { top: '50%', left: '38%', w: '24%', h: '24%', color: '#FFEAA7',  label: 'LAPTOP', conf: '99%' },
+    ],
+  },
+  {
+    id: 3, name: 'Camera 3', location: 'Mobile Patrol — Unit 7', status: 'LIVE', statusColor: '#00D4FF',
+    scanColor: '#00D4FF',
+    videoSrc: '/cameras/cam3-dock.mp4',
+    boxes: [
+      { top: '52%', left: '14%', w: '68%', h: '44%', color: '#FFEAA7',  label: 'VEHICLE', conf: '99%' },
+      { top: '60%', left: '72%', w: '20%', h: '28%', color: '#00D4FF',  label: 'HAND',    conf: '87%' },
+    ],
+  },
+  {
+    id: 4, name: 'Camera 4', location: 'Perimeter — Highway', status: 'ALERT', statusColor: '#FF6B6B',
+    scanColor: '#FF6B6B', showScan: true,
+    videoSrc: '/cameras/cam4-perimeter.mp4',
+    boxes: [
+      { top: '38%', left: '60%', w: '24%', h: '38%', color: '#FF6B6B',  label: 'VEHICLE', conf: '98%', pulse: true },
+      { top: '52%', left: '40%', w: '18%', h: '26%', color: '#00D4FF',  label: 'VEHICLE', conf: '93%' },
+      { top: '60%', left: '22%', w: '16%', h: '22%', color: '#00D4FF',  label: 'VEHICLE', conf: '89%' },
+      { top: '46%', left: '78%', w: '16%', h: '20%', color: '#00D4FF',  label: 'VEHICLE', conf: '85%' },
+    ],
+  },
+];
+
+// corner-bracket decoration
+function Brackets({ color }: { color: string }) {
+  const s = { stroke: color, strokeWidth: 1.5, fill: 'none' };
+  return (
+    <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+      {/* TL */}<polyline points="0,12 0,0 12,0" {...s} />
+      {/* TR */}<polyline points="calc(100% - 12),0 100%,0 100%,12" {...s} style={{ ...s, stroke: color }} />
+      {/* BL */}<polyline points="0,calc(100% - 12) 0,100% 12,100%" {...s} />
+      {/* BR */}<polyline points="calc(100% - 12),100% 100%,100% 100%,calc(100% - 12)" {...s} />
+    </svg>
+  );
+}
+
+function DetectionBox({ box, prefersReduced, driftSeed }: { box: BoxDef; prefersReduced: boolean | null; driftSeed: number }) {
+  const drift = prefersReduced ? {} : {
+    x: [0, 3 + (driftSeed % 4), -2, 0],
+    y: [0, -2, 2 + (driftSeed % 3), 0],
+    ...(box.pulse ? { opacity: [0.75, 1, 0.75] } : {}),
+  };
+  return (
+    <motion.div
+      className="absolute border rounded-sm"
+      style={{
+        top: box.top, left: box.left, width: box.w, height: box.h,
+        borderColor: box.color,
+        boxShadow: `0 0 8px ${box.color}66, inset 0 0 8px ${box.color}20`,
+      }}
+      animate={drift}
+      transition={{ repeat: Infinity, duration: 3 + driftSeed * 0.4, ease: 'easeInOut' }}
+    >
+      {/* label badge sitting on top edge */}
+      <div className="absolute -top-3 left-0 text-[7px] font-bold px-1 py-0.5 rounded-sm leading-none whitespace-nowrap"
+        style={{ background: box.color, color: '#0B1120', letterSpacing: '0.05em' }}>
+        {box.label}{box.conf && <span className="opacity-70 ml-1">{box.conf}</span>}
+      </div>
+      {/* corner ticks */}
+      {(['tl','tr','bl','br'] as const).map(c => (
+        <div key={c} className="absolute" style={{
+          width: 6, height: 6,
+          top:    c.startsWith('t') ? -1 : undefined,
+          bottom: c.startsWith('b') ? -1 : undefined,
+          left:   c.endsWith('l')  ? -1 : undefined,
+          right:  c.endsWith('r')  ? -1 : undefined,
+          borderTop:    c.startsWith('t') ? `2px solid ${box.color}` : undefined,
+          borderBottom: c.startsWith('b') ? `2px solid ${box.color}` : undefined,
+          borderLeft:   c.endsWith('l')  ? `2px solid ${box.color}` : undefined,
+          borderRight:  c.endsWith('r')  ? `2px solid ${box.color}` : undefined,
+        }} />
+      ))}
+    </motion.div>
+  );
+}
+
+function CameraFeedCard({ cam }: { cam: CamConfig }) {
+  const prefersReduced = useReducedMotion();
+  const [videoOk, setVideoOk] = useState(true);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+      viewport={{ once: true }} transition={{ delay: cam.id * 0.1 }}
+      className="aspect-video rounded-xl overflow-hidden glass border border-white/5 relative select-none"
+    >
+      {/* fallback gradient (shown until video loads or if it fails) */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-[#0B1120]" />
+
+      {/* real CCTV-style video footage */}
+      {videoOk && (
+        <video
+          src={cam.videoSrc}
+          autoPlay loop muted playsInline preload="auto"
+          onError={() => setVideoOk(false)}
+          onCanPlay={(e) => { (e.currentTarget as HTMLVideoElement).play().catch(() => {}); }}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: 'grayscale(0.5) contrast(1.1) brightness(0.95) saturate(0.5)',
+          }}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* surveillance vignette + color tint */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse at center, rgba(11,17,32,0) 50%, rgba(11,17,32,0.55) 100%)',
+      }} />
+      <div className="absolute inset-0 pointer-events-none mix-blend-overlay" style={{
+        background: `linear-gradient(135deg, ${cam.scanColor}20, transparent 50%)`,
+      }} />
+
+      {/* film grain / noise overlay (CSS-only) */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08]" style={{
+        backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'3\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
+        mixBlendMode: 'overlay',
+      }} />
+
+      {/* subtle grid */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(0,212,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.4) 1px, transparent 1px)',
+        backgroundSize: '30px 30px',
+      }} />
+
+      {/* vertical scan line */}
+      {cam.showScan && !prefersReduced && (
+        <motion.div
+          className="absolute top-0 bottom-0 w-0.5 pointer-events-none"
+          style={{ background: `linear-gradient(180deg, transparent, ${cam.scanColor}80, transparent)` }}
+          animate={{ left: ['0%', '100%', '0%'] }}
+          transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
+        />
+      )}
+
+      {/* horizontal sweep */}
+      {!prefersReduced && (
+        <motion.div
+          className="absolute left-0 right-0 h-px pointer-events-none"
+          style={{ background: `linear-gradient(90deg, transparent, ${cam.scanColor}60, transparent)` }}
+          animate={{ top: ['0%', '100%'] }}
+          transition={{ repeat: Infinity, duration: 3 + cam.id * 0.5, ease: 'linear' }}
+        />
+      )}
+
+      {/* detection boxes */}
+      {cam.boxes.map((box, i) => (
+        <DetectionBox key={i} box={box} prefersReduced={prefersReduced} driftSeed={cam.id * 3 + i} />
+      ))}
+
+      {/* bottom-left: cam name + location */}
+      <div className="absolute bottom-2 left-2 flex flex-col gap-0.5">
+        <span className="text-[8px] font-mono text-slate-500">{cam.name}</span>
+        <span className="text-[7px] text-slate-600">{cam.location}</span>
+      </div>
+
+      {/* top-right: status badge */}
+      <div className="absolute top-2 right-2 flex items-center gap-1 rounded px-1.5 py-0.5"
+        style={{ background: `${cam.statusColor}20`, border: `1px solid ${cam.statusColor}50` }}>
+        <motion.div className="w-1 h-1 rounded-full" style={{ background: cam.statusColor }}
+          animate={!prefersReduced ? { opacity: [1, 0.3, 1] } : {}}
+          transition={{ repeat: Infinity, duration: 1 }} />
+        <span className="text-[7px] font-bold" style={{ color: cam.statusColor }}>{cam.status}</span>
+      </div>
+
+      {/* top-left: rec indicator */}
+      <div className="absolute top-2 left-2 flex items-center gap-1">
+        <motion.div className="w-1.5 h-1.5 rounded-full bg-red-500"
+          animate={!prefersReduced ? { opacity: [1, 0, 1] } : {}}
+          transition={{ repeat: Infinity, duration: 1.2, delay: cam.id * 0.3 }} />
+        <span className="text-[7px] font-mono text-slate-500">REC</span>
+      </div>
+
+      {/* detection count badge */}
+      <div className="absolute bottom-2 right-2 text-[8px] font-semibold"
+        style={{ color: cam.scanColor }}>
+        {cam.boxes.length} det.
+      </div>
+    </motion.div>
+  );
+}
 
 function AnalyticsCard({ stat, color, delay }: { stat: { label: string; value: string }; color: string; delay: number }) {
   return (
@@ -154,27 +369,8 @@ export default function MonitoringShowcase() {
               <div className="lg:col-span-2 space-y-4">
                 <div className="text-sm font-semibold text-white mb-3">Multi-Camera Live Feed</div>
                 <div className="grid grid-cols-2 gap-4">
-                  {[1, 2, 3, 4].map((i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="aspect-video rounded-xl overflow-hidden glass border border-white/5 relative"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-900" />
-                      <div className="absolute inset-0 opacity-5" style={{
-                        backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(0,212,255,0.05) 25%, rgba(0,212,255,0.05) 26%, transparent 27%, transparent 74%, rgba(0,212,255,0.05) 75%, rgba(0,212,255,0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0,212,255,0.05) 25%, rgba(0,212,255,0.05) 26%, transparent 27%, transparent 74%, rgba(0,212,255,0.05) 75%, rgba(0,212,255,0.05) 76%, transparent 77%, transparent)',
-                        backgroundSize: '40px 40px'
-                      }} />
-                      <div className="absolute top-2 left-2 text-[9px] text-slate-500 font-mono">Camera {i}</div>
-                      <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent opacity-20"
-                        animate={{ scaleX: [0, 1, 0] }}
-                        transition={{ repeat: Infinity, duration: 2, delay: i * 0.2 }}
-                      />
-                    </motion.div>
+                  {CAM_CONFIGS.map((cam) => (
+                    <CameraFeedCard key={cam.id} cam={cam} />
                   ))}
                 </div>
               </div>
