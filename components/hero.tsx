@@ -188,16 +188,6 @@ export default function Hero() {
           className="inline-flex items-center gap-2 mb-8 flex-wrap justify-center"
         >
           <div className="tag-pill">Enterprise AI Platform</div>
-          <div
-            className="tag-pill"
-            style={{
-              background: 'rgba(108,99,255,0.1)',
-              border: '1px solid rgba(108,99,255,0.2)',
-              color: '#6C63FF',
-            }}
-          >
-            2025 Edition
-          </div>
         </motion.div>
 
         {/* H1 */}

@@ -137,7 +137,9 @@ export default function FinalCTA() {
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-16 px-4">
             <a
-              href="#contact"
+              href="https://calendly.com/nitinarora81788/30min"
+              rel="noopener noreferrer"
+              target="_blank"
               className="group relative inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-[#0B1120] rounded-xl overflow-hidden w-full sm:w-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00D4FF]"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#00D4FF] to-[#6C63FF]" />

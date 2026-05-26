@@ -21,9 +21,9 @@ const BENEFITS = [
 ] as const;
 
 const CONTACT_ITEMS = [
-  { icon: Mail,   label: 'Email', value: 'enterprise@nexusai.com',           color: '#00D4FF' },
-  { icon: Phone,  label: 'Phone', value: '+1 (888) NEXUS-AI',                color: '#6C63FF' },
-  { icon: MapPin, label: 'HQ',    value: 'San Francisco, CA + New York, NY', color: '#00D4FF' },
+  { icon: Mail,   label: 'Email', value: 'ai@nexus-aisolution.com',           color: '#00D4FF' },
+  { icon: Phone,  label: 'Phone', value: '+91 8178840058',                    color: '#6C63FF' },
+  { icon: MapPin, label: 'HQ',    value: 'DLF Cyber Park Tower A, Gurugram, IN', color: '#00D4FF' },
 ] as const;
 
 const INPUT_CLASS =
@@ -111,7 +111,7 @@ export default function Contact() {
                 needs and outline an AI transformation roadmap.
               </p>
               <a
-                href="https://calendly.com"
+                href="https://calendly.com/nitinarora81788/30min"
                 rel="noopener noreferrer"
                 target="_blank"
                 className="group w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-[#0B1120] rounded-xl bg-gradient-to-r from-[#00D4FF] to-[#6C63FF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00D4FF]"

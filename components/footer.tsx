@@ -37,6 +37,12 @@ export default function Footer() {
             <p className="text-xs text-slate-600 leading-relaxed mb-4 max-w-[200px]">
               Enterprise AI Solutions that transform business operations at scale.
             </p>
+            <a
+              href="mailto:ai@nexus-aisolution.com"
+              className="text-xs text-slate-500 hover:text-[#00D4FF] transition-colors block mb-4"
+            >
+              ai@nexus-aisolution.com
+            </a>
             <div className="flex gap-2" aria-label="Social links">
               {(['LinkedIn', 'Twitter', 'GitHub'] as const).map((name, i) => (
                 <a
