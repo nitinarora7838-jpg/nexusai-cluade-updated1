@@ -16,6 +16,7 @@ interface Product {
   color: string;
   description: string;
   features: string[];
+  slug: string;
 }
 
 // ─── Data ──────────────────────────────────────────────────────────
@@ -25,6 +26,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Payroll Intelligence',
     tag: 'Payroll',
     color: '#00D4FF',
+    slug: 'ai-payroll-intelligence',
     description: 'End-to-end payroll automation with AI compliance checks, anomaly detection, and real-time reporting.',
     features: ['Automated tax calculations', 'Compliance monitoring', 'Anomaly detection', 'Multi-jurisdiction support'],
   },
@@ -33,6 +35,7 @@ const PRODUCTS: Product[] = [
     name: 'AI PMO Copilot',
     tag: 'PMO',
     color: '#6C63FF',
+    slug: 'ai-pmo-copilot',
     description: 'AI-powered project management intelligence that tracks milestones, risks, and resource optimization.',
     features: ['Risk prediction', 'Resource optimization', 'Portfolio analytics', 'Automated reporting'],
   },
@@ -41,6 +44,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Workflow Engine',
     tag: 'Automation',
     color: '#00D4FF',
+    slug: 'ai-workflow-engine',
     description: 'Orchestrate complex business workflows with intelligent routing, conditional logic, and AI decision engines.',
     features: ['Visual workflow builder', 'AI decision nodes', 'API integrations', 'Real-time monitoring'],
   },
@@ -49,6 +53,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Analytics Dashboard',
     tag: 'Analytics',
     color: '#6C63FF',
+    slug: 'ai-analytics-dashboard',
     description: 'Transform raw data into actionable intelligence with predictive analytics and AI-generated insights.',
     features: ['Predictive analytics', 'NL queries', 'Custom KPI tracking', 'Executive summaries'],
   },
@@ -57,6 +62,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Customer Support Agent',
     tag: 'Support',
     color: '#00D4FF',
+    slug: 'ai-customer-support-agent',
     description: 'Deploy intelligent AI agents that resolve 80% of customer inquiries autonomously with human-like accuracy.',
     features: ['Multi-channel support', 'Sentiment analysis', 'Auto-escalation', 'Knowledge base sync'],
   },
@@ -65,6 +71,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Automation Studio',
     tag: 'Low-Code',
     color: '#6C63FF',
+    slug: 'ai-automation-studio',
     description: 'No-code automation builder powered by AI suggestions, with enterprise-grade reliability and scalability.',
     features: ['Drag-drop builder', 'AI suggestions', '500+ connectors', 'Enterprise SLA'],
   },
@@ -73,6 +80,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Reporting System',
     tag: 'Reports',
     color: '#00D4FF',
+    slug: 'ai-reporting-system',
     description: 'Automated report generation with AI narrative writing, scheduled delivery, and dynamic visualizations.',
     features: ['Auto-generation', 'AI narrative', 'Scheduled delivery', 'Dynamic charts'],
   },
@@ -81,6 +89,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Productivity Assistant',
     tag: 'Productivity',
     color: '#6C63FF',
+    slug: 'ai-productivity-assistant',
     description: 'An intelligent workplace AI that manages tasks, schedules, communications, and knowledge retrieval.',
     features: ['Smart scheduling', 'Task automation', 'Knowledge retrieval', 'Team collaboration'],
   },
@@ -89,6 +98,7 @@ const PRODUCTS: Product[] = [
     name: 'AI Monitoring Intelligence',
     tag: 'Monitoring',
     color: '#00D4FF',
+    slug: 'ai-monitoring-intelligence',
     description: 'Transform existing cameras into intelligent monitoring systems with real-time AI analytics and alerts.',
     features: ['Plug-and-play integration', 'Real-time alerts', 'Multi-camera management', 'Compliance reporting'],
   },
@@ -150,7 +160,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       </ul>
 
       <a
-        href="#contact"
+        href={`/products/${product.slug}`}
+        target="_blank"
+        rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-xs font-semibold transition-all group/link focus-visible:outline-2 focus-visible:outline-offset-2"
         style={{ color: product.color }}
         aria-label={`Learn more about ${product.name}`}
