@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
+import dynamic from 'next/dynamic';
 import './globals.css';
+
+const Cursor = dynamic(() => import('@/components/cursor'), { ssr: false });
 
 // ─── Fonts ─────────────────────────────────────────────────────────
 const inter = Inter({
@@ -82,6 +85,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
+        <Cursor />
         {/* Skip-to-content link for keyboard / screen-reader users */}
         <a
           href="#main-content"

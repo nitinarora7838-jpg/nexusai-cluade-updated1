@@ -161,8 +161,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
       <a
         href={`/products/${product.slug}`}
-        target="_blank"
-        rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-xs font-semibold transition-all group/link focus-visible:outline-2 focus-visible:outline-offset-2"
         style={{ color: product.color }}
         aria-label={`Learn more about ${product.name}`}
