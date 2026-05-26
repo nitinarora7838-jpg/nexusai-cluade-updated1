@@ -153,7 +153,7 @@ export default function ProductPageClient({ product }: { product: ProductData })
               className="inline-flex items-center justify-center gap-2 px-7 py-4 text-sm font-semibold text-white rounded-xl border border-white/10 hover:border-white/25 transition-colors"
             >
               <Mail className="w-4 h-4" />
-              Talk to an Expert
+              Email Our Team
             </a>
           </motion.div>
 
