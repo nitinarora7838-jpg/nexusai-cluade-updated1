@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Nexus Next.js Dev",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd nexusai-cluade-updated1 && npm run dev"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}
