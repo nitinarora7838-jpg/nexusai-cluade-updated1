@@ -106,7 +106,7 @@ export default function Automation() {
             </ol>
 
             <a
-              href="#contact"
+              href="/automation"
               className="group inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 text-sm font-semibold text-[#0B1120] rounded-xl bg-gradient-to-r from-[#00D4FF] to-[#6C63FF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00D4FF]"
             >
               Explore Automation
