@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Nexus AI <noreply@nexus-aisolution.com>',
+        from: 'Nexus AI <onboarding@resend.dev>',
         to: ['ai@nexus-aisolution.com'],
         reply_to: email,
         subject: `[Nexus AI Enquiry] ${name} from ${company}`,
