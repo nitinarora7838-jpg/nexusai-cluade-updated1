@@ -680,7 +680,7 @@ export default function AutomationPageClient() {
               </span>
             </h2>
             <p className="text-slate-400 text-base sm:text-lg mt-4 max-w-2xl mx-auto">
-              Enterprise-grade security and compliance aren't an afterthought — they're the foundation every automation is built on.
+              Enterprise-grade security and compliance are not an afterthought — they are the foundation every automation is built on.
             </p>
           </motion.div>
 
