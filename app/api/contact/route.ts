@@ -64,9 +64,14 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      const err = await response.json();
-      console.error('Resend API error:', err);
-      return NextResponse.json({ error: 'Failed to send email. Please try again.' }, { status: 500 });
+      const err = await response.json().catch(() => ({}));
+      console.error('Resend API error:', JSON.stringify(err));
+      // Surface the real Resend error so it is visible in Vercel Function logs
+      const resendMessage = err?.message || err?.name || 'Unknown Resend error';
+      return NextResponse.json(
+        { error: `Email delivery failed: ${resendMessage}` },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true });
