@@ -56,9 +56,14 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         from: 'Nexus AI <onboarding@resend.dev>',
-        to: ['ai@nexus-aisolution.com'],
+        // NOTE: While using onboarding@resend.dev, Resend free tier only
+        // allows delivery to the account's registered email.
+        // Once nexus-aisolution.com is verified in Resend dashboard,
+        // change 'to' back to ['ai@nexus-aisolution.com'] and update
+        // 'from' to 'Nexus AI <noreply@nexus-aisolution.com>'
+        to: ['nitinarora81788@gmail.com'],
         reply_to: email,
-        subject: `New enquiry from ${name} — ${company}`,
+        subject: `[Nexus AI Enquiry] ${name} from ${company}`,
         html,
       }),
     });
