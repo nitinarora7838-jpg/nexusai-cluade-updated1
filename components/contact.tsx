@@ -41,10 +41,16 @@ export default function Contact() {
     setLoading(true);
     setError(null);
     try {
-      await new Promise<void>(r => setTimeout(r, 1200));
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to send');
       setSent(true);
-    } catch {
-      setError('Something went wrong. Please try again or email us directly.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again or email us directly.');
     } finally {
       setLoading(false);
     }
