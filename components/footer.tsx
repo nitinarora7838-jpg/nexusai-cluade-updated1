@@ -26,9 +26,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 sm:col-span-3 md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="relative w-8 h-8 flex-shrink-0" aria-hidden="true">
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan-400 to-[#6C63FF]" />
-                <Zap className="absolute inset-0 m-auto w-4 h-4 text-white" />
+              <div className="relative w-9 h-9 flex-shrink-0" aria-hidden="true">
+                <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#6C63FF] opacity-30 blur-sm" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#00D4FF] via-[#3B82F6] to-[#6C63FF]" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/25 to-transparent" />
+                <svg className="absolute inset-0 m-auto w-4 h-4 drop-shadow" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
               </div>
               <span className="font-bold text-white">
                 Nexus <span className="gradient-text">AI</span>

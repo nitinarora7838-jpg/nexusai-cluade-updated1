@@ -66,11 +66,18 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" aria-label="Nexus AI — home" className="flex items-center gap-2.5 group flex-shrink-0">
-          <div className="relative w-9 h-9" aria-hidden="true">
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan-400 to-[#6C63FF] opacity-90 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan-400 to-[#6C63FF] blur-md opacity-50 group-hover:opacity-80 transition-opacity" />
-            <Zap className="absolute inset-0 m-auto w-5 h-5 text-white" aria-hidden="true" />
+        <a href="/" aria-label="Nexus AI — home" className="flex items-center gap-3 group flex-shrink-0">
+          <div className="relative w-10 h-10 flex-shrink-0" aria-hidden="true">
+            {/* Outer glow */}
+            <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#6C63FF] opacity-30 blur-md group-hover:opacity-60 transition-opacity duration-300" />
+            {/* Icon background */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#00D4FF] via-[#3B82F6] to-[#6C63FF]" />
+            {/* Inner shine */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/25 to-transparent" />
+            {/* Lightning bolt */}
+            <svg className="absolute inset-0 m-auto w-5 h-5 drop-shadow" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
           </div>
           <span className="text-lg font-bold tracking-tight">
             <span className="text-white">Nexus</span>
