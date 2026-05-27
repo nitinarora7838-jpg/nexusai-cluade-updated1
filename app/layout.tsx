@@ -66,6 +66,11 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
     creator: '@nexusai',
   },
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/apple-icon.svg',
+  },
   robots: {
     index: true,
     follow: true,

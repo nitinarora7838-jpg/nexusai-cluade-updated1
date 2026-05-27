@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d1535"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#6C63FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+  <!-- Stylised N with lightning cut -->
+  <path d="M7 24V8l7.5 10.5V8H11V6h8v2h-2.5v8L24 6v18h-3.5V13.5L13 24H7z" fill="url(#glow)"/>
+  <!-- Accent dot -->
+  <circle cx="26" cy="7" r="2.2" fill="#00D4FF" opacity="0.9"/>
+</svg>
