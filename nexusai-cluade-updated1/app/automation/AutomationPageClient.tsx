@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion, type Variants } from 'framer-motion';
 import Link from 'next/link';
 import {
   ArrowLeft, ArrowRight, Zap, Shield, Eye, Lock, FileText,
@@ -332,9 +332,9 @@ function AnimatedCounter({ target, suffix, duration = 2000 }: { target: number; 
 }
 
 // ─── Main page ────────────────────────────────────────────────────────
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 36 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] } }),
+  show: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.6, ease: 'easeOut' } }),
 };
 
 export default function AutomationPageClient() {
