@@ -376,7 +376,7 @@ export default function MonitoringHero() {
             </div>
 
             <a
-              href="#contact"
+              href="/monitoring"
               className="group inline-flex items-center gap-2 px-7 py-4 text-sm font-semibold text-[#0B1120] rounded-xl bg-gradient-to-r from-[#00D4FF] to-[#6C63FF] hover:shadow-lg hover:shadow-[#00D4FF]/20 transition-all"
             >
               Start Monitoring
