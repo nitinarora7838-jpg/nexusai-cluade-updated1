@@ -13,10 +13,10 @@ const VALUES: Value[] = [
 ];
 
 const STATS: Stat[] = [
-  { val: '2019',  label: 'Founded'               },
-  { val: '500+',  label: 'Enterprise Clients'     },
-  { val: '50+',   label: 'Countries Served'       },
-  { val: '$2B+',  label: 'Client Value Generated' },
+  { val: '2025',   label: 'Founded'               },
+  { val: '40+',    label: 'Enterprise Clients'     },
+  { val: '18+',    label: 'Countries Served'       },
+  { val: '$120M+', label: 'Client Value Generated' },
 ];
 
 export default function About() {

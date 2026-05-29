@@ -10,8 +10,8 @@ interface Particle { x: number; y: number; vx: number; vy: number; r: number; al
 
 // ─── Constants ─────────────────────────────────────────────────────
 const STATS: Stat[] = [
-  { value: 500,  suffix: '+',  label: 'Enterprise Clients'    },
-  { value: 10,   suffix: 'B+', label: 'Transactions Automated' },
+  { value: 40,   suffix: '+',  label: 'Enterprise Clients'    },
+  { value: 250,  suffix: 'M+', label: 'Transactions Automated' },
   { value: 99.9, suffix: '%',  label: 'Uptime SLA', decimal: true },
   { value: 3,    suffix: 'x',  label: 'Avg Productivity Gain'  },
 ];
