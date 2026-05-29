@@ -507,7 +507,7 @@ export default function CaseStudyPageClient({ slug }: { slug: string }) {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <Quote className="w-8 h-8 mx-auto mb-6 opacity-40" style={{ color }} />
             <blockquote className="text-xl sm:text-2xl font-medium text-white leading-relaxed mb-6">
-              "{quote.text}"
+              &ldquo;{quote.text}&rdquo;
             </blockquote>
             <div className="text-sm font-semibold text-white">{quote.author}</div>
             <div className="text-xs text-slate-500 mt-1">{quote.role}</div>
