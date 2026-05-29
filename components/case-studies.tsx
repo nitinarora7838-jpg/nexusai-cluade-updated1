@@ -8,12 +8,12 @@ interface Metric   { icon: LucideIcon; value: string; label: string; }
 interface CaseStudy {
   company: string; industry: string; logo: string; color: string;
   headline: string; description: string;
-  metrics: Metric[]; tags: string[];
+  metrics: Metric[]; tags: string[]; slug: string;
 }
 
 const CASES: CaseStudy[] = [
   {
-    company: 'Global Finance Corp', industry: 'Financial Services', logo: 'GFC', color: '#00D4FF',
+    company: 'Global Finance Corp', industry: 'Financial Services', logo: 'GFC', color: '#00D4FF', slug: 'global-finance-corp',
     headline: 'Reduced manual workflows by 75%',
     description: 'Deployed Nexus AI Workflow Engine to automate 140+ manual financial processes, eliminating 12,000 hours of manual work per quarter.',
     metrics: [
@@ -24,7 +24,7 @@ const CASES: CaseStudy[] = [
     tags: ['Workflow Automation', 'Finance', 'Compliance'],
   },
   {
-    company: 'MedTech Solutions', industry: 'Healthcare', logo: 'MTS', color: '#6C63FF',
+    company: 'MedTech Solutions', industry: 'Healthcare', logo: 'MTS', color: '#6C63FF', slug: 'medtech-solutions',
     headline: 'Automated payroll processing for 8,000 employees',
     description: 'Nexus AI Payroll Intelligence handles multi-state payroll, benefits deductions, and regulatory compliance with 99.97% accuracy.',
     metrics: [
@@ -35,7 +35,7 @@ const CASES: CaseStudy[] = [
     tags: ['Payroll', 'Healthcare', 'HR Automation'],
   },
   {
-    company: 'RetailPlex International', industry: 'Retail', logo: 'RPI', color: '#00D4FF',
+    company: 'RetailPlex International', industry: 'Retail', logo: 'RPI', color: '#00D4FF', slug: 'retailplex-international',
     headline: 'Increased operational efficiency by 3×',
     description: 'AI-powered inventory management, demand forecasting, and automated vendor communications transformed their entire supply chain.',
     metrics: [
@@ -46,7 +46,7 @@ const CASES: CaseStudy[] = [
     tags: ['Analytics', 'Retail', 'Supply Chain'],
   },
   {
-    company: 'Logistics Prime', industry: 'Logistics', logo: 'LP', color: '#6C63FF',
+    company: 'Logistics Prime', industry: 'Logistics', logo: 'LP', color: '#6C63FF', slug: 'logistics-prime',
     headline: 'Reduced reporting effort by 80%',
     description: 'Nexus AI Reporting System automated 200+ monthly reports across 15 departments with AI-generated insights and exec-ready summaries.',
     metrics: [
@@ -57,7 +57,7 @@ const CASES: CaseStudy[] = [
     tags: ['Reporting', 'Analytics', 'Logistics'],
   },
   {
-    company: 'TechVenture SaaS', industry: 'SaaS', logo: 'TVS', color: '#00D4FF',
+    company: 'TechVenture SaaS', industry: 'SaaS', logo: 'TVS', color: '#00D4FF', slug: 'techventure-saas',
     headline: 'AI handling 85% of enterprise support tickets',
     description: 'Custom AI Support Agent trained on product knowledge handles complex enterprise queries with human-level accuracy, 24/7.',
     metrics: [
@@ -190,7 +190,7 @@ export default function CaseStudies() {
             </dl>
 
             <a
-              href="#contact"
+              href={`/case-studies/${c.slug}`}
               className="inline-flex items-center gap-2 text-sm font-semibold group focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ color: c.color }}
             >
