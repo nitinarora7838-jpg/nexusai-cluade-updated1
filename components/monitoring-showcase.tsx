@@ -22,31 +22,31 @@ interface CamConfig {
 const CAM_CONFIGS: CamConfig[] = [
   {
     id: 1, name: 'Camera 1', location: 'Outdoor Zone — Garden', status: 'OK', statusColor: '#96CEB4',
-    scanColor: '#00D4FF',
+    scanColor: '#0891b2',
     videoSrc: '/cameras/cam1-entrance.mp4',
     boxes: [
-      { top: '8%',  left: '18%', w: '58%', h: '80%', color: '#00D4FF',  label: 'PERSON', conf: '96%' },
+      { top: '8%',  left: '18%', w: '58%', h: '80%', color: '#0891b2',  label: 'PERSON', conf: '96%' },
       { top: '55%', left: '8%',  w: '22%', h: '30%', color: '#FFEAA7',  label: 'PLANT',  conf: '82%' },
     ],
   },
   {
     id: 2, name: 'Camera 2', location: 'Conference Room — Zone A', status: 'OK', statusColor: '#96CEB4',
-    scanColor: '#6C63FF',
+    scanColor: '#059669',
     videoSrc: '/cameras/cam2-zone-a.mp4',
     boxes: [
-      { top: '4%',  left: '32%', w: '34%', h: '38%', color: '#6C63FF',  label: 'PERSON', conf: '94%' },
-      { top: '40%', left: '4%',  w: '28%', h: '52%', color: '#6C63FF',  label: 'PERSON', conf: '91%' },
-      { top: '38%', left: '68%', w: '28%', h: '54%', color: '#6C63FF',  label: 'PERSON', conf: '93%' },
+      { top: '4%',  left: '32%', w: '34%', h: '38%', color: '#059669',  label: 'PERSON', conf: '94%' },
+      { top: '40%', left: '4%',  w: '28%', h: '52%', color: '#059669',  label: 'PERSON', conf: '91%' },
+      { top: '38%', left: '68%', w: '28%', h: '54%', color: '#059669',  label: 'PERSON', conf: '93%' },
       { top: '50%', left: '38%', w: '24%', h: '24%', color: '#FFEAA7',  label: 'LAPTOP', conf: '99%' },
     ],
   },
   {
-    id: 3, name: 'Camera 3', location: 'Mobile Patrol — Unit 7', status: 'LIVE', statusColor: '#00D4FF',
-    scanColor: '#00D4FF',
+    id: 3, name: 'Camera 3', location: 'Mobile Patrol — Unit 7', status: 'LIVE', statusColor: '#0891b2',
+    scanColor: '#0891b2',
     videoSrc: '/cameras/cam3-dock.mp4',
     boxes: [
       { top: '52%', left: '14%', w: '68%', h: '44%', color: '#FFEAA7',  label: 'VEHICLE', conf: '99%' },
-      { top: '60%', left: '72%', w: '20%', h: '28%', color: '#00D4FF',  label: 'HAND',    conf: '87%' },
+      { top: '60%', left: '72%', w: '20%', h: '28%', color: '#0891b2',  label: 'HAND',    conf: '87%' },
     ],
   },
   {
@@ -55,9 +55,9 @@ const CAM_CONFIGS: CamConfig[] = [
     videoSrc: '/cameras/cam4-perimeter.mp4',
     boxes: [
       { top: '38%', left: '60%', w: '24%', h: '38%', color: '#FF6B6B',  label: 'VEHICLE', conf: '98%', pulse: true },
-      { top: '52%', left: '40%', w: '18%', h: '26%', color: '#00D4FF',  label: 'VEHICLE', conf: '93%' },
-      { top: '60%', left: '22%', w: '16%', h: '22%', color: '#00D4FF',  label: 'VEHICLE', conf: '89%' },
-      { top: '46%', left: '78%', w: '16%', h: '20%', color: '#00D4FF',  label: 'VEHICLE', conf: '85%' },
+      { top: '52%', left: '40%', w: '18%', h: '26%', color: '#0891b2',  label: 'VEHICLE', conf: '93%' },
+      { top: '60%', left: '22%', w: '16%', h: '22%', color: '#0891b2',  label: 'VEHICLE', conf: '89%' },
+      { top: '46%', left: '78%', w: '16%', h: '20%', color: '#0891b2',  label: 'VEHICLE', conf: '85%' },
     ],
   },
 ];
@@ -226,13 +226,13 @@ function AnalyticsCard({ stat, color, delay }: { stat: { label: string; value: s
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay }}
-      className="glass rounded-xl p-4 border border-white/5"
+      className="glass rounded-xl p-4 border border-slate-200 bg-slate-50"
     >
       <div className="flex items-center gap-3 mb-2">
         <div className="w-2 h-2 rounded-full" style={{ background: color }} />
-        <span className="text-xs text-slate-600 font-medium">{stat.label}</span>
+        <span className="text-xs text-slate-500 font-medium">{stat.label}</span>
       </div>
-      <div className="text-2xl font-bold text-white">{stat.value}</div>
+      <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
     </motion.div>
   );
 }
@@ -252,10 +252,10 @@ function LiveActivityFeed() {
   ];
 
   return (
-    <div className="glass rounded-2xl border border-white/8 p-6 h-full">
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 h-full shadow-sm">
       <div className="flex items-center gap-2 mb-4">
-        <Activity className="w-4 h-4 text-[#00D4FF]" />
-        <h4 className="font-semibold text-white text-sm">Live Activity Feed</h4>
+        <Activity className="w-4 h-4 text-cyan-600" />
+        <h4 className="font-semibold text-slate-900 text-sm">Live Activity Feed</h4>
       </div>
       <div className="space-y-3">
         {activities.map((a, i) => (
@@ -265,11 +265,11 @@ function LiveActivityFeed() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="flex gap-3 items-start pb-3 border-b border-white/5 last:border-0"
+            className="flex gap-3 items-start pb-3 border-b border-slate-200 last:border-0"
           >
             <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: a.color }} />
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-slate-300 leading-tight">{a.msg}</p>
+              <p className="text-xs text-slate-700 leading-tight">{a.msg}</p>
               <p className="text-[10px] text-slate-600 mt-0.5">{times[i] ?? 0}s ago</p>
             </div>
           </motion.div>
@@ -283,17 +283,16 @@ export default function MonitoringShowcase() {
   const [activeTab, setActiveTab] = useState('live');
 
   const stats = [
-    { label: 'Active Cameras', value: '247', color: '#00D4FF' },
-    { label: 'AI Detections', value: '1.2K', color: '#6C63FF' },
+    { label: 'Active Cameras', value: '247', color: '#0891b2' },
+    { label: 'AI Detections', value: '1.2K', color: '#059669' },
     { label: 'Alerts Today', value: '8', color: '#FF6B6B' },
     { label: 'Uptime', value: '99.9%', color: '#96CEB4' },
   ];
 
   return (
-    <section className="py-20 sm:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#111827] via-[#0B1120] to-[#0B1120]" />
+    <section className="py-20 sm:py-28 relative overflow-hidden bg-slate-50">
       <div className="absolute inset-0 grid-bg opacity-20" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-[#6C63FF]/4 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-emerald-100/40 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
@@ -305,11 +304,11 @@ export default function MonitoringShowcase() {
         >
           <div className="tag-pill inline-block mb-4">Platform Overview</div>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-5" style={{ fontFamily: 'var(--font-space)' }}>
-            <span className="text-white">Enterprise Monitoring</span>
+            <span className="text-slate-900">Enterprise Monitoring</span>
             <br />
             <span className="gradient-text">Command Center</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-700 text-lg max-w-2xl mx-auto">
             A unified platform for managing AI-powered monitoring across unlimited cameras and locations.
           </p>
         </motion.div>
@@ -319,10 +318,9 @@ export default function MonitoringShowcase() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-strong rounded-2xl border border-white/10 overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm"
         >
-          {/* Top bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
             <div className="flex items-center gap-3">
               <div className="flex gap-1">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
@@ -338,15 +336,15 @@ export default function MonitoringShowcase() {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-6 px-6 py-4 border-b border-white/5">
+          <div className="flex gap-6 px-6 py-4 border-b border-slate-200">
             {['Live View', 'Analytics', 'Alerts', 'Reports'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab.toLowerCase())}
                 className={`text-xs font-semibold uppercase tracking-wider pb-2 transition-all border-b-2 ${
                   activeTab === tab.toLowerCase()
-                    ? 'text-[#00D4FF] border-[#00D4FF]'
-                    : 'text-slate-600 border-transparent hover:text-slate-400'
+                    ? 'text-teal-600 border-teal-600'
+                    : 'text-slate-500 border-transparent hover:text-slate-700'
                 }`}
               >
                 {tab}
@@ -367,7 +365,7 @@ export default function MonitoringShowcase() {
             <div className="grid lg:grid-cols-3 gap-4">
               {/* Camera grid */}
               <div className="lg:col-span-2 space-y-4">
-                <div className="text-sm font-semibold text-white mb-3">Multi-Camera Live Feed</div>
+                <div className="text-sm font-semibold text-slate-900 mb-3">Multi-Camera Live Feed</div>
                 <div className="grid grid-cols-2 gap-4">
                   {CAM_CONFIGS.map((cam) => (
                     <CameraFeedCard key={cam.id} cam={cam} />
@@ -380,7 +378,7 @@ export default function MonitoringShowcase() {
             </div>
 
             {/* Bottom metrics */}
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/5">
+            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-200">
               {[
                 { icon: Eye, label: 'Objects Tracked', val: '2,847' },
                 { icon: AlertTriangle, label: 'Alerts Triggered', val: '23' },
@@ -388,11 +386,11 @@ export default function MonitoringShowcase() {
               ].map((m, i) => {
                 const Icon = m.icon;
                 return (
-                  <div key={i} className="flex items-center gap-2 p-3 rounded-lg bg-white/3 border border-white/5">
-                    <Icon className="w-4 h-4 text-[#00D4FF] flex-shrink-0" />
+                  <div key={i} className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 border border-slate-200">
+                    <Icon className="w-4 h-4 text-cyan-600 flex-shrink-0" />
                     <div>
-                      <div className="text-[10px] text-slate-600">{m.label}</div>
-                      <div className="text-sm font-bold text-white">{m.val}</div>
+                      <div className="text-[10px] text-slate-500">{m.label}</div>
+                      <div className="text-sm font-bold text-slate-900">{m.val}</div>
                     </div>
                   </div>
                 );
@@ -432,11 +430,11 @@ export default function MonitoringShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 + i * 0.1 }}
-              className="glass rounded-xl p-5 border border-white/5 text-center"
+              className="bg-white rounded-xl p-5 border border-slate-200 text-center shadow-sm"
             >
               <div className="text-3xl mb-3">{f.icon}</div>
-              <h4 className="font-semibold text-white text-sm mb-2">{f.title}</h4>
-              <p className="text-xs text-slate-500">{f.desc}</p>
+              <h4 className="font-semibold text-slate-900 text-sm mb-2">{f.title}</h4>
+              <p className="text-xs text-slate-600">{f.desc}</p>
             </motion.div>
           ))}
         </motion.div>

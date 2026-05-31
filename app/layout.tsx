@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Nexus AI', url: 'https://nexusai.com' }],
   creator: 'Nexus AI',
   // themeColor lives in metadata in Next.js 13 (not a separate viewport export)
-  themeColor: '#0B1120',
+  themeColor: '#ffffff',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
   openGraph: {
     type: 'website',
@@ -100,7 +100,7 @@ export default function RootLayout({
         {/* Skip-to-content link for keyboard / screen-reader users */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#00D4FF] focus:text-[#0B1120] focus:font-semibold focus:rounded-lg focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-teal-600 focus:text-white focus:font-semibold focus:rounded-lg focus:outline-none"
         >
           Skip to main content
         </a>

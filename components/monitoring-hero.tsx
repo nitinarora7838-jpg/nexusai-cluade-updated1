@@ -12,13 +12,13 @@ function MonitoringCard({ icon: Icon, title, desc, delay }: { icon: ComponentTyp
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.5 }}
-      className="glass rounded-2xl p-6 border border-white/5 hover:border-[#00D4FF]/30 transition-all"
+      className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-cyan-200 transition-all shadow-sm"
     >
-      <div className="w-10 h-10 rounded-lg bg-[#00D4FF]/15 flex items-center justify-center mb-4">
-        <Icon className="w-5 h-5 text-[#00D4FF]" />
+      <div className="w-10 h-10 rounded-lg bg-cyan-50 border border-cyan-200 flex items-center justify-center mb-4">
+        <Icon className="w-5 h-5 text-cyan-600" />
       </div>
-      <h4 className="font-semibold text-white mb-2">{title}</h4>
-      <p className="text-sm text-slate-500">{desc}</p>
+      <h4 className="font-semibold text-slate-900 mb-2">{title}</h4>
+      <p className="text-sm text-slate-600">{desc}</p>
     </motion.div>
   );
 }
@@ -320,10 +320,9 @@ function CameraFeed() {
 
 export default function MonitoringHero() {
   return (
-    <section className="py-20 sm:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120] via-[#111827] to-[#0B1120]" />
+    <section className="py-20 sm:py-28 relative overflow-hidden bg-slate-50">
       <div className="absolute inset-0 grid-bg opacity-20" />
-      <div className="absolute top-0 right-1/3 w-[700px] h-[500px] rounded-full bg-[#00D4FF]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-1/3 w-[700px] h-[500px] rounded-full bg-cyan-100/40 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
@@ -335,16 +334,16 @@ export default function MonitoringHero() {
             className="space-y-8"
           >
             <div>
-              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/20">
-                <Camera className="w-3.5 h-3.5 text-[#00D4FF]" />
-                <span className="text-xs font-semibold text-[#00D4FF] uppercase tracking-wide">Vision AI</span>
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-cyan-50 border border-cyan-200">
+                <Camera className="w-3.5 h-3.5 text-cyan-600" />
+                <span className="text-xs font-semibold text-cyan-600 uppercase tracking-wide">Vision AI</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-5" style={{ fontFamily: 'var(--font-space)' }}>
-                <span className="text-white">Transform Your</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-5 text-slate-900" style={{ fontFamily: 'var(--font-space)' }}>
+                Transform Your
                 <br />
                 <span className="gradient-text">Cameras Into Intelligence</span>
               </h2>
-              <p className="text-lg text-slate-400 leading-relaxed">
+              <p className="text-lg text-slate-700 leading-relaxed">
                 Convert any existing IP camera into an AI-powered monitoring system. Real-time detection, intelligent alerts, and enterprise-grade compliance reporting — all without replacing hardware.
               </p>
             </div>
@@ -364,12 +363,12 @@ export default function MonitoringHero() {
                   transition={{ delay: i * 0.1 }}
                   className="flex gap-3 items-start"
                 >
-                  <div className="w-6 h-6 rounded-full bg-[#00D4FF]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <f.icon className="w-3.5 h-3.5 text-[#00D4FF]" />
+                  <div className="w-6 h-6 rounded-full bg-cyan-50 border border-cyan-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <f.icon className="w-3.5 h-3.5 text-cyan-600" />
                   </div>
                   <div>
-                    <div className="font-semibold text-white text-sm">{f.title}</div>
-                    <div className="text-xs text-slate-500">{f.desc}</div>
+                    <div className="font-semibold text-slate-900 text-sm">{f.title}</div>
+                    <div className="text-xs text-slate-600">{f.desc}</div>
                   </div>
                 </motion.div>
               ))}
@@ -377,7 +376,7 @@ export default function MonitoringHero() {
 
             <a
               href="/monitoring"
-              className="group inline-flex items-center gap-2 px-7 py-4 text-sm font-semibold text-[#0B1120] rounded-xl bg-gradient-to-r from-[#00D4FF] to-[#6C63FF] hover:shadow-lg hover:shadow-[#00D4FF]/20 transition-all"
+              className="group inline-flex items-center gap-2 px-7 py-4 text-sm font-semibold text-white rounded-xl bg-teal-600 hover:bg-teal-700 transition-colors"
             >
               Start Monitoring
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -402,10 +401,10 @@ export default function MonitoringHero() {
           className="mb-16"
         >
           <div className="text-center mb-10">
-            <h3 className="text-3xl font-extrabold text-white mb-3" style={{ fontFamily: 'var(--font-space)' }}>
+            <h3 className="text-3xl font-extrabold text-slate-900 mb-3" style={{ fontFamily: 'var(--font-space)' }}>
               Core Capabilities
             </h3>
-            <p className="text-slate-400 max-w-2xl mx-auto">
+            <p className="text-slate-700 max-w-2xl mx-auto">
               Enterprise-grade monitoring features designed for scale, security, and compliance.
             </p>
           </div>
@@ -426,7 +425,7 @@ export default function MonitoringHero() {
           viewport={{ once: true }}
         >
           <div className="text-center mb-10">
-            <h3 className="text-3xl font-extrabold text-white mb-3" style={{ fontFamily: 'var(--font-space)' }}>
+            <h3 className="text-3xl font-extrabold text-slate-900 mb-3" style={{ fontFamily: 'var(--font-space)' }}>
               Intelligence for Every Environment
             </h3>
           </div>
@@ -443,11 +442,11 @@ export default function MonitoringHero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="glass rounded-2xl p-6 border border-white/5 text-center hover:border-[#00D4FF]/30 transition-all"
+                className="bg-white rounded-2xl p-6 border border-slate-200 text-center hover:border-emerald-200 transition-all shadow-sm"
               >
-                <h4 className="font-semibold text-white mb-3">{use.title}</h4>
+                <h4 className="font-semibold text-slate-900 mb-3">{use.title}</h4>
                 <div className="text-2xl font-extrabold gradient-text mb-1">{use.metric}</div>
-                <div className="text-xs text-slate-500">{use.label}</div>
+                <div className="text-xs text-slate-600">{use.label}</div>
               </motion.div>
             ))}
           </div>
