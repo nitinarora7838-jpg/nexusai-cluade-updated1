@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sendTextMessage } from '@/lib/whatsapp';
 
 export async function POST(req: NextRequest) {
   try {
@@ -71,6 +72,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: `Email delivery failed: ${resendMessage}` },
         { status: 500 }
+      );
+    }
+
+    // Send WhatsApp alert to team if configured
+    const teamPhone = process.env.WHATSAPP_TEAM_PHONE;
+    if (teamPhone) {
+      const alert =
+        `🔔 *New Nexus AI Enquiry*\n\n` +
+        `👤 *Name:* ${name}\n` +
+        `🏢 *Company:* ${company}\n` +
+        `📧 *Email:* ${email}\n\n` +
+        `💬 ${message.slice(0, 200)}${message.length > 200 ? '...' : ''}`;
+      sendTextMessage(teamPhone, alert).catch((e) =>
+        console.warn('WhatsApp team alert failed:', e)
       );
     }
 
