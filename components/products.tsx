@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useSpring, useReducedMotion } from 'framer-motion';
 import {
   Brain, BarChart3, Workflow, Headphones, FileText,
   Cpu, TrendingUp, Users, ArrowRight, CheckCircle2, Camera,
@@ -107,48 +107,106 @@ const PRODUCTS: Product[] = [
 // ─── Card component ─────────────────────────────────────────────────
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const Icon = product.icon;
+  const ref = useRef<HTMLElement>(null);
+  const prefersReduced = useReducedMotion();
+
+  // Cursor-driven 3D tilt (spring-smoothed)
+  const rotateX = useSpring(0, { stiffness: 180, damping: 18 });
+  const rotateY = useSpring(0, { stiffness: 180, damping: 18 });
+
+  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = ref.current;
+    if (!el || prefersReduced) return;
+    const rect = el.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;   // 0 → 1
+    const py = (e.clientY - rect.top) / rect.height;   // 0 → 1
+    rotateY.set((px - 0.5) * 8);
+    rotateX.set((0.5 - py) * 8);
+    // feed the spotlight position to CSS
+    el.style.setProperty('--mx', `${px * 100}%`);
+    el.style.setProperty('--my', `${py * 100}%`);
+  };
+
+  const handleLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
 
   return (
     <motion.article
+      ref={ref}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ delay: (index % 4) * 0.08, duration: 0.55 }}
-      className="group relative glass rounded-2xl p-5 sm:p-6 card-hover border border-white/5 hover:border-white/10 shimmer-effect overflow-hidden flex flex-col"
+      whileHover={{ y: -6, boxShadow: `0 24px 50px -16px ${product.color}40` }}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      className="group relative glass rounded-2xl p-5 sm:p-6 border border-white/5 hover:border-white/15 overflow-hidden flex flex-col will-change-transform"
       aria-label={product.name}
     >
-      {/* Hover gradient */}
+      {/* Animated gradient border on hover */}
       <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: `radial-gradient(circle at 50% 0%, ${product.color}12, transparent 70%)` }}
+        className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `linear-gradient(135deg, ${product.color}55, transparent 40%, transparent 60%, ${product.color}30)`,
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          padding: '1px',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Cursor spotlight */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ background: `radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), ${product.color}24, transparent 65%)` }}
+        aria-hidden="true"
+      />
+
+      {/* Top accent line that grows on hover */}
+      <div
+        className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-[width] duration-500 ease-out pointer-events-none"
+        style={{ background: `linear-gradient(90deg, transparent, ${product.color}, transparent)` }}
         aria-hidden="true"
       />
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-4 sm:mb-5">
+      <div className="relative flex items-start justify-between mb-4 sm:mb-5">
         <div
-          className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{ background: `${product.color}18`, border: `1px solid ${product.color}30` }}
+          className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3"
+          style={{
+            background: `linear-gradient(135deg, ${product.color}26, ${product.color}0a)`,
+            border: `1px solid ${product.color}30`,
+            boxShadow: `inset 0 1px 0 ${product.color}20`,
+          }}
           aria-hidden="true"
         >
-          <Icon className="w-5 h-5" style={{ color: product.color }} />
+          <Icon
+            className="w-5 h-5 transition-transform duration-300"
+            style={{ color: product.color, filter: `drop-shadow(0 0 6px ${product.color}80)` }}
+          />
         </div>
         <span
-          className="text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0"
+          className="text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0 transition-all duration-300"
           style={{ background: `${product.color}15`, color: product.color, border: `1px solid ${product.color}25` }}
         >
           {product.tag}
         </span>
       </div>
 
-      <h3 className="text-base sm:text-lg font-bold text-white mb-2">{product.name}</h3>
-      <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4 sm:mb-5 flex-1">
+      <h3 className="relative text-base sm:text-lg font-bold text-white mb-2 transition-colors duration-300 group-hover:text-white">
+        {product.name}
+      </h3>
+      <p className="relative text-xs sm:text-sm text-slate-500 leading-relaxed mb-4 sm:mb-5 flex-1">
         {product.description}
       </p>
 
-      <ul className="space-y-1.5 sm:space-y-2 mb-5 sm:mb-6" aria-label={`${product.name} features`}>
+      <ul className="relative space-y-1.5 sm:space-y-2 mb-5 sm:mb-6" aria-label={`${product.name} features`}>
         {product.features.map(f => (
-          <li key={f} className="flex items-center gap-2 text-xs text-slate-400">
+          <li key={f} className="flex items-center gap-2 text-xs text-slate-400 transition-colors duration-300 group-hover:text-slate-300">
             <CheckCircle2
               className="w-3.5 h-3.5 flex-shrink-0"
               style={{ color: product.color }}
@@ -161,7 +219,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
       <a
         href={`/products/${product.slug}`}
-        className="inline-flex items-center gap-1.5 text-xs font-semibold transition-all group/link focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="relative inline-flex items-center gap-1.5 text-xs font-semibold transition-all group/link focus-visible:outline-2 focus-visible:outline-offset-2"
         style={{ color: product.color }}
         aria-label={`Learn more about ${product.name}`}
       >
@@ -187,6 +245,15 @@ export default function Products() {
       <div className="absolute inset-0 grid-bg opacity-30" aria-hidden="true" />
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-px bg-gradient-to-r from-transparent via-[#00D4FF]/30 to-transparent"
+        aria-hidden="true"
+      />
+      {/* Ambient glow orbs for depth */}
+      <div
+        className="absolute top-1/4 -left-32 w-[420px] h-[420px] rounded-full bg-[#00D4FF]/5 blur-[120px] pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-1/4 -right-32 w-[420px] h-[420px] rounded-full bg-[#6C63FF]/5 blur-[120px] pointer-events-none"
         aria-hidden="true"
       />
 
