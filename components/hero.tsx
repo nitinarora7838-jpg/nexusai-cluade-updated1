@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Play, ChevronDown } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+// 3D hero scene — client-only, lazy-loaded so it never blocks SSR or first paint
+const Hero3D = dynamic(() => import('./hero-3d'), { ssr: false });
 
 // ─── Types ─────────────────────────────────────────────────────────
 interface Stat { value: number; suffix: string; label: string; decimal?: boolean; }
@@ -164,6 +168,18 @@ export default function Hero() {
       <div className="absolute inset-0 animated-gradient" aria-hidden="true" />
       <div className="absolute inset-0 grid-bg opacity-60"  aria-hidden="true" />
       <ParticleCanvas />
+
+      {/* 3D AI core — layered behind the headline, skipped for reduced-motion */}
+      {!prefersReduced && (
+        <div
+          className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center"
+          aria-hidden="true"
+        >
+          <div className="w-full h-full max-w-[1100px] opacity-70 sm:opacity-80">
+            <Hero3D />
+          </div>
+        </div>
+      )}
 
       {/* Glow orbs */}
       <div

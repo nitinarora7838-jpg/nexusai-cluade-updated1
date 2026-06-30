@@ -7,6 +7,8 @@ const nextConfig = {
   },
   // Compress output
   compress: true,
+  // Transpile three.js / R3F ESM packages for the 3D hero scene
+  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
   // Stricter build — catch TS/lint errors at deploy time
   typescript: { ignoreBuildErrors: false },
   eslint:     { ignoreDuringBuilds: true },
