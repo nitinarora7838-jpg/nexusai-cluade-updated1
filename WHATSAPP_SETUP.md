@@ -18,6 +18,12 @@ WHATSAPP_ACCESS_TOKEN=your_permanent_access_token
 WHATSAPP_PHONE_NUMBER_ID=your_phone_number_id
 WHATSAPP_VERIFY_TOKEN=any_random_secret_string_you_choose
 
+# App Secret (Meta App → Settings → Basic → App Secret).
+# REQUIRED: the webhook verifies Meta's X-Hub-Signature-256 against this.
+# Without it, the webhook rejects all POSTs (fails closed) so forged
+# requests can't trigger outbound messages or AI replies.
+WHATSAPP_APP_SECRET=your_meta_app_secret
+
 # Your team's WhatsApp number for contact form alerts (E.164 format, no +)
 # e.g. 14155552671 for +1 (415) 555-2671
 WHATSAPP_TEAM_PHONE=your_team_whatsapp_number

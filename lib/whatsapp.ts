@@ -1,4 +1,36 @@
+import crypto from 'crypto';
+
 const BASE_URL = 'https://graph.facebook.com/v19.0';
+
+/**
+ * Verify Meta's `X-Hub-Signature-256` header against the raw request body.
+ * Meta signs every webhook delivery with an HMAC-SHA256 of the raw body using
+ * the app secret. Without this check, anyone who learns the webhook URL could
+ * POST forged payloads and make us send WhatsApp messages / call the AI.
+ *
+ * Fails closed: if WHATSAPP_APP_SECRET is not configured, the request is
+ * rejected (returns false) rather than processed unverified.
+ */
+export function verifyWebhookSignature(rawBody: string, signatureHeader: string | null): boolean {
+  const appSecret = process.env.WHATSAPP_APP_SECRET;
+  if (!appSecret) {
+    console.warn('[whatsapp] WHATSAPP_APP_SECRET not set — rejecting webhook (fail closed).');
+    return false;
+  }
+  if (!signatureHeader || !signatureHeader.startsWith('sha256=')) return false;
+
+  const expected =
+    'sha256=' + crypto.createHmac('sha256', appSecret).update(rawBody, 'utf8').digest('hex');
+
+  const received = Buffer.from(signatureHeader);
+  const computed = Buffer.from(expected);
+  if (received.length !== computed.length) return false;
+  try {
+    return crypto.timingSafeEqual(received, computed);
+  } catch {
+    return false;
+  }
+}
 
 function getConfig() {
   const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;

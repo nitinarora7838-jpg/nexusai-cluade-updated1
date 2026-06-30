@@ -3,6 +3,7 @@ import {
   sendTextMessage,
   markMessageRead,
   extractTextFromMessage,
+  verifyWebhookSignature,
   type WhatsAppWebhookPayload,
 } from '@/lib/whatsapp';
 import { generateAIReply } from '@/lib/whatsapp-ai';
@@ -24,7 +25,14 @@ export async function GET(req: NextRequest) {
 // POST — incoming messages
 export async function POST(req: NextRequest) {
   try {
-    const body: WhatsAppWebhookPayload = await req.json();
+    // Read the raw body so we can verify Meta's signature over the exact bytes
+    const rawBody = await req.text();
+
+    if (!verifyWebhookSignature(rawBody, req.headers.get('x-hub-signature-256'))) {
+      return NextResponse.json({ status: 'unauthorized' }, { status: 401 });
+    }
+
+    const body: WhatsAppWebhookPayload = JSON.parse(rawBody);
 
     if (body.object !== 'whatsapp_business_account') {
       return NextResponse.json({ status: 'ignored' });
