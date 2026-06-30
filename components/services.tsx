@@ -1,6 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useSpring } from 'framer-motion';
+
+const reduceMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 import { Brain, Rocket, Code, Settings, Sparkles, Plug, TrendingUp, LayoutDashboard, type LucideIcon } from 'lucide-react';
 
 interface Service {
@@ -21,6 +26,95 @@ const SERVICES: Service[] = [
   { icon: TrendingUp,    title: 'AI Analytics',            desc: 'Convert operational data into strategic intelligence with predictive AI models.',                             color: '#00D4FF'             },
   { icon: LayoutDashboard,title:'Intelligent Dashboards',  desc: 'Executive-grade dashboards with real-time AI insights and automated reporting.',                              color: '#6C63FF', wide: true  },
 ];
+
+// ─── Card with cursor-driven 3D tilt + spotlight ─────────────────────
+function ServiceCard({ svc, index }: { svc: Service; index: number }) {
+  const Icon = svc.icon;
+  const ref = useRef<HTMLElement>(null);
+
+  const rotateX = useSpring(0, { stiffness: 180, damping: 18 });
+  const rotateY = useSpring(0, { stiffness: 180, damping: 18 });
+
+  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = ref.current;
+    if (!el || reduceMotion()) return;
+    const rect = el.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    rotateY.set((px - 0.5) * 7);
+    rotateX.set((0.5 - py) * 7);
+    el.style.setProperty('--mx', `${px * 100}%`);
+    el.style.setProperty('--my', `${py * 100}%`);
+  };
+
+  const handleLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
+  return (
+    <motion.article
+      ref={ref}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ delay: index * 0.07, duration: 0.5 }}
+      whileHover={{ y: -6, boxShadow: `0 24px 50px -16px ${svc.color}40` }}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      className={`group relative glass rounded-2xl p-5 sm:p-7 border border-white/5 hover:border-white/15 overflow-hidden will-change-transform ${svc.wide ? 'lg:col-span-2' : ''}`}
+    >
+      {/* Animated gradient border on hover */}
+      <div
+        className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `linear-gradient(135deg, ${svc.color}55, transparent 40%, transparent 60%, ${svc.color}30)`,
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          padding: '1px',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Cursor spotlight */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ background: `radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), ${svc.color}22, transparent 65%)` }}
+        aria-hidden="true"
+      />
+
+      {/* Glowing icon tile */}
+      <div
+        className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center mb-4 sm:mb-5 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3"
+        style={{
+          background: `linear-gradient(135deg, ${svc.color}26, ${svc.color}0a)`,
+          border: `1px solid ${svc.color}30`,
+          boxShadow: `inset 0 1px 0 ${svc.color}20`,
+        }}
+        aria-hidden="true"
+      >
+        <Icon
+          className="w-4 h-4 sm:w-5 sm:h-5"
+          style={{ color: svc.color, filter: `drop-shadow(0 0 6px ${svc.color}80)` }}
+        />
+      </div>
+
+      <h3 className="relative text-base sm:text-lg font-bold text-white mb-2">{svc.title}</h3>
+      <p className="relative text-xs sm:text-sm text-slate-500 leading-relaxed transition-colors duration-300 group-hover:text-slate-400">
+        {svc.desc}
+      </p>
+
+      {/* Bottom accent line */}
+      <div
+        className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-500"
+        style={{ background: `linear-gradient(90deg, ${svc.color}, transparent)` }}
+        aria-hidden="true"
+      />
+    </motion.article>
+  );
+}
 
 export default function Services() {
   return (
@@ -46,30 +140,9 @@ export default function Services() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {SERVICES.map((svc, i) => {
-            const Icon = svc.icon;
-            return (
-              <motion.article
-                key={svc.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.07, duration: 0.5 }}
-                className={`group relative glass rounded-2xl p-5 sm:p-7 card-hover border border-white/5 hover:border-white/10 overflow-hidden ${svc.wide ? 'lg:col-span-2' : ''}`}
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse at 20% 50%, ${svc.color}10, transparent 70%)` }} aria-hidden="true" />
-                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center mb-4 sm:mb-5"
-                  style={{ background: `${svc.color}18`, border: `1px solid ${svc.color}30` }} aria-hidden="true">
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: svc.color }} />
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-white mb-2">{svc.title}</h3>
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">{svc.desc}</p>
-                <div className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-500"
-                  style={{ background: `linear-gradient(90deg, ${svc.color}60, transparent)` }} aria-hidden="true" />
-              </motion.article>
-            );
-          })}
+          {SERVICES.map((svc, i) => (
+            <ServiceCard key={svc.title} svc={svc} index={i} />
+          ))}
         </div>
       </div>
     </section>
