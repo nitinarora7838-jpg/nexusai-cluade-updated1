@@ -48,6 +48,9 @@ None are needed just to browse the site. The contact form needs **at least one**
 | `WHATSAPP_PHONE_NUMBER_ID` | The WhatsApp Business phone number ID from Meta. | Optional (needed for WhatsApp) |
 | `WHATSAPP_APP_SECRET` | Meta app secret. The webhook rejects all incoming messages without it. | Optional (needed for the WhatsApp bot) |
 | `WHATSAPP_VERIFY_TOKEN` | Any secret string you choose; used once when Meta verifies the webhook URL. | Optional (needed for the WhatsApp bot) |
+| `LYZR_API_KEY` | Powers the "Ask Nexus AI" chat on every page (Lyzr agent API key). Kept on the server only; without it the chat shows a friendly error. | Required for the chat |
+| `LYZR_USER_ID` | The Lyzr account user ID sent with each chat request (usually the email you use in Lyzr Studio). | Recommended for the chat |
+| `LYZR_AGENT_ID` | Which Lyzr agent answers. Defaults to the Nexus AI agent (`6b0470a797f839862b625678`). | Optional |
 | `ANTHROPIC_API_KEY` | Lets the WhatsApp bot write AI replies with Claude. Without it the bot sends a fixed "we'll get back to you" reply. | Optional |
 | `WHATSAPP_TEAM_PHONE` | Team WhatsApp number (digits with country code, e.g. `14155552671`) that gets an alert for each new lead. | Optional |
 | `WHATSAPP_ADMIN_KEY` | Long random secret protecting `/api/whatsapp/send` and `/broadcast` (sent as `Authorization: Bearer …`). If unset, those endpoints always refuse. | Optional |
@@ -71,6 +74,7 @@ app/
   automation/ voice-chat/ voice-agents/   Service pages (one shared template)
   contact/                 Consultation form
   api/contact/             Form handler: validate → Supabase → Resend → WhatsApp alert
+  api/chat/                Website chat → Lyzr agent (keeps the API key on the server)
   api/whatsapp/            Webhook (bot), send and broadcast (admin only)
 components/
   home/                    Homepage sections
