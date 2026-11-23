@@ -24,13 +24,11 @@ const organizationJsonLd = {
   logo: `${siteConfig.url}/favicon.svg`,
   description: siteConfig.description,
   email: siteConfig.email,
-  areaServed: { '@type': 'Country', name: 'India' },
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
     email: siteConfig.email,
-    areaServed: 'IN',
-    availableLanguage: ['English', 'Hindi'],
+    availableLanguage: ['English'],
   },
   makesOffer: services.map((s) => ({
     '@type': 'Offer',

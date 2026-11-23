@@ -1,6 +1,6 @@
 # Nexus AI website
 
-The marketing website for [Nexus AI](https://www.nexus-aisolution.com). It explains our three done-for-you services for Indian businesses:
+The marketing website for [Nexus AI](https://www.nexus-aisolution.com). It explains our three done-for-you services:
 
 - **AI Automation** (`/automation`): WhatsApp Business automation, lead routing, CRM updates, document extraction, reports and internal assistants.
 - **AI Voice Chat** (`/voice-chat`): a voice assistant on a website, app or WhatsApp.
@@ -10,7 +10,7 @@ Visitors book a free consultation at `/contact`. Each request is saved to Supaba
 
 ## Tech stack
 
-Next.js 13.5 (App Router), TypeScript, Tailwind CSS, shadcn/ui primitives, lucide-react icons, react-hook-form + zod, Supabase, Resend, WhatsApp Cloud API, Anthropic (Claude) for WhatsApp replies. Hosted on Vercel (Mumbai region, `bom1`).
+Next.js 13.5 (App Router), TypeScript, Tailwind CSS, shadcn/ui primitives, lucide-react icons, react-hook-form + zod, Supabase, Resend, WhatsApp Cloud API, Anthropic (Claude) for WhatsApp replies. Hosted on Vercel (pages are served worldwide from Vercel's CDN; server functions run in the region set in `vercel.json`).
 
 ## Run it locally
 
@@ -49,7 +49,7 @@ None are needed just to browse the site. The contact form needs **at least one**
 | `WHATSAPP_APP_SECRET` | Meta app secret. The webhook rejects all incoming messages without it. | Optional (needed for the WhatsApp bot) |
 | `WHATSAPP_VERIFY_TOKEN` | Any secret string you choose; used once when Meta verifies the webhook URL. | Optional (needed for the WhatsApp bot) |
 | `ANTHROPIC_API_KEY` | Lets the WhatsApp bot write AI replies with Claude. Without it the bot sends a fixed "we'll get back to you" reply. | Optional |
-| `WHATSAPP_TEAM_PHONE` | Team WhatsApp number (digits with country code, e.g. `919876543210`) that gets an alert for each new lead. | Optional |
+| `WHATSAPP_TEAM_PHONE` | Team WhatsApp number (digits with country code, e.g. `14155552671`) that gets an alert for each new lead. | Optional |
 | `WHATSAPP_ADMIN_KEY` | Long random secret protecting `/api/whatsapp/send` and `/broadcast` (sent as `Authorization: Bearer …`). If unset, those endpoints always refuse. | Optional |
 
 ## Database setup (Supabase)

@@ -2,11 +2,11 @@ export const siteConfig = {
   name: 'Nexus AI',
   url: 'https://www.nexus-aisolution.com',
   email: 'ai@nexus-aisolution.com',
-  title: 'Nexus AI | AI Voice Agents, Voice Chat & Automation for Indian Businesses',
+  title: 'Nexus AI | AI Voice Agents, Voice Chat & Business Automation',
   description:
-    'Nexus AI builds AI voice agents, website voice chat and business automation for Indian companies, in English, Hindi and Hinglish. We set it up, connect it to your tools and run it for you.',
+    'Nexus AI builds AI voice agents, website voice chat and business automation for growing businesses. We set it up, connect it to your tools and run it for you.',
   shortDescription:
-    'Done-for-you AI voice agents, voice chat and automation for Indian businesses, in English, Hindi and Hinglish.',
+    'Done-for-you AI voice agents, website voice chat and business automation.',
 } as const;
 
 export const mainNav = [

@@ -28,16 +28,16 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    'AI automation India',
+    'AI automation',
     'AI voice agents',
-    'AI voice agent India',
+    'AI voice agent for business',
     'AI voice chat for websites',
-    'Hindi voice AI',
-    'Hinglish voice AI',
+    'multilingual voice AI',
     'AI calling agent',
-    'WhatsApp Business automation',
     'AI phone answering',
-    'voice AI for Indian businesses',
+    'AI receptionist',
+    'WhatsApp Business automation',
+    'done-for-you AI',
   ],
   authors: [{ name: 'Nexus AI', url: siteConfig.url }],
   creator: 'Nexus AI',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    locale: 'en_IN',
+    locale: 'en_US',
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: siteConfig.title,
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body>
         <a
           href="#main-content"

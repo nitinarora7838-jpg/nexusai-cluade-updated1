@@ -14,7 +14,7 @@ import {
 import type { ServiceSlug } from '@/lib/services';
 
 export const heroFacts = [
-  'English · Hindi · Hinglish',
+  'Speaks multiple languages',
   'Works with WhatsApp, your CRM and phone system',
   'Starts with a 2-week pilot',
 ];
@@ -39,7 +39,7 @@ export const chooserRows: { problem: string; service: ServiceSlug; serviceName: 
 
 export const togetherFlow = [
   { title: 'Customer calls or speaks', text: 'On the phone, your website or WhatsApp.' },
-  { title: 'AI understands and answers', text: 'In English, Hindi or Hinglish.' },
+  { title: 'AI understands and answers', text: 'In your customer’s language.' },
   { title: 'Action is taken', text: 'A booking, a payment link or a qualified lead.' },
   {
     title: 'Automation does the rest',
@@ -64,9 +64,9 @@ export const industries: { name: string; icon: LucideIcon; jobs: string[] }[] = 
     jobs: ['Call back admission enquiries', 'Book counselling sessions', 'Remind parents about fee deadlines'],
   },
   {
-    name: 'BFSI & collections',
+    name: 'Banking, finance & insurance',
     icon: Landmark,
-    jobs: ['EMI and payment reminder calls', 'Send payment links on WhatsApp', 'Qualify loan and insurance leads'],
+    jobs: ['Payment due-date reminder calls', 'Send payment links on WhatsApp', 'Qualify loan and insurance leads'],
   },
   {
     name: 'E-commerce & D2C',
@@ -121,8 +121,8 @@ export const whyPoints: { title: string; text: string; icon: LucideIcon }[] = [
     icon: Wrench,
   },
   {
-    title: 'Built for Indian languages',
-    text: 'Tuned for English, Hindi and Hinglish, and for Indian accents and names.',
+    title: 'Speaks your customers’ language',
+    text: 'Works in multiple languages and accents, and copes when people switch languages mid-sentence.',
     icon: Languages,
   },
   {
@@ -152,9 +152,9 @@ export const integrations = [
 
 export const trustPoints = [
   'Callers are always told they’re speaking with an AI assistant.',
-  'Outbound calls follow TRAI calling-hour and DND rules.',
+  'Outbound calls follow local calling-hour and do-not-call rules.',
   'Recordings and transcripts are visible only to your authorised team.',
-  'Personal data is handled in line with the principles of India’s DPDP Act.',
+  'Personal data is handled in line with the data-protection laws that apply to you.',
 ];
 
 export const pricingParts = [
