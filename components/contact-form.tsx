@@ -194,10 +194,13 @@ export function ContactForm() {
         <select
           id={fid('companySize')}
           defaultValue=""
-          className={cn(inputClass, 'appearance-none bg-[length:16px] bg-[right_1rem_center] bg-no-repeat pr-10')}
+          className={cn(inputClass, 'appearance-none pr-10 [color-scheme:dark]')}
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
+            backgroundSize: '16px',
+            backgroundPosition: 'right 1rem center',
+            backgroundRepeat: 'no-repeat',
           }}
           aria-invalid={!!errors.companySize}
           aria-describedby={describedBy('companySize')}

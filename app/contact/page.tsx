@@ -56,7 +56,7 @@ export default function ContactPage() {
             </ol>
             <div className="mt-8 rounded-2xl border border-line bg-surface p-5 text-sm leading-relaxed text-muted">
               Prefer email? Write to{' '}
-              <a href={`mailto:${siteConfig.email}`} className="font-medium text-brand hover:underline">
+              <a href={`mailto:${siteConfig.email}`} className="whitespace-nowrap font-medium text-brand hover:underline">
                 {siteConfig.email}
               </a>
             </div>
