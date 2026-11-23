@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/voice", "destination": "/", "permanent": true },
+    { "source": "/voice/", "destination": "/", "permanent": true }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}

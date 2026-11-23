@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Voice Agents That Answer &amp; Book Calls 24/7 | Nexus AI Voice</title>
+<link rel="canonical" href="https://voice.nexus-aisolution.com/">
+<link rel="icon" href="/agent-avatar.svg" type="image/svg+xml">
+<meta property="og:title" content="Nexus AI Voice: AI voice agents that answer, qualify and book">
+<meta property="og:description" content="AI voice agents that pick up every call, qualify the caller and book them into your calendar, 24/7. Talk to Nexus AI live or book a free voice audit.">
+<meta property="og:url" content="https://voice.nexus-aisolution.com/">
+<meta property="og:type" content="website">
+<meta name="description" content="Nexus AI builds and runs AI voice agents that answer every call, qualify callers and book appointments into your calendar, 24/7. Talk to our AI receptionist live or book a free voice audit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}img{max-width:100%}
+:root{
+  color-scheme:dark;
+  --bg:#09090A; --bg-2:#111113; --card:#141416; --card-2:#1A1A1D; --line:#26262A; --line-2:#333338;
+  --fg:#F4F4F5; --muted:#A1A1AA; --dim:#71717A;
+  --or:#4C8DFF; --or-2:#6FA4FF; --or-btn:#2563EB; --or-btn-2:#3B76F0; --or-soft:rgba(76,141,255,.12); --or-line:rgba(76,141,255,.38);
+  --ok:#4ADE80; --ok-soft:rgba(74,222,128,.12);
+  --f-d:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-b:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-m:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-d);letter-spacing:-.025em;line-height:1.05;text-wrap:balance;margin:0}
+p{margin:0}
+.o{color:var(--or)}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.page{position:relative;z-index:1}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(72px,10vw,128px)}
+.center{text-align:center}
+.label{display:inline-block;font:500 .7rem/1 var(--f-m);letter-spacing:.14em;text-transform:uppercase;color:var(--or);margin-bottom:18px}
+h2{font-size:clamp(2rem,1.2rem + 3vw,3.2rem);font-weight:700}
+.sub{color:var(--muted);font-size:1.05rem;max-width:60ch;margin:18px auto 0}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .95rem/1 var(--f-b);padding:15px 22px;border-radius:6px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .15s,transform .15s,border-color .15s}
+.btn-or{background:var(--or-btn);color:#fff}
+.btn-or:hover{background:var(--or-btn-2);transform:translateY(-1px)}
+a:focus-visible,.btn:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.nav{position:sticky;margin-bottom:-67px;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(9,9,10,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font:700 1.08rem var(--f-d);text-decoration:none;letter-spacing:-.01em}
+.mark{width:28px;height:28px;border-radius:6px;background:var(--or-btn);display:grid;place-items:center}
+.logo .o{font-weight:600}
+.logo .vo{font-weight:500;color:var(--muted)}
+.links{display:flex;gap:26px;margin:0 auto;font-size:.9rem}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--fg)}
+.nav .btn{padding:11px 16px;font-size:.86rem}
+.menu-btn{display:none;width:44px;height:44px;border-radius:8px;border:1px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;place-items:center}
+.mnav{display:none}
+@media (max-width:380px){.logo .vo{display:none}}
+@media (max-width:820px){.links{display:none}.nav .btn{margin-left:auto;padding:11px 14px}.menu-btn{display:grid}
+  .mnav{display:grid;position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 66px);z-index:8;background:rgba(9,9,10,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+    padding:8px max(20px,env(safe-area-inset-right,0px)) 16px max(20px,env(safe-area-inset-left,0px))}
+  .mnav[hidden]{display:none}
+  .mnav a{padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;font:600 1.05rem var(--f-d)}
+  .mbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));
+    background:rgba(9,9,10,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease}
+  .mbar.show{transform:none}
+  .mbar a{flex:1;min-height:48px;display:grid;place-items:center;border-radius:8px;text-decoration:none;font:600 .95rem var(--f-b)}
+  .mbar .wa-btn{flex:0 0 auto;padding:0 16px;border:1px solid var(--line-2);color:var(--fg)}
+  .mbar .bk{background:var(--or-btn);color:#fff}
+  body footer{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
+  .nav .wrap{gap:10px}.nav .btn{white-space:nowrap;font-size:.82rem;padding:10px 12px}
+}
+@media (min-width:821px){.mbar{display:none}}
+.call{max-width:820px;margin:64px auto 0;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:left;box-shadow:0 40px 80px -40px rgba(76,141,255,.3)}
+.call-top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:14px 18px;border-bottom:1px solid var(--line);font:500 .76rem var(--f-m);color:var(--muted)}
+.live{display:flex;align-items:center;gap:8px;color:var(--ok)}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
+.example{margin-left:auto;color:var(--or);border:1px solid var(--or-line);padding:3px 7px;border-radius:4px;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
+.wave{display:flex;align-items:center;gap:3px;height:28px}
+.wave i{width:3px;border-radius:2px;background:var(--or);height:30%}
+@media (prefers-reduced-motion:no-preference){.wave i{animation:wv 1.1s ease-in-out infinite}}
+@keyframes wv{0%,100%{height:25%}50%{height:100%}}
+.call-body{display:grid;grid-template-columns:1.35fr 1fr}
+.call-body>*{min-width:0}
+.tx{padding:20px 20px 22px;display:grid;gap:14px;font-size:.93rem}
+.ln{display:grid;grid-template-columns:72px 1fr;gap:12px}
+.ln b{font:500 .7rem/1.9 var(--f-m);text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.ln.ai b{color:var(--or)}
+.ln.ai p{color:var(--fg)}
+.ln p{color:var(--muted)}
+.acts{border-left:1px solid var(--line);padding:20px;display:grid;gap:10px;align-content:start;background:rgba(0,0,0,.18)}
+.acts h4{margin:0 0 4px;font:500 .7rem var(--f-m);text-transform:uppercase;letter-spacing:.12em;color:var(--dim)}
+.act{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--fg)}
+.act::before{content:"";flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:var(--ok-soft);box-shadow:inset 0 0 0 1px var(--ok);background-image:linear-gradient(var(--ok),var(--ok));background-size:6px 6px;background-repeat:no-repeat;background-position:center}
+.act small{display:block;font:400 .72rem var(--f-m);color:var(--dim)}
+@media (max-width:720px){.call-body{grid-template-columns:1fr}.acts{border-left:0;border-top:1px solid var(--line)}.ln{grid-template-columns:1fr;gap:2px}}
+.diff{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;text-align:left}
+.diff>div{padding:30px 26px;display:grid;gap:12px;align-content:start}
+.diff>div+div{border-left:1px solid var(--line)}
+.tag{justify-self:start;font:500 .66rem/1 var(--f-m);letter-spacing:.12em;text-transform:uppercase;padding:6px 9px;border-radius:4px;border:1px solid var(--line-2);color:var(--muted)}
+.diff h3{font-size:1.2rem;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.diff p{color:var(--muted);font-size:.92rem}
+.diff .us{background:linear-gradient(180deg,var(--or-soft),transparent 70%)}
+.diff .us .tag{color:var(--or);border-color:var(--or-line)}
+.quote{margin-top:48px;font:600 clamp(1.15rem,1rem + .6vw,1.45rem)/1.4 var(--f-d);letter-spacing:-.01em;max-width:40ch;margin-inline:auto}
+@media (max-width:820px){.diff{grid-template-columns:1fr}.diff>div+div{border-left:0;border-top:1px solid var(--line)}}
+.sys{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;text-align:left}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 24px;display:grid;gap:14px;align-content:start;transition:border-color .2s}
+.card:hover{border-color:var(--or-line)}
+.ic{width:42px;height:42px;border-radius:8px;background:var(--or-soft);border:1px solid var(--or-line);display:grid;place-items:center}
+.num{font:500 .7rem var(--f-m);color:var(--dim);letter-spacing:.1em}
+.card h3{font-size:1.22rem;font-weight:600;letter-spacing:-.01em}
+.card>p{color:var(--muted);font-size:.93rem}
+.card ul{list-style:none;margin:4px 0 0;padding:14px 0 0;border-top:1px solid var(--line);display:grid;gap:9px;font-size:.88rem}
+.card li{display:flex;gap:10px}
+.card li::before{content:"→";color:var(--or);font-family:var(--f-m)}
+@media (max-width:900px){.sys{grid-template-columns:1fr}}
+.statement h2{font-size:clamp(2.2rem,1.2rem + 4vw,4rem)}
+.statement .sub{font-size:1.1rem;max-width:62ch}
+.statement .sub strong{color:var(--fg);font-weight:600}
+.calc{margin-top:52px;display:grid;grid-template-columns:1.2fr 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);text-align:left}
+.calc>*{min-width:0}
+.inputs{padding:30px;display:grid;gap:26px}
+.field{display:grid;gap:10px}
+.field-top{display:flex;justify-content:space-between;gap:12px;font-size:.92rem}
+.field-top output{font:500 .95rem var(--f-m);color:var(--fg);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--or);height:4px}
+.cur{display:flex;gap:6px}
+.cur button{font:500 .78rem var(--f-m);padding:7px 11px;border-radius:5px;background:transparent;color:var(--muted);border:1px solid var(--line-2);cursor:pointer}
+.cur button[aria-pressed="true"]{color:#fff;background:var(--or-btn);border-color:var(--or-btn)}
+.result{padding:30px;background:linear-gradient(160deg,var(--or-soft),transparent 75%);border-left:1px solid var(--line);display:grid;gap:12px;align-content:center}
+.result span{font:500 .7rem var(--f-m);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.result b{font:700 clamp(2.4rem,1.6rem + 2.6vw,3.4rem)/1 var(--f-d);letter-spacing:-.03em;color:var(--or);font-variant-numeric:tabular-nums}
+.result p{color:var(--muted);font-size:.9rem}
+.result small{color:var(--dim);font:400 .74rem var(--f-m)}
+@media (max-width:820px){.calc{grid-template-columns:1fr}.result{border-left:0;border-top:1px solid var(--line)}}
+.tl{max-width:860px;margin:60px auto 0;text-align:left;position:relative}
+.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:linear-gradient(var(--or),var(--line) 70%)}
+.phase{position:relative;padding-left:40px;padding-bottom:40px}
+.phase:last-child{padding-bottom:0}
+.phase::before{content:"";position:absolute;left:0;top:4px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:2px solid var(--or);box-shadow:0 0 0 5px var(--or-soft)}
+.ph-head{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:baseline;margin-bottom:14px}
+.ph-head b{font:600 .78rem var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--or)}
+.ph-head span{font:400 .76rem var(--f-m);color:var(--dim)}
+.ph-head h3{width:100%;font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+.tasks{border:1px solid var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+.task{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:13px 16px;font-size:.92rem}
+.task+.task{border-top:1px solid var(--line)}
+.task i{font:normal 500 .72rem var(--f-m);color:var(--dim)}
+.task em{font:normal 400 .74rem var(--f-m);color:var(--muted);white-space:nowrap;border:1px solid var(--line-2);padding:3px 8px;border-radius:4px}
+@media (max-width:560px){.task{grid-template-columns:24px 1fr}.task em{grid-column:2;justify-self:start}}
+.ind{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px;text-align:left}
+.ind .card h3{font-size:1.08rem}
+.ind .say{font:400 .82rem/1.5 var(--f-m);color:var(--fg);background:var(--bg-2);border:1px solid var(--line);border-left:2px solid var(--or);padding:10px 12px;border-radius:6px}
+@media (max-width:960px){.ind{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.ind{grid-template-columns:1fr}}
+.stack{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:44px}
+.stack span{font:500 .78rem var(--f-m);color:var(--muted);border:1px solid var(--line);padding:8px 12px;border-radius:5px;background:var(--card)}
+.stack .lb{border:0;background:none;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;font-size:.68rem;align-self:center}
+.band{background:var(--bg-2);border-block:1px solid var(--line)}
+.faq{max-width:780px;margin:48px auto 0;text-align:left}
+details{border-bottom:1px solid var(--line)}
+details:first-child{border-top:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:22px 40px 22px 0;font:600 1.05rem var(--f-d);letter-spacing:-.01em;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:18px;font:400 1.4rem var(--f-m);color:var(--or)}
+details[open] summary::after{content:"−"}
+details p{padding:0 0 22px;color:var(--muted);max-width:66ch}
+.gets{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:52px;text-align:left;border-top:1px solid var(--line)}
+.gets>div{padding:26px 24px 0 0;display:grid;gap:8px;align-content:start}
+.gets>div+div{padding-left:24px;border-left:1px solid var(--line)}
+.gets b{font:500 .72rem var(--f-m);color:var(--or)}
+.gets h3{font-size:1.08rem;font-weight:600;letter-spacing:-.01em}
+.gets p{color:var(--muted);font-size:.9rem}
+@media (max-width:820px){.gets{grid-template-columns:1fr}.gets>div,.gets>div+div{padding:22px 0;border-left:0}.gets>div+div{border-top:1px solid var(--line)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:34px}
+.chips span{font:500 .72rem var(--f-m);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);padding:7px 11px;border-radius:4px}
+.booker{margin:48px auto 0;max-width:940px;display:grid;grid-template-columns:260px 1fr 190px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;text-align:left}
+.booker>*{min-width:0}
+.bk-info{padding:24px;border-right:1px solid var(--line);display:grid;gap:12px;align-content:start}
+.bk-info .host{font-size:.85rem;color:var(--muted)}
+.bk-info h3{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.bk-info p{font-size:.88rem;color:var(--muted)}
+.meta{display:grid;gap:8px;font:400 .8rem var(--f-m);color:var(--muted);margin-top:4px}
+.bk-cal{padding:22px}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font:600 .95rem var(--f-d)}
+.cal-head button{background:none;border:1px solid var(--line-2);color:var(--fg);width:30px;height:30px;border-radius:6px;cursor:pointer}
+.cal-head div{display:flex;gap:6px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.grid .dow{font:500 .66rem var(--f-m);text-transform:uppercase;letter-spacing:.06em;color:var(--dim);text-align:center;padding-bottom:4px}
+.day{aspect-ratio:1;max-width:100%;border-radius:6px;border:0;background:transparent;color:var(--dim);font:500 .85rem var(--f-b);font-variant-numeric:tabular-nums}
+.day.av{background:var(--card-2);color:var(--fg);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line-2)}
+.day.av:hover{box-shadow:inset 0 0 0 1px var(--or)}
+.day.sel{background:var(--or-btn);color:#fff;box-shadow:none}
+.bk-slots{padding:22px 18px;border-left:1px solid var(--line);display:grid;gap:8px;align-content:start}
+.bk-slots h4{margin:0 0 4px;font:600 .88rem var(--f-d)}
+.slot{font:500 .85rem var(--f-m);padding:10px;border-radius:6px;border:1px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;text-align:center;text-decoration:none}
+.slot:hover{border-color:var(--or);color:var(--or)}
+.bk-foot{grid-column:1/-1;border-top:1px solid var(--line);padding:16px 24px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;font-size:.86rem;color:var(--muted)}
+@media (max-width:900px){.booker{grid-template-columns:1fr}.bk-info{border-right:0;border-bottom:1px solid var(--line)}.bk-slots{border-left:0;border-top:1px solid var(--line);grid-template-columns:repeat(3,1fr)}.bk-slots h4{grid-column:1/-1}}
+footer{border-top:1px solid var(--line);padding-block:56px 40px;background:var(--bg)}
+.foot{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:36px}
+.foot p{color:var(--muted);font-size:.9rem;max-width:40ch;margin-top:14px}
+.foot h5{margin:0 0 14px;font:500 .7rem var(--f-m);text-transform:uppercase;letter-spacing:.12em;color:var(--dim)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:.9rem}
+.foot ul a{text-decoration:none;color:var(--muted)}
+.foot ul a:hover{color:var(--fg)}
+.heart{color:var(--or)}
+.legal{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font:400 .76rem var(--f-m);color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+@media (max-width:760px){.foot{grid-template-columns:1fr}
+  .foot ul{gap:0}.foot ul a{display:block;padding:10px 0}
+  .cur button{min-height:40px;padding:8px 14px}
+  .cal-head button{width:40px;height:40px}
+  .slot{min-height:44px;display:grid;place-items:center}
+  summary{padding-block:20px}
+  .btn{min-height:48px}
+  section{padding-block:clamp(56px,14vw,96px)}
+}
+.glow{position:fixed;left:0;top:0;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(76,141,255,.16),rgba(76,141,255,.05) 40%,transparent 68%);transform:translate(var(--gx,50vw),var(--gy,30vh));transition:transform .25s ease-out}
+.stage{position:relative;max-width:1120px;margin:64px auto 0}
+.stage .call{margin-top:0}
+.float{position:absolute;z-index:2;background:rgba(20,20,22,.88);backdrop-filter:blur(10px);border:1px solid var(--line-2);border-radius:12px;padding:14px 16px;text-align:left;
+  box-shadow:0 24px 50px -20px rgba(0,0,0,.7),0 0 0 1px rgba(76,141,255,.06);
+  transform:translate(calc(var(--mx,0)*var(--d)*1px),calc(var(--my,0)*var(--d)*1px));transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .2s}
+.float:hover{border-color:var(--or-line)}
+.float small{display:block;font:500 .64rem var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.float b{font:600 .95rem var(--f-d);color:var(--fg)}
+.float p{font-size:.8rem;color:var(--muted);margin-top:2px}
+.f1{left:-44px;top:-30px;width:184px;--d:-22}
+.f2{right:-60px;top:-120px;width:188px;--d:18}
+.f3{left:-30px;bottom:-56px;width:176px;--d:28}
+.f4{right:-44px;bottom:20px;width:184px;--d:-16}
+.minical{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:10px}
+.minical i{aspect-ratio:1;border-radius:3px;background:var(--card-2)}
+.minical i.on{background:var(--or-btn)}
+.wa{display:flex;gap:10px;align-items:flex-start}
+.wa .dot{flex:none;width:30px;height:30px;border-radius:50%;background:#1f9d55;display:grid;place-items:center}
+.meter{height:6px;border-radius:3px;background:var(--card-2);margin-top:10px;overflow:hidden}
+.meter i{display:block;height:100%;width:86%;background:linear-gradient(90deg,var(--or-btn),var(--or-2))}
+.spark{display:flex;align-items:flex-end;gap:4px;height:34px;margin-top:10px}
+.spark i{flex:1;background:var(--or-soft);border-top:2px solid var(--or);border-radius:2px 2px 0 0}
+@media (max-width:1240px){.float{display:none}}
+@media (prefers-reduced-motion:reduce){.float{transform:none}.glow{display:none}}
+.card,.diff>div,.tasks{position:relative}
+.card::after,.diff>div::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
+  background:radial-gradient(360px circle at var(--x,50%) var(--y,50%),rgba(76,141,255,.14),transparent 60%)}
+.card:hover::after,.diff>div:hover::after{opacity:1}
+.orb-hero{position:relative;overflow:hidden;background:#020409;min-height:clamp(620px,92vh,860px);padding-block:0;isolation:isolate;
+  margin-top:calc(-1 * env(safe-area-inset-top,0px))}
+#aurora,#orb{position:absolute;inset:0;width:100%;height:100%;display:block}
+#aurora{z-index:0}
+#orb{z-index:1}
+.orb-hero::after{content:"";position:absolute;inset:auto 0 0;height:120px;z-index:2;pointer-events:none;background:linear-gradient(transparent,var(--bg))}
+.orb-grid{position:relative;z-index:3;min-height:clamp(620px,92vh,860px);display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto 1fr auto auto;
+  padding-block:calc(env(safe-area-inset-top,0px) + 116px) 64px;pointer-events:none}
+.orb-grid a,.orb-grid button{pointer-events:auto}
+.orb-h1{grid-column:1;grid-row:1;font-family:var(--f-d);font-size:clamp(2.6rem,1.4rem + 3.6vw,4.6rem);line-height:1.02;letter-spacing:-.035em;display:grid;margin:0}
+.orb-h1 b{font-weight:600}
+.orb-h1 i{font-family:var(--f-b);font-style:italic;font-weight:300;letter-spacing:-.03em;color:#dfe8ff}
+.orb-core{grid-column:1/-1;grid-row:2;align-self:center;justify-self:center;text-align:center;display:grid;gap:14px}
+.orb-label{font:500 .66rem var(--f-m);letter-spacing:.22em;text-transform:uppercase;color:#c9d6ee}
+.orb-name{white-space:nowrap;font:300 italic clamp(1.7rem,1rem + 2.4vw,3rem)/1 var(--f-b);letter-spacing:-.02em;color:#6FA8FF;text-shadow:0 0 30px rgba(76,141,255,.55)}
+.orb-side{grid-column:3;grid-row:3;align-self:end;display:grid;gap:22px;max-width:330px}
+.orb-side p{font-size:.98rem;line-height:1.55;color:#dfe6f3;text-shadow:0 1px 12px rgba(0,0,0,.8)}
+.orb-cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.btn-line{display:inline-flex;gap:10px;align-items:center;padding:12px 16px;border:1px solid rgba(255,255,255,.55);color:#fff;text-decoration:none;font:500 .9rem var(--f-b);border-radius:2px;background:rgba(2,4,9,.35);backdrop-filter:blur(6px);transition:background .2s,border-color .2s}
+.btn-line:hover{background:var(--or-btn);border-color:var(--or-btn)}
+.btn-text{color:#fff;text-shadow:0 1px 8px #000;font-size:.9rem;text-underline-offset:4px}
+.orb-trust{grid-column:1/3;grid-row:4;align-self:end;display:flex;flex-wrap:wrap;gap:8px 22px;font:400 .74rem var(--f-m);color:#c3cde0;text-shadow:0 1px 8px #000;margin-top:18px}
+.orb-trust span::before{content:"✓ ";color:var(--or)}
+@media (max-width:900px){
+  .orb-hero,.orb-grid{min-height:0}
+  .orb-grid{grid-template-columns:1fr;grid-template-rows:auto auto auto auto;text-align:left;padding-block:calc(env(safe-area-inset-top,0px) + 96px) 48px}
+  .orb-core{min-height:min(92vw,440px);align-content:center;margin-block:8px}
+  .orb-h1{font-size:clamp(2.5rem,11vw,3.4rem)}
+  .orb-name{font-size:clamp(1.6rem,7.5vw,2.2rem)}
+  .orb-cta{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-text{text-align:center;padding:12px 0}
+  .orb-h1,.orb-core,.orb-side,.orb-trust{grid-column:1}
+  .orb-core{grid-row:2}
+  .orb-side{grid-row:3;max-width:none}
+  .orb-trust{grid-row:4}
+}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 0 rgba(74,222,128,.6);flex:none}
+@media (prefers-reduced-motion:no-preference){.live-dot{animation:ping 1.8s ease-out infinite}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}100%{box-shadow:0 0 0 10px rgba(74,222,128,0)}}
+.orb-core{pointer-events:none}
+.talk-orb{pointer-events:auto;justify-self:center;position:relative;margin-top:8px;display:inline-flex;align-items:center;gap:10px;padding:13px 22px 13px 16px;border-radius:999px;border:1px solid rgba(140,180,255,.55);
+  background:rgba(37,99,235,.28);backdrop-filter:blur(8px);color:#fff;font:600 .95rem var(--f-b);cursor:pointer;box-shadow:0 0 40px rgba(76,141,255,.45),inset 0 0 20px rgba(76,141,255,.25);transition:background .2s,transform .2s}
+.talk-orb:hover{background:rgba(37,99,235,.55);transform:translateY(-1px)}
+.talk-orb svg{position:relative;z-index:1}
+.talk-orb .ring{position:absolute;inset:-1px;border-radius:inherit;border:1px solid rgba(120,170,255,.6);pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.talk-orb .ring{animation:ring 2.4s ease-out infinite}.talk-orb .r2{animation-delay:1.2s}}
+@keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35,1.7);opacity:0}}
+.talk-hint{font:400 .72rem var(--f-m);color:#9fb3d6;letter-spacing:.02em}
+.inline-talk{background:none;border:0;padding:0;font:inherit;color:var(--or);cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.mbar .wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;font:600 .95rem var(--f-b);cursor:pointer;border-radius:8px}
+@media (max-width:820px){#nexus-agent .atoms-widget-wrapper>div[style*="fixed"]{bottom:calc(84px + env(safe-area-inset-bottom,0px)) !important;right:12px !important}}
+</style>
+<link rel="stylesheet" href="/custom.css">
+<link rel="preconnect" href="https://www.nexus-aisolution.com">
+<style>/* Way back to the main site */.links .home-link{color:var(--fg);white-space:nowrap}.links .home-link:hover{color:var(--or)}.mnav .home-link{color:var(--or)}html.is-leaving body{opacity:0;transition:opacity .22s ease}@media (prefers-reduced-motion:reduce){html.is-leaving body{transition:none}}</style>
+</head>
+<body>
+
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="glow" aria-hidden="true"></div>
+<div class="page">
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="https://www.nexus-aisolution.com/" title="Back to the Nexus AI main site"><span class="mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><rect x="1.5" y="6" width="2" height="4" rx="1" fill="#fff"/><rect x="5" y="3.5" width="2" height="9" rx="1" fill="#fff"/><rect x="8.5" y="1.5" width="2" height="13" rx="1" fill="#fff"/><rect x="12" y="5" width="2" height="6" rx="1" fill="#fff"/></svg></span>Nexus <span class="o">AI</span>&nbsp;<span class="vo">Voice</span></a>
+    <nav class="links" aria-label="Main"><a class="home-link" href="https://www.nexus-aisolution.com/">← Nexus AI home</a><a href="#systems">Voice agents</a><a href="#process">Process</a><a href="#industries">Industries</a><a href="#faq">FAQ</a></nav>
+    <a class="btn btn-or" href="#audit">Book free audit</a>
+    <button type="button" class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile" hidden><a class="home-link" href="https://www.nexus-aisolution.com/">← Nexus AI home</a><a href="#systems">Voice agents</a><a href="#process">Process</a><a href="#industries">Industries</a><a href="#faq">FAQ</a><a href="#audit">Book free voice audit</a></nav>
+</header>
+
+<main id="top">
+<section class="orb-hero" id="hero">
+  <canvas id="aurora" aria-hidden="true"></canvas>
+  <canvas id="orb" aria-hidden="true"></canvas>
+  <div class="wrap orb-grid">
+    <h1 class="orb-h1"><b>Answer.</b><i>Qualify.</i><i>Book.</i></h1>
+    <div class="orb-core">
+      <span class="orb-label">Nexus AI Voice · Agent</span>
+      <p class="orb-name">{AI Receptionist}</p>
+      <button type="button" class="talk-orb" data-talk aria-label="Talk to Nexus AI now"><span class="ring"></span><span class="ring r2"></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Talk to it now</span></button>
+      <span class="talk-hint">Live AI call in your browser · free · no sign-up</span>
+    </div>
+    <div class="orb-side">
+      <p>AI voice agents that pick up every call in under a second, qualify the caller and book them into your calendar. Day, night and weekends.</p>
+      <div class="orb-cta">
+        <a class="btn-text" href="#audit">Book voice audit now →</a>
+      </div>
+    </div>
+    <div class="orb-trust"><span>Works with your current number</span><span>Human hand-off anytime</span><span>Live in ~3 weeks</span></div>
+  </div>
+</section>
+
+<section class="center" id="demo-sec" style="padding-top:clamp(56px,8vw,96px)">
+  <div class="wrap">
+    <span class="label">What a call looks like</span>
+    <h2>Every call answered, booked<br>and logged. <span class="o">Automatically.</span></h2>
+    <p class="sub">Below is an example. Want to hear the real thing? <button type="button" class="inline-talk" data-talk>Start a live call with Nexus AI →</button></p>
+    <div class="stage" id="stage">
+      <div class="float f1" aria-hidden="true"><small>Booked · Google Calendar</small><b>Tue, 5:30 PM</b><p>Cleaning · Dr. Mehta</p><div class="minical"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="float f2" aria-hidden="true"><small>Sent on WhatsApp</small><div class="wa"><span class="dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></span><p style="margin:0;color:var(--fg)">Hi Ananya, you're booked for 5:30 PM tomorrow at Smile Dental. Reply 1 to confirm.</p></div></div>
+      <div class="float f3" aria-hidden="true"><small>Lead score</small><b>Hot lead · 86/100</b><p>Budget fits · wants visit this week</p><div class="meter"><i></i></div></div>
+      <div class="float f4" aria-hidden="true"><small>Calls answered · this week</small><b>Every call, 24/7</b><div class="spark"><i style="height:40%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:70%"></i><i style="height:62%"></i><i style="height:85%"></i><i style="height:100%"></i></div></div>
+    <div class="call" id="demo" role="figure" aria-label="Example inbound call handled by the AI voice agent">
+      <div class="call-top">
+        <span class="live">Live call · 01:12</span>
+        <span>Inbound · Smile Dental Clinic</span>
+        <div class="wave" aria-hidden="true"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.2s"></i></div>
+        <span class="example">Example</span>
+      </div>
+      <div class="call-body">
+        <div class="tx">
+          <div class="ln"><b>Caller</b><p>Hi, do you have anything tomorrow for a cleaning? I can only come after work.</p></div>
+          <div class="ln ai"><b>AI agent</b><p>Sure. Tomorrow I have 5:30 or 6:15 in the evening with Dr. Mehta. Which works better?</p></div>
+          <div class="ln"><b>Caller</b><p>5:30 is good. How much is it?</p></div>
+          <div class="ln ai"><b>AI agent</b><p>A cleaning is ₹1,500. You're booked for 5:30 tomorrow, and I've sent the details to your WhatsApp. Anything else?</p></div>
+        </div>
+        <div class="acts">
+          <h4>What happened in the background</h4>
+          <div class="act"><div>Checked calendar<small>Google Calendar · 2 open slots</small></div></div>
+          <div class="act"><div>Answered price from your price list<small>Knowledge base</small></div></div>
+          <div class="act"><div>Booked appointment<small>Tomorrow 17:30 · Dr. Mehta</small></div></div>
+          <div class="act"><div>Sent confirmation<small>WhatsApp · reminder set for 2 h before</small></div></div>
+          <div class="act"><div>Logged call + transcript<small>CRM · new patient</small></div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="center" style="padding-top:clamp(40px,6vw,72px)">
+  <div class="wrap">
+    <span class="label">Why Nexus AI</span>
+    <h2>We're not a chatbot reseller.<br>Here's the difference.</h2>
+    <div class="diff">
+      <div><span class="tag">Typical AI tool</span><h3>Buy a login.<br>Build it yourself.</h3><p>You get a dashboard and a blank prompt. Scripts, integrations and testing are your problem, so most never go live.</p></div>
+      <div><span class="tag">Typical agency</span><h3>Ship a demo.<br>Disappear.</h3><p>A slick demo call, then no one owns it when callers ask something new or bookings start going wrong.</p></div>
+      <div class="us"><span class="tag">Nexus AI</span><h3>We build it, run it,<br>and improve it weekly.</h3><p>We script, connect and test the agent on your real calls, then review conversations every week so it keeps getting better.</p></div>
+    </div>
+    <p class="quote">"Anyone can make an AI talk.<br>We make it <span class="o">answer, book and follow up</span> without a human."</p>
+  </div>
+</section>
+
+<section class="center" id="systems">
+  <div class="wrap">
+    <span class="label">What we build</span>
+    <h2>Three voice systems.<br>One phone line that never sleeps.</h2>
+    <p class="sub">Start with one. Most businesses begin with the inbound receptionist and add the others once it's paying for itself.</p>
+    <div class="sys">
+      <article class="card">
+        <div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4C8DFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></div>
+        <span class="num">01 · INBOUND</span>
+        <h3>AI Receptionist</h3>
+        <p>Answers every incoming call, day or night, on your existing number.</p>
+        <ul><li>Answers FAQs, prices and timings</li><li>Books, moves and cancels appointments</li><li>Qualifies leads with your questions</li><li>Transfers urgent calls to staff</li></ul>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4C8DFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+        <span class="num">02 · OUTBOUND</span>
+        <h3>Follow-up Caller</h3>
+        <p>Calls people back so leads and bookings don't go cold.</p>
+        <ul><li>Calls new web leads within 60 seconds</li><li>Appointment reminders and confirmations</li><li>No-show and cancellation recovery</li><li>Reactivates old customers</li></ul>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4C8DFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6H15a3 3 0 0 1 3 3v6.5M6 8.5V15a3 3 0 0 0 3 3h6.5"/></svg></div>
+        <span class="num">03 · AFTER THE CALL</span>
+        <h3>Call Automation</h3>
+        <p>Everything that should happen after a call happens on its own.</p>
+        <ul><li>Updates your CRM with notes and tags</li><li>WhatsApp or SMS summary to the caller</li><li>Alerts your team for hot leads</li><li>Recordings and transcripts, searchable</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="center statement band">
+  <div class="wrap">
+    <span class="label">The real problem</span>
+    <h2>Your phone is ringing.<br><span class="o">Who's answering?</span></h2>
+    <p class="sub">When a caller reaches voicemail, most don't leave a message. They call the next business on the list. Your front desk can't answer two lines at once, pick up at 9 p.m., or call every web lead back within a minute. <strong>An AI voice agent can, every single time.</strong></p>
+
+    <div class="calc" aria-labelledby="calc-h">
+      <div class="inputs">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center">
+          <h3 id="calc-h" style="font-size:1.2rem;font-weight:600">What missed calls cost you</h3>
+          <div class="cur" role="group" aria-label="Currency"><button type="button" id="cur-inr" aria-pressed="true">₹ INR</button><button type="button" id="cur-usd" aria-pressed="false">$ USD</button></div>
+        </div>
+        <div class="field"><div class="field-top"><label for="missed">Missed or unanswered calls per week</label><output id="o-missed">25</output></div><input type="range" id="missed" min="0" max="200" step="1" value="25"></div>
+        <div class="field"><div class="field-top"><label for="conv">Share that would have become customers</label><output id="o-conv">20%</output></div><input type="range" id="conv" min="5" max="60" step="1" value="20"></div>
+        <div class="field"><div class="field-top"><label for="val">Average value of one customer</label><output id="o-val">₹5,000</output></div><input type="range" id="val" min="500" max="100000" step="500" value="5000"></div>
+      </div>
+      <div class="result" aria-live="polite">
+        <span>Estimated revenue lost per month</span>
+        <b id="lost">₹1,08,250</b>
+        <p id="lost-note">About 22 customers a month going to someone else.</p>
+        <small>Your numbers stay in your browser. Nothing is sent.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="center" id="process">
+  <div class="wrap">
+    <span class="label">Our method</span>
+    <h2>Listen. Build.<br>Launch. Improve.</h2>
+    <p class="sub">A fixed, four-phase process. You know what happens each week and when your agent goes live.</p>
+    <div class="tl">
+      <div class="phase">
+        <div class="ph-head"><b>Phase 1 · Listen</b><span>Week 1</span><h3>Understand how your calls really go</h3></div>
+        <div class="tasks">
+          <div class="task"><i>01</i><span>Review call recordings and missed-call logs</span><em>2–3 days</em></div>
+          <div class="task"><i>02</i><span>Map caller questions, booking rules and hand-off cases</span><em>2 days</em></div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="ph-head"><b>Phase 2 · Build</b><span>Week 2</span><h3>Script, voice and integrations</h3></div>
+        <div class="tasks">
+          <div class="task"><i>03</i><span>Choose voice, accent, language and agent persona</span><em>1 day</em></div>
+          <div class="task"><i>04</i><span>Connect phone number, calendar, CRM and WhatsApp</span><em>2–3 days</em></div>
+          <div class="task"><i>05</i><span>Run 100+ test calls on real scenarios with your team</span><em>2 days</em></div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="ph-head"><b>Phase 3 · Launch</b><span>Week 3</span><h3>Go live safely</h3></div>
+        <div class="tasks">
+          <div class="task"><i>06</i><span>Soft launch on after-hours and overflow calls</span><em>3–4 days</em></div>
+          <div class="task"><i>07</i><span>Full go-live with a human fallback on every call</span><em>1 day</em></div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="ph-head"><b>Phase 4 · Improve</b><span>Ongoing</span><h3>Better every week</h3></div>
+        <div class="tasks">
+          <div class="task"><i>08</i><span>Weekly call review and script tuning</span><em>Weekly</em></div>
+          <div class="task"><i>09</i><span>Report: calls answered, bookings made, leads passed on</span><em>Monthly</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="center band" id="industries">
+  <div class="wrap">
+    <span class="label">Who it's for</span>
+    <h2>Built for businesses<br>that run on the phone.</h2>
+    <div class="ind">
+      <article class="card"><h3>Clinics &amp; dental</h3><p>Books, reschedules and reminds patients. Sends emergencies to staff.</p><p class="say">"Can I see a doctor this evening?"</p></article>
+      <article class="card"><h3>Real estate</h3><p>Qualifies buyers by budget and area, then books site visits.</p><p class="say">"Is the 3BHK on MG Road still available?"</p></article>
+      <article class="card"><h3>Home services</h3><p>Takes job details, quotes standard prices and books a technician slot.</p><p class="say">"My AC stopped cooling. Can someone come today?"</p></article>
+      <article class="card"><h3>Auto dealers &amp; service</h3><p>Books test drives and service slots, and follows up on enquiries.</p><p class="say">"When is my car's service due?"</p></article>
+    </div>
+    <div class="stack" aria-label="Integrations"><span class="lb">Connects with</span><span>Google Calendar</span><span>Cal.com</span><span>Calendly</span><span>HubSpot</span><span>Zoho CRM</span><span>Salesforce</span><span>WhatsApp</span><span>Twilio</span><span>Exotel</span></div>
+  </div>
+</section>
+
+<section class="center" id="faq">
+  <div class="wrap">
+    <span class="label">FAQ</span>
+    <h2>Questions before you book.</h2>
+    <div class="faq">
+      <details open><summary>Will callers know they're talking to AI?</summary><p>The voices sound natural and respond in under a second, so most conversations feel normal. We recommend the agent says it's an AI assistant at the start. Callers can ask for a person at any time.</p></details>
+      <details><summary>Can it use our existing phone number?</summary><p>Yes. We forward your current number to the agent for all calls, only after-hours, or only when your team doesn't pick up. You choose.</p></details>
+      <details><summary>Which languages does it speak?</summary><p>English plus many other languages, and it can switch mid-call when the caller does. We test the voice and accent with you before launch.</p></details>
+      <details><summary>What happens when the AI can't help?</summary><p>It transfers the call to the right person, or takes a message and alerts your team on WhatsApp with a summary. You decide which cases always go to a human.</p></details>
+      <details><summary>How much does it cost?</summary><p>A one-time setup fee plus a monthly fee based on call minutes. Because every business has different call volumes, you get a fixed quote after the free audit, before you commit to anything.</p></details>
+      <details><summary>Are calls recorded? What about privacy?</summary><p>Calls can be recorded and transcribed for quality, with a consent message at the start. Data stays in your accounts, and we sign an NDA and a data processing agreement.</p></details>
+      <details><summary>Can I talk to someone first?</summary><p>Yes. Email <a href="mailto:ai@nexus-aisolution.com">ai@nexus-aisolution.com</a> or message us on WhatsApp at <a href="https://wa.me/917011225289" target="_blank" rel="noopener">+91 70112 25289</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="center band" id="audit">
+  <div class="wrap">
+    <span class="label">Get started</span>
+    <h2>The audit is free.<br><span class="o">Missed calls aren't.</span></h2>
+    <p class="sub">A 30-minute call where we look at how your phones are handled today, and show you exactly what an AI voice agent would take off your team.</p>
+    <div class="gets">
+      <div><b>01</b><h3>We look at your calls</h3><p>Call volume, peak hours, missed calls and what callers usually ask.</p></div>
+      <div><b>02</b><h3>We map what AI can handle</h3><p>Which calls the agent answers, which it books, and which go to your team.</p></div>
+      <div><b>03</b><h3>You get a plan and a price</h3><p>A written summary and fixed quote within 2 days. No pressure to sign.</p></div>
+    </div>
+    <p class="sub" style="margin-top:22px">Not ready to book? <button type="button" class="inline-talk" data-talk>Talk to Nexus AI first →</button></p>
+    <div class="chips"><span>30 minutes</span><span>Free</span><span>No obligation</span><span>Google Meet</span></div>
+
+    <div class="booker">
+      <div class="bk-info">
+        <span class="host">Nexus AI Voice</span>
+        <h3>30 min · Free AI Voice Audit</h3>
+        <p>See how many calls you're missing and what an AI voice agent would handle for your business.</p>
+        <div class="meta"><span>◷ 30 min</span><span>▣ Google Meet</span><span>◎ Asia/Kolkata (IST)</span></div>
+      </div>
+      <div class="bk-cal">
+        <div class="cal-head"><span id="cal-month">December 2026</span><div><button type="button" id="prev" aria-label="Previous month">‹</button><button type="button" id="next" aria-label="Next month">›</button></div></div>
+        <div class="grid" id="cal-grid"></div>
+      </div>
+      <div class="bk-slots" id="slots"><h4 id="slot-day">Pick a day</h4></div>
+      <div class="bk-foot"><span>Prefer WhatsApp? Message <a href="https://wa.me/917011225289" target="_blank" rel="noopener" style="color:var(--fg);font-weight:600">+91 70112 25289</a></span><a href="https://cal.com/nitin-arora-do3bcj/30min" target="_blank" rel="noopener" style="color:var(--fg)">Open full calendar →</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="https://www.nexus-aisolution.com/" title="Back to the Nexus AI main site"><span class="mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><rect x="1.5" y="6" width="2" height="4" rx="1" fill="#fff"/><rect x="5" y="3.5" width="2" height="9" rx="1" fill="#fff"/><rect x="8.5" y="1.5" width="2" height="13" rx="1" fill="#fff"/><rect x="12" y="5" width="2" height="6" rx="1" fill="#fff"/></svg></span>Nexus <span class="o">AI</span>&nbsp;<span class="vo">Voice</span></a>
+        <p>Nexus AI Voice builds and runs AI voice agents that answer, qualify and book, for clinics, real estate, home services and auto businesses.</p>
+        <a class="btn btn-or" href="#audit" style="margin-top:20px">Book free voice audit →</a>
+      </div>
+      <div><h5>Voice agents</h5><ul><li><a href="#systems">AI Receptionist</a></li><li><a href="#systems">Follow-up Caller</a></li><li><a href="#systems">Call Automation</a></li><li><a href="#process">Process</a></li></ul></div>
+      <div><h5>Company &amp; contact</h5><ul><li><a href="#industries">Industries</a></li><li><a href="#faq">FAQ</a></li><li><a href="mailto:ai@nexus-aisolution.com">ai@nexus-aisolution.com</a></li><li><a href="https://wa.me/917011225289" target="_blank" rel="noopener">WhatsApp +91 70112 25289</a></li><li><a href="https://www.nexus-aisolution.com/">nexus-aisolution.com</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Nexus AI Voice · New Delhi, India</span><span>Built with <span class="heart" aria-label="love">♥</span> in New Delhi</span></div>
+  </div>
+</footer>
+</div>
+<div class="mbar" id="mbar"><button type="button" class="wa-btn" data-talk><span class="live-dot" aria-hidden="true"></span>Talk to Nexus AI</button><a class="bk" href="#audit">Book free audit</a></div>
+
+<div id="nexus-agent"></div>
+<script src="https://unpkg.com/atoms-widget-core@1.1.2/dist/embed/widget.umd.js"></script>
+<script>
+(function(){
+  var AGENT={assistantId:"6b03463bffa86860935d5b47",mode:"voice",position:"bottom-right",size:"compact",
+    ctaName:"Talk to Nexus AI",avatarUrl:"/agent-avatar.svg",title:"Nexus AI Voice",
+    startButtonText:"Start call",endButtonText:"End call",
+    voiceEmptyMessage:"Hi! I'm the Nexus AI Voice receptionist. Tap Start call and ask me anything about AI voice agents.",
+    voiceActiveEmptyMessage:"Listening… go ahead and speak.",
+    baseColor:"#111216",accentColor:"#2563EB",ctaButtonColor:"#2563EB",ctaButtonTextColor:"#FFFFFF",
+    textOnAccentColor:"#FFFFFF",primaryTextColor:"#F4F4F5",secondaryTextColor:"#A1A1AA",agentBubbleColor:"#1C1D22",borderRadius:16};
+  window.NEXUS_AGENT=AGENT;
+  try{ if(window.AtomsWidgetLoader){ new window.AtomsWidgetLoader({container:document.getElementById('nexus-agent'),component:'AtomsWidget',props:AGENT}); } }
+  catch(e){ console.warn('Nexus agent failed to start',e) }
+})();
+</script>
+
+<script>
+(function(){
+  function cfg(){return window.NEXUS_AGENT||{ctaName:'Talk to Nexus AI',startButtonText:'Start call',endButtonText:'End call'}}
+  function btns(){const w=document.getElementById('nexus-agent');return w?[...w.querySelectorAll('button')]:[]}
+  const txt=b=>(b.textContent||'').trim().toLowerCase();
+  function findStart(){const c=cfg();return btns().find(b=>txt(b)===c.startButtonText.toLowerCase()&&b.offsetParent!==null)}
+  function inCall(){const c=cfg();return btns().some(b=>txt(b)===c.endButtonText.toLowerCase())}
+  function talk(){
+    if(!btns().length){location.hash='#audit';return}
+    if(inCall())return;
+    let s=findStart();
+    if(s){s.click();return}
+    const c=cfg();
+    const launcher=btns().find(b=>txt(b).includes(c.ctaName.toLowerCase()))||btns().find(b=>/call|talk/.test(txt(b)+' '+(b.getAttribute('aria-label')||'').toLowerCase()))||btns()[0];
+    launcher.click();
+    let n=0;const t=setInterval(()=>{s=findStart();if(s||++n>30){clearInterval(t);if(s)s.click()}},100);
+  }
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-talk]');if(b){e.preventDefault();talk()}});
+})();
+(function(){
+  const b=document.getElementById('menu-btn'),m=document.getElementById('mnav'),bar=document.getElementById('mbar'),hero=document.getElementById('hero'),audit=document.getElementById('audit');
+  b.addEventListener('click',()=>{const o=m.hidden;m.hidden=!o;b.setAttribute('aria-expanded',o)});
+  m.addEventListener('click',e=>{if(e.target.closest('a')){m.hidden=true;b.setAttribute('aria-expanded','false')}});
+  let pastHero=false,atAudit=false;const upd=()=>bar.classList.toggle('show',pastHero&&!atAudit);
+  new IntersectionObserver(es=>{pastHero=!es[0].isIntersecting;upd()}).observe(hero);
+  new IntersectionObserver(es=>{atAudit=es[0].isIntersecting;upd()},{threshold:.15}).observe(audit);
+})();
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let s=[],w,h,dpr;
+  function size(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    s=Array.from({length:Math.round(w*h/5200)},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.1+.2,a:Math.random()*.6+.15,t:Math.random()*6.28,o:Math.random()<.06}));draw(0)}
+  function draw(t){x.clearRect(0,0,w,h);for(const p of s){const a=still?p.a:p.a*(.6+.4*Math.sin(t/1400+p.t));x.fillStyle=p.o?`rgba(120,170,255,${a})`:`rgba(255,255,255,${a})`;x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill()}}
+  function loop(t){draw(t);requestAnimationFrame(loop)}
+  addEventListener('resize',size);size();if(!still)requestAnimationFrame(loop);
+})();
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='INR';
+  const fmt=n=>cur==='INR'?'₹'+Math.round(n).toLocaleString('en-IN'):'$'+Math.round(n).toLocaleString('en-US');
+  const cfg={INR:{min:500,max:100000,step:500,def:5000},USD:{min:20,max:2000,step:10,def:150}};
+  function run(){
+    const m=+$('missed').value,c=+$('conv').value/100,v=+$('val').value;
+    $('o-missed').textContent=m;$('o-conv').textContent=Math.round(c*100)+'%';$('o-val').textContent=fmt(v);
+    const cust=m*4.33*c;$('lost').textContent=fmt(cust*v);
+    $('lost-note').textContent='About '+Math.round(cust)+' customers a month going to someone else.';
+  }
+  function setCur(k){cur=k;const r=$('val'),g=cfg[k];r.min=g.min;r.max=g.max;r.step=g.step;r.value=g.def;
+    $('cur-inr').setAttribute('aria-pressed',k==='INR');$('cur-usd').setAttribute('aria-pressed',k==='USD');run()}
+  ['missed','conv','val'].forEach(i=>$(i).addEventListener('input',run));
+  $('cur-inr').onclick=()=>setCur('INR');$('cur-usd').onclick=()=>setCur('USD');run();
+})();
+(function(){
+  const CAL_URL='https://cal.com/nitin-arora-do3bcj/30min';
+  const grid=document.getElementById('cal-grid'),slots=document.getElementById('slots'),label=document.getElementById('cal-month');
+  const today=new Date();today.setHours(0,0,0,0);
+  let view=new Date(today.getFullYear(),today.getMonth(),1),sel=null;
+  const times=['10:00','11:30','13:00','15:00','16:30','18:00'];
+  function pad(n){return String(n).padStart(2,'0')}
+  function render(){
+    label.textContent=view.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+    grid.innerHTML='';['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d=>{const e=document.createElement('div');e.className='dow';e.textContent=d;grid.append(e)});
+    const first=(view.getDay()+6)%7,days=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    for(let i=0;i<first;i++)grid.append(document.createElement('span'));
+    for(let d=1;d<=days;d++){const dt=new Date(view.getFullYear(),view.getMonth(),d),b=document.createElement('button');b.type='button';b.textContent=d;b.className='day';
+      const ok=dt>today&&dt.getDay()!==0;
+      if(ok){b.classList.add('av');b.onclick=()=>{sel=dt;render();showSlots()}}else b.disabled=true;
+      if(sel&&+sel===+dt)b.classList.add('sel');grid.append(b)}
+  }
+  function showSlots(){
+    slots.innerHTML='';const h=document.createElement('h4');h.textContent=sel.toLocaleDateString('en-US',{weekday:'short',day:'numeric',month:'short'});slots.append(h);
+    const ds=sel.getFullYear()+'-'+pad(sel.getMonth()+1)+'-'+pad(sel.getDate());
+    times.forEach(t=>{const a=document.createElement('a');a.className='slot';a.textContent=t;a.href=CAL_URL+'?date='+ds;a.target='_blank';a.rel='noopener';slots.append(a)});
+  }
+  document.getElementById('prev').onclick=()=>{const p=new Date(view.getFullYear(),view.getMonth()-1,1);if(p>=new Date(today.getFullYear(),today.getMonth(),1)){view=p;render()}};
+  document.getElementById('next').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);render()};
+  render();
+})();
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer:fine)').matches)return;
+  const root=document.documentElement,stage=document.getElementById('stage');let raf=0,ev=null;
+  addEventListener('pointermove',e=>{ev=e;if(!raf)raf=requestAnimationFrame(tick)},{passive:true});
+  function tick(){raf=0;const e=ev;root.style.setProperty('--gx',e.clientX+'px');root.style.setProperty('--gy',e.clientY+'px');
+    const r=stage.getBoundingClientRect();
+    stage.style.setProperty('--mx',((e.clientX-(r.left+r.width/2))/r.width).toFixed(3));
+    stage.style.setProperty('--my',((e.clientY-(r.top+r.height/2))/r.height).toFixed(3));
+    const t=e.target.closest&&e.target.closest('.card,.diff>div');
+    if(t){const b=t.getBoundingClientRect();t.style.setProperty('--x',(e.clientX-b.left)+'px');t.style.setProperty('--y',(e.clientY-b.top)+'px')}}
+})();
+(function(){
+  const hero=document.getElementById('hero'),A=document.getElementById('aurora'),O=document.getElementById('orb');
+  const ax=A.getContext('2d'),ox=O.getContext('2d');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const off=document.createElement('canvas'),fx=off.getContext('2d');
+  const COLS=['#5B9BFF','#7FB2FF','#4AA8FF','#A3CBFF'];
+  let W,H,dpr,R,cx,cy,pts=[],mouse={x:-9999,y:-9999,tx:0,ty:0,on:false},rotY=0,tiltX=0,tiltY=0;
+  function build(){
+    const n=W<700?7000:18000;pts=[];
+    for(let i=0;i<n;i++){const y=Math.random()*2-1,r=Math.sqrt(1-y*y),th=Math.random()*6.2832,j=.965+Math.random()*.07;
+      pts.push({x:Math.cos(th)*r*j,y:y*j,z:Math.sin(th)*r*j,ox:0,oy:0,s:Math.random()*.9+.5,h:Math.random(),c:(Math.random()*4)|0})}
+  }
+  function size(){
+    dpr=Math.min(devicePixelRatio||1,2);const b=hero.getBoundingClientRect();W=b.width;H=b.height;
+    O.width=W*dpr;O.height=H*dpr;
+    ox.setTransform(dpr,0,0,dpr,0,0);
+    A.width=W;A.height=H;off.width=Math.ceil(W/3);off.height=Math.ceil(H/3);tongues=[];
+    if(W<900){const c=document.querySelector('.orb-core').getBoundingClientRect();R=Math.min(W*.4,c.height*.46);cx=W/2;cy=c.top-b.top+c.height/2}
+    else{R=Math.min(W*.23,H*.33);cx=W/2;cy=H*.52}
+    hero.style.setProperty('--orb-bottom',Math.max(70,H-(cy+R))+'px');hero.style.setProperty('--orb-cy',cy+'px');hero.style.setProperty('--orb-r',R+'px');
+    build();
+  }
+  hero.addEventListener('pointermove',e=>{const b=hero.getBoundingClientRect();mouse.x=e.clientX-b.left;mouse.y=e.clientY-b.top;mouse.on=true;
+    mouse.tx=(mouse.x-cx)/W;mouse.ty=(mouse.y-cy)/H},{passive:true});
+  hero.addEventListener('pointerleave',()=>{mouse.on=false;mouse.x=mouse.y=-9999;mouse.tx=mouse.ty=0});
+  let tongues=[];
+  function makeTongues(){tongues=[];const n=W<700?46:90;
+    for(let i=0;i<n;i++){let u=Math.random();u=.5+(u-.5)*Math.pow(Math.random(),.35)*1.05;
+      tongues.push({u,w:.012+Math.random()*.035,h:.25+Math.random()*.75,ph:Math.random()*6.28,sp:.5+Math.random()*1.2,
+        hue:198+Math.random()*30,a:.05+Math.random()*.09})}}
+  function aurora(t){
+    const w=off.width,h=off.height;fx.clearRect(0,0,w,h);fx.globalCompositeOperation='lighter';
+    if(!tongues.length)makeTongues();
+    for(const g of tongues){
+      const d=Math.abs(g.u-.5),env=Math.max(0,1-d*2.1)**1.4;
+      const ht=h*(.12+.62*env*g.h*(.75+.25*Math.sin(t*.0012*g.sp+g.ph)));
+      const x=g.u*w,wd=w*g.w*(1+env*.8),sway=Math.sin(t*.0009*g.sp+g.ph)*wd*1.6;
+      const gr=fx.createLinearGradient(0,h,0,h-ht);
+      gr.addColorStop(0,`hsla(${g.hue},100%,62%,${g.a*1.8})`);gr.addColorStop(.45,`hsla(${g.hue+8},100%,55%,${g.a})`);gr.addColorStop(1,`hsla(${g.hue+15},100%,50%,0)`);
+      fx.fillStyle=gr;fx.beginPath();fx.moveTo(x-wd,h);
+      fx.bezierCurveTo(x-wd*.9,h-ht*.45,x+sway-wd*.25,h-ht*.8,x+sway,h-ht);
+      fx.bezierCurveTo(x+sway+wd*.25,h-ht*.8,x+wd*.9,h-ht*.45,x+wd,h);fx.closePath();fx.fill();
+    }
+    const core=fx.createRadialGradient(w/2,h,0,w/2,h,w*.28);
+    core.addColorStop(0,'rgba(120,190,255,.35)');core.addColorStop(.5,'rgba(40,100,255,.12)');core.addColorStop(1,'rgba(20,60,200,0)');
+    fx.fillStyle=core;fx.fillRect(0,0,w,h);
+    ax.clearRect(0,0,A.width,A.height);ax.imageSmoothingEnabled=true;ax.filter='blur(3px)';
+    ax.drawImage(off,0,0,A.width,A.height);ax.filter='none';
+  }
+  function orb(t){
+    ox.clearRect(0,0,W,H);
+    tiltX+=((mouse.ty*.9)-tiltX)*.05;tiltY+=((mouse.tx*1.2)-tiltY)*.05;rotY=still?0.6:rotY+.0016;
+    const a=rotY+tiltY,ca=Math.cos(a),sa=Math.sin(a),cb=Math.cos(tiltX),sb=Math.sin(tiltX),f=3.2;
+    const rr=Math.max(70,R*.55);
+    for(const p of pts){
+      let x=p.x*ca+p.z*sa,z=-p.x*sa+p.z*ca,y=p.y*cb-z*sb;z=p.y*sb+z*cb;
+      const k=f/(f-z),sx=cx+x*R*k,sy=cy+y*R*k;
+      let fx2=0,fy2=0;
+      if(mouse.on){const dx=sx+p.ox-mouse.x,dy=sy+p.oy-mouse.y,d=Math.hypot(dx,dy);
+        if(d<rr){const push=(1-d/rr)**2*38*(z>0?1:.5);fx2=dx/(d||1)*push;fy2=dy/(d||1)*push}}
+      p.ox+=(fx2-p.ox)*.12;p.oy+=(fy2-p.oy)*.12;
+      const depth=(z+1)/2,flick=still?1:.75+.25*Math.sin(t*.002+p.h*40);
+      ox.globalAlpha=(.14+.76*depth)*flick;ox.fillStyle=COLS[p.c];
+      const size=(.45+depth*.85)*p.s;
+      ox.fillRect(sx+p.ox,sy+p.oy,size,size);
+    }
+    ox.globalAlpha=1;
+    const g=ox.createRadialGradient(cx,cy+R*.6,R*.1,cx,cy,R*1.15);
+    g.addColorStop(0,'rgba(60,130,255,.10)');g.addColorStop(1,'rgba(60,130,255,0)');ox.fillStyle=g;ox.beginPath();ox.arc(cx,cy,R*1.15,0,6.283);ox.fill();
+  }
+  let vis=true,running=false;
+  function start(){if(!running&&!still){running=true;requestAnimationFrame(loop)}}
+  new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis)start()}).observe(hero);
+  function loop(t){if(!vis){running=false;return}aurora(t);orb(t);requestAnimationFrame(loop)}
+  addEventListener('resize',()=>{size();if(still){aurora(0);orb(0)}});
+  size();aurora(0);orb(0);start();
+})();
+</script>
+
+<script>
+/* Smooth hand-over back to the Nexus AI main site (mirrors the main site's fade into this one). */
+(function(){
+  var MAIN_HOSTS=['www.nexus-aisolution.com','nexus-aisolution.com'];
+  document.addEventListener('click',function(e){
+    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
+    if(!a||(a.target&&a.target!=='_self'))return;
+    var url;try{url=new URL(a.href)}catch(_){return}
+    if(MAIN_HOSTS.indexOf(url.host)<0)return;
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    e.preventDefault();
+    document.documentElement.classList.add('is-leaving');
+    setTimeout(function(){location.assign(url.href)},220);
+  });
+  window.addEventListener('pageshow',function(){document.documentElement.classList.remove('is-leaving')});
+})();
+</script>
+</body>
+</html>
