@@ -1,94 +1,87 @@
-# Nexus AI — Enterprise AI Platform
+# Nexus AI website
 
-> Intelligent automation systems, AI agents, and enterprise transformation platforms that accelerate growth, cut costs, and drive productivity across every vertical.
+The marketing website for [Nexus AI](https://www.nexus-aisolution.com). It explains our three done-for-you services for Indian businesses:
 
----
+- **AI Automation** (`/automation`): WhatsApp Business automation, lead routing, CRM updates, document extraction, reports and internal assistants.
+- **AI Voice Chat** (`/voice-chat`): a voice assistant on a website, app or WhatsApp.
+- **AI Voice Agents** (`/voice-agents`): AI that makes and answers real phone calls.
 
-## 🚀 Overview
+Visitors book a free consultation at `/contact`. Each request is saved to Supabase, emailed to the team via Resend, and optionally sent to the team on WhatsApp.
 
-Nexus AI is a Next.js 13 web application showcasing the full suite of Nexus AI's enterprise products and services — from AI-powered payroll and workflow automation to real-time monitoring dashboards and generative AI solutions.
+## Tech stack
 
-## 🛠 Tech Stack
+Next.js 13.5 (App Router), TypeScript, Tailwind CSS, shadcn/ui primitives, lucide-react icons, react-hook-form + zod, Supabase, Resend, WhatsApp Cloud API, Anthropic (Claude) for WhatsApp replies. Hosted on Vercel (Mumbai region, `bom1`).
 
-| Layer | Technology |
-|---|---|
-| Framework | [Next.js 13](https://nextjs.org/) (App Router) |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS 3 |
-| Animations | Framer Motion + GSAP |
-| UI Primitives | Radix UI + shadcn/ui |
-| Forms | React Hook Form + Zod |
-| Backend / DB | Supabase |
-| Deployment | Vercel / Netlify |
+## Run it locally
 
-## 📦 Getting Started
-
-### Prerequisites
-
-- Node.js ≥ 18
-- npm ≥ 9
-
-### Install & Run
+Requirements: Node.js 18 or newer and npm.
 
 ```bash
-# Install dependencies
 npm install
-
-# Start the development server
+cp .env.example .env.local   # then fill in the values you need (all optional for browsing the site)
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open http://localhost:3000.
 
-### Other Scripts
+Other scripts:
 
 ```bash
-npm run build       # Production build
-npm run start       # Start production server
-npm run lint        # Run ESLint
-npm run typecheck   # TypeScript type-check (no emit)
+npm run typecheck   # TypeScript check
+npm run lint        # ESLint
+npm run build       # production build
+npm run start       # serve the production build
 ```
 
-## 📁 Project Structure
+## Environment variables
+
+None are needed just to browse the site. The contact form needs **at least one** of Supabase or Resend to work; with both, leads are saved and emailed.
+
+| Name | What it's for | Required? |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL. Used to save contact-form leads and WhatsApp conversations. | Optional (recommended) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server only, never expose it). Needed together with the URL above. | Optional (recommended) |
+| `RESEND_API_KEY` | Sends each contact-form lead to the team by email via Resend. | Optional (recommended) |
+| `RESEND_FROM_EMAIL` | Sender for those emails, e.g. `Nexus AI <hello@nexus-aisolution.com>`. Must be a domain verified in Resend. Defaults to `Nexus AI <onboarding@resend.dev>`. | Optional |
+| `CONTACT_TO_EMAIL` | Where lead emails go. Defaults to `ai@nexus-aisolution.com`. | Optional |
+| `WHATSAPP_ACCESS_TOKEN` | Meta WhatsApp Cloud API token. Needed for any WhatsApp feature. | Optional (needed for WhatsApp) |
+| `WHATSAPP_PHONE_NUMBER_ID` | The WhatsApp Business phone number ID from Meta. | Optional (needed for WhatsApp) |
+| `WHATSAPP_APP_SECRET` | Meta app secret. The webhook rejects all incoming messages without it. | Optional (needed for the WhatsApp bot) |
+| `WHATSAPP_VERIFY_TOKEN` | Any secret string you choose; used once when Meta verifies the webhook URL. | Optional (needed for the WhatsApp bot) |
+| `ANTHROPIC_API_KEY` | Lets the WhatsApp bot write AI replies with Claude. Without it the bot sends a fixed "we'll get back to you" reply. | Optional |
+| `WHATSAPP_TEAM_PHONE` | Team WhatsApp number (digits with country code, e.g. `919876543210`) that gets an alert for each new lead. | Optional |
+| `WHATSAPP_ADMIN_KEY` | Long random secret protecting `/api/whatsapp/send` and `/broadcast` (sent as `Authorization: Bearer …`). If unset, those endpoints always refuse. | Optional |
+
+## Database setup (Supabase)
+
+In the Supabase SQL editor, run:
+
+1. `supabase/leads-schema.sql` (contact-form leads)
+2. `supabase/whatsapp-schema.sql` (WhatsApp bot, only if you use it)
+
+Both enable row level security with no public policies, so only the server can read or write the data.
+
+WhatsApp setup steps are in [`WHATSAPP_SETUP.md`](./WHATSAPP_SETUP.md).
+
+## Project structure
 
 ```
-├── app/
-│   ├── layout.tsx        # Root layout — fonts, metadata, skip-link
-│   ├── page.tsx          # Home page (code-split sections)
-│   └── globals.css       # Global styles & Tailwind directives
-├── components/
-│   ├── navigation.tsx
-│   ├── hero.tsx
-│   ├── products.tsx
-│   ├── services.tsx
-│   ├── …                 # One file per page section
-│   └── ui/               # shadcn/ui primitives
-├── hooks/                # Custom React hooks
-├── lib/                  # Shared utilities
-├── public/               # Static assets
-├── next.config.js
-├── tailwind.config.ts
-└── tsconfig.json
+app/
+  page.tsx                 Homepage
+  automation/ voice-chat/ voice-agents/   Service pages (one shared template)
+  contact/                 Consultation form
+  api/contact/             Form handler: validate → Supabase → Resend → WhatsApp alert
+  api/whatsapp/            Webhook (bot), send and broadcast (admin only)
+components/
+  home/                    Homepage sections
+  layout/                  Header, mobile menu, footer, logo
+  service-page.tsx         Template for the three service pages
+  section.tsx, step-list.tsx, faq.tsx, cta.tsx, service-card.tsx, …
+lib/
+  site.ts, services.ts, home-content.ts, faqs.ts   All website copy
+  contact-schema.ts        Form validation (shared by browser and server)
+  leads.ts                 Save / email / WhatsApp-alert a lead
+supabase/                  SQL schemas
 ```
 
-## 🔒 Environment Variables
-
-Create a `.env.local` file in the project root and add:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-> **Never commit `.env.local` to source control.** It is already listed in `.gitignore`.
-
-## 🚢 Deployment
-
-The project ships with both a `vercel.json` and a `netlify.toml` — deploy to whichever platform you prefer:
-
-- **Vercel**: Import the repo at [vercel.com/new](https://vercel.com/new) and set your env vars in the project settings.
-- **Netlify**: Import the repo at [app.netlify.com](https://app.netlify.com) — the `@netlify/plugin-nextjs` plugin is already configured.
-
-## 📄 License
-
-© 2025 Nexus AI Inc. All rights reserved.
+Most text on the site lives in `lib/`, so copy changes rarely need you to touch components.
