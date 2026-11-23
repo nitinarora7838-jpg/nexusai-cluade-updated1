@@ -11,11 +11,14 @@ const nextConfig = {
   // Old pages that no longer exist → the most relevant new page (permanent 308).
   async redirects() {
     return [
+      // The AI Voice Agents tab lives on its own site. Temporary (307) so it can be changed later.
+      { source: '/voice-agents', destination: 'https://voice.nexus-aisolution.com', permanent: false },
+      { source: '/voice-agents/:path*', destination: 'https://voice.nexus-aisolution.com', permanent: false },
       { source: '/monitoring', destination: '/', permanent: true },
       { source: '/monitoring/:path*', destination: '/', permanent: true },
       { source: '/dashboard', destination: '/', permanent: true },
       { source: '/dashboard/:path*', destination: '/', permanent: true },
-      { source: '/products/ai-customer-support-agent', destination: '/voice-agents', permanent: true },
+      { source: '/products/ai-customer-support-agent', destination: 'https://voice.nexus-aisolution.com', permanent: true },
       {
         source:
           '/products/:slug(ai-workflow-engine|ai-automation-studio|ai-reporting-system|ai-productivity-assistant)',

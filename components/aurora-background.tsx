@@ -13,11 +13,11 @@ import { cn } from '@/lib/utils';
  *   resolution and ~30 fps to stay light on phones.
  */
 
-// Brand palette (RGB 0–1): teal at the horizon → brand cyan (#00D4FF) → blue as it rises.
-const COLOR_BASE = [0.0, 0.78, 0.7];
-const COLOR_MID = [0.0, 0.83, 1.0];
-const COLOR_TOP = [0.15, 0.39, 0.92];
-const BACKGROUND = [11 / 255, 17 / 255, 32 / 255]; // #0B1120
+// Voice-site palette (RGB 0–1): sky blue at the horizon (#4AA8FF) → brand blue (#4C8DFF) → deep blue (#2563EB).
+const COLOR_BASE = [74 / 255, 168 / 255, 1.0];
+const COLOR_MID = [76 / 255, 141 / 255, 1.0];
+const COLOR_TOP = [37 / 255, 99 / 255, 235 / 255];
+const BACKGROUND = [2 / 255, 4 / 255, 9 / 255]; // #020409
 
 const VERTEX = `
 attribute vec2 aPos;
@@ -290,9 +290,9 @@ export function AuroraBackground({ className }: AuroraBackgroundProps) {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(60% 45% at 68% 100%, rgba(0,212,255,0.22), transparent 70%),' +
-            'radial-gradient(35% 55% at 92% 100%, rgba(37,99,235,0.18), transparent 70%),' +
-            'radial-gradient(30% 40% at 45% 100%, rgba(0,199,179,0.14), transparent 70%)',
+            'radial-gradient(60% 45% at 68% 100%, rgba(76,141,255,0.24), transparent 70%),' +
+            'radial-gradient(35% 55% at 92% 100%, rgba(37,99,235,0.2), transparent 70%),' +
+            'radial-gradient(30% 40% at 45% 100%, rgba(74,168,255,0.14), transparent 70%)',
         }}
       />
       <canvas

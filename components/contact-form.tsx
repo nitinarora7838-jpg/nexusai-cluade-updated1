@@ -16,7 +16,7 @@ const interestFromSlug: Record<string, ContactInput['interest']> = {
 };
 
 const inputClass =
-  'block w-full rounded-xl border border-input bg-ink px-4 py-3 text-base text-fg placeholder:text-muted/80 transition-colors focus:border-brand focus:outline-none aria-[invalid=true]:border-red-400';
+  'block w-full rounded-lg border border-line-2 bg-[rgba(2,6,20,0.45)] px-4 py-3 text-base text-fg placeholder:text-muted/80 transition-colors focus:border-brand focus:outline-none aria-[invalid=true]:border-red-400';
 
 function Field({
   id,
@@ -112,7 +112,7 @@ export function ContactForm() {
         ref={successRef}
         tabIndex={-1}
         role="status"
-        className="rounded-2xl border border-line bg-surface p-8 text-center focus:outline-none"
+        className="glass-card rounded-[14px] p-8 text-center focus:outline-none"
       >
         <CircleCheck className="mx-auto h-10 w-10 text-brand" aria-hidden="true" />
         <h2 className="mt-4 text-2xl font-semibold">Thanks, {submittedName}. We’ve got your message.</h2>
@@ -131,7 +131,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="relative space-y-6 rounded-2xl border border-line bg-surface p-6 sm:p-8"
+      className="glass-card relative space-y-6 rounded-[14px] p-6 sm:p-8"
       aria-label="Book a free consultation"
     >
       {/* Honeypot: hidden from people and screen readers; bots tend to fill it in. */}
@@ -196,7 +196,7 @@ export function ContactForm() {
           className={cn(inputClass, 'appearance-none pr-10 [color-scheme:dark]')}
           style={{
             backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A1A1AA' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
             backgroundSize: '16px',
             backgroundPosition: 'right 1rem center',
             backgroundRepeat: 'no-repeat',
@@ -224,10 +224,10 @@ export function ContactForm() {
               <input
                 type="radio"
                 value={option}
-                className="peer absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 accent-[#00D4FF]"
+                className="peer absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 accent-[#4C8DFF]"
                 {...register('interest')}
               />
-              <span className="flex min-h-[48px] items-center rounded-xl border border-input bg-ink py-3 pl-11 pr-4 text-sm text-body transition-colors hover:border-white/25 peer-checked:border-brand peer-checked:text-fg">
+              <span className="flex min-h-[48px] items-center rounded-lg border border-line-2 bg-[rgba(76,141,255,0.06)] py-3 pl-11 pr-4 text-sm text-body transition-colors hover:border-[rgba(160,200,255,0.45)] peer-checked:border-brand peer-checked:bg-[rgba(76,141,255,0.16)] peer-checked:text-fg">
                 {option}
               </span>
             </label>

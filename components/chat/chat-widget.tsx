@@ -178,13 +178,13 @@ export function ChatWidget() {
           role="dialog"
           aria-modal="false"
           aria-labelledby={titleId}
-          className="fixed inset-0 z-[60] flex animate-fade-up flex-col overflow-hidden bg-surface/95 backdrop-blur-xl sm:inset-auto sm:bottom-24 sm:right-6 sm:h-[min(640px,calc(100vh-8rem))] sm:w-[400px] sm:rounded-2xl sm:border sm:border-white/10 sm:shadow-2xl sm:shadow-black/50"
+          className="fixed inset-0 z-[60] flex animate-fade-up flex-col overflow-hidden bg-panel backdrop-blur-xl sm:inset-auto sm:bottom-24 sm:right-6 sm:h-[min(640px,calc(100vh-8rem))] sm:w-[400px] sm:rounded-2xl sm:border sm:border-line-2 sm:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8),0_0_60px_-24px_rgba(76,141,255,0.55)]"
         >
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-line px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-3">
-            <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-brand/10">
-              <Sparkles className="h-5 w-5 text-brand" aria-hidden="true" />
-              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-surface bg-emerald-400" aria-hidden="true" />
+            <span className="icon-tile relative grid h-10 w-10 shrink-0 place-items-center rounded-full">
+              <Sparkles className="h-5 w-5 text-[#BFD6FF]" aria-hidden="true" />
+              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-[#05070d] bg-ok" aria-hidden="true" />
             </span>
             <div className="min-w-0 flex-1">
               <h2 id={titleId} className="font-space text-base font-semibold leading-tight">
@@ -226,7 +226,7 @@ export function ChatWidget() {
                     key={s}
                     type="button"
                     onClick={() => send(s)}
-                    className="rounded-xl border border-white/15 bg-transparent px-3 py-2 text-left text-sm text-body transition-colors hover:border-brand/50 hover:text-fg"
+                    className="glass-chip rounded-xl px-3 py-2 text-left text-sm text-body transition-colors hover:border-brand/60 hover:text-fg"
                   >
                     {s}
                   </button>
@@ -237,7 +237,7 @@ export function ChatWidget() {
             {messages.map((m) =>
               m.role === 'user' ? (
                 <div key={m.id} className="flex justify-end">
-                  <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-brand px-4 py-2.5 text-sm leading-relaxed text-ink">
+                  <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-brand-solid px-4 py-2.5 text-sm leading-relaxed text-white">
                     {m.text}
                   </p>
                 </div>
@@ -282,7 +282,7 @@ export function ChatWidget() {
                 e.preventDefault();
                 send(input);
               }}
-              className="flex items-end gap-2 rounded-2xl border border-white/15 bg-ink/60 p-1.5 pl-4 transition-colors focus-within:border-brand/60"
+              className="flex items-end gap-2 rounded-2xl border border-line-2 bg-[rgba(2,6,20,0.45)] p-1.5 pl-4 transition-colors focus-within:border-brand/60"
             >
               <label htmlFor={`${panelId}-input`} className="sr-only">
                 Type your question
@@ -306,7 +306,7 @@ export function ChatWidget() {
               <button
                 type="submit"
                 disabled={!input.trim() || pending}
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand text-ink transition-opacity hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-40"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand-solid text-white transition-opacity hover:bg-brand-solid-hover disabled:cursor-not-allowed disabled:opacity-40"
                 aria-label="Send"
               >
                 <ArrowUp className="h-4 w-4" aria-hidden="true" />
@@ -334,7 +334,7 @@ export function ChatWidget() {
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
         className={cn(
-          'fixed bottom-4 right-4 z-[61] inline-flex h-14 items-center gap-2.5 rounded-full border border-white/20 bg-white/[0.06] px-4 text-sm font-semibold text-fg shadow-lg shadow-black/30 backdrop-blur-md transition-colors duration-200 hover:border-brand/60 hover:bg-white/10 sm:bottom-6 sm:right-6 sm:px-5',
+          'btn-glass-glow fixed bottom-4 right-4 z-[61] inline-flex h-14 items-center gap-2.5 rounded-full px-4 text-sm font-semibold text-fg sm:bottom-6 sm:right-6 sm:px-5',
           open && 'max-sm:hidden',
         )}
       >
@@ -353,15 +353,15 @@ function AssistantBubble({ children, error }: { children: React.ReactNode; error
   return (
     <div className="flex items-start gap-2.5">
       <span
-        className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/10 bg-brand/10"
+        className="icon-tile mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full"
         aria-hidden="true"
       >
-        <Sparkles className="h-3.5 w-3.5 text-brand" />
+        <Sparkles className="h-3.5 w-3.5 text-[#BFD6FF]" />
       </span>
       <div
         className={cn(
           'max-w-[85%] rounded-2xl rounded-tl-md border px-4 py-2.5 text-sm leading-relaxed',
-          error ? 'border-red-400/30 bg-red-400/10 text-red-100' : 'border-white/10 bg-white/[0.04] text-body',
+          error ? 'border-red-400/30 bg-red-400/10 text-red-100' : 'border-line-2 bg-[rgba(76,141,255,0.07)] text-body',
         )}
       >
         {children}

@@ -21,9 +21,13 @@ const nextSteps = [
 export default function ContactPage() {
   return (
     <section aria-labelledby="contact-heading" className="py-16 sm:py-24">
-      <div className="mx-auto max-w-content px-4 sm:px-6">
+      <div className="mx-auto max-w-content px-5 sm:px-6">
         <div className="max-w-2xl animate-fade-up">
-          <h1 id="contact-heading" className="text-4xl font-semibold leading-tight sm:text-5xl">
+          <p className="label-mono mb-[18px]">Contact</p>
+          <h1
+            id="contact-heading"
+            className="text-[clamp(2.4rem,1.4rem_+_3vw,3.8rem)] font-semibold leading-[1.04] tracking-[-0.035em]"
+          >
             Book a free consultation
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted">
@@ -41,11 +45,8 @@ export default function ContactPage() {
             <ol className="mt-6 space-y-6">
               {nextSteps.map((step, i) => (
                 <li key={step.title} className="flex gap-4">
-                  <span
-                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-brand/40 text-sm font-semibold text-brand"
-                    aria-hidden="true"
-                  >
-                    {i + 1}
+                  <span className="w-6 shrink-0 pt-0.5 font-mono text-[0.72rem] font-medium text-brand" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
                   </span>
                   <div>
                     <h3 className="font-inter font-semibold">{step.title}</h3>
@@ -54,7 +55,7 @@ export default function ContactPage() {
                 </li>
               ))}
             </ol>
-            <div className="mt-8 rounded-2xl border border-line bg-surface p-5 text-sm leading-relaxed text-muted">
+            <div className="glass-card mt-8 rounded-xl p-5 text-sm leading-relaxed text-muted">
               Prefer email? Write to{' '}
               <a href={`mailto:${siteConfig.email}`} className="whitespace-nowrap font-medium text-brand hover:underline">
                 {siteConfig.email}

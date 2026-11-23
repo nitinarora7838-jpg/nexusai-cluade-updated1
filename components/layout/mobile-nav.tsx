@@ -34,20 +34,20 @@ export function MobileNav() {
 
   return (
     <details ref={ref} className="group lg:hidden">
-      <summary className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-line text-fg hover:bg-white/5">
+      <summary className="grid h-11 w-11 cursor-pointer place-items-center rounded-lg border border-line-2 text-fg hover:bg-white/5">
         <span className="sr-only">Menu</span>
         <Menu className="h-5 w-5 group-open:hidden" aria-hidden="true" />
         <X className="hidden h-5 w-5 group-open:block" aria-hidden="true" />
       </summary>
-      <div className="absolute inset-x-0 top-full border-b border-line bg-ink px-4 pb-6 pt-2 sm:px-6">
+      <div className="absolute inset-x-0 top-full border-b border-line bg-panel px-5 pb-5 pt-2 backdrop-blur-md sm:px-6">
         <nav aria-label="Main">
-          <ul className="divide-y divide-line">
+          <ul>
             {mainNav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   onClick={close}
-                  className="flex min-h-[48px] items-center text-base font-medium text-body hover:text-fg"
+                  className="flex min-h-[48px] items-center border-b border-line py-3.5 font-space text-[1.05rem] font-semibold text-fg"
                 >
                   {item.label}
                 </Link>

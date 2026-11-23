@@ -1,4 +1,3 @@
-import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface CheckListProps {
@@ -6,12 +5,15 @@ interface CheckListProps {
   className?: string;
 }
 
+/** Bullet list with blue arrows, as on the voice site. */
 export function CheckList({ items, className }: CheckListProps) {
   return (
-    <ul className={cn('space-y-3', className)}>
+    <ul className={cn('grid gap-[9px]', className)}>
       {items.map((item) => (
-        <li key={item} className="flex gap-3 text-body">
-          <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
+        <li key={item} className="flex gap-2.5 text-body">
+          <span className="font-mono text-brand" aria-hidden="true">
+            →
+          </span>
           <span className="leading-relaxed">{item}</span>
         </li>
       ))}

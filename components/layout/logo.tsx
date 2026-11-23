@@ -1,14 +1,29 @@
 import Link from 'next/link';
 
+/** Same mark as the Nexus AI Voice site: blue tile with sound bars. */
+export function LogoMark({ className = 'h-7 w-7' }: { className?: string }) {
+  return (
+    <span className={`grid shrink-0 place-items-center rounded-md bg-brand-solid ${className}`} aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16">
+        <rect x="1.5" y="6" width="2" height="4" rx="1" fill="#fff" />
+        <rect x="5" y="3.5" width="2" height="9" rx="1" fill="#fff" />
+        <rect x="8.5" y="1.5" width="2" height="13" rx="1" fill="#fff" />
+        <rect x="12" y="5" width="2" height="6" rx="1" fill="#fff" />
+      </svg>
+    </span>
+  );
+}
+
 export function Logo() {
   return (
-    <Link href="/" className="inline-flex items-center gap-2.5 rounded-lg font-space text-lg font-semibold text-fg">
-      <svg viewBox="0 0 32 32" className="h-8 w-8" aria-hidden="true">
-        <rect width="32" height="32" rx="8" fill="#111827" />
-        <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="none" stroke="#FFFFFF" strokeOpacity="0.16" />
-        <path d="M17 7 L8 18 L16 18 L15 25 L24 14 L16 14 Z" fill="#00D4FF" />
-      </svg>
-      Nexus AI
+    <Link
+      href="/"
+      className="inline-flex items-center gap-2.5 rounded-md font-space text-[1.08rem] font-bold tracking-[-0.01em] text-fg"
+    >
+      <LogoMark />
+      <span>
+        Nexus <span className="font-semibold text-brand">AI</span>
+      </span>
     </Link>
   );
 }

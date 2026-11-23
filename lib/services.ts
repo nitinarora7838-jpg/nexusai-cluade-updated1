@@ -22,6 +22,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import type { FaqItem } from '@/lib/faqs';
+import { voiceSiteUrl } from '@/lib/site';
 
 export type ServiceSlug = 'automation' | 'voice-chat' | 'voice-agents';
 
@@ -57,7 +58,10 @@ export type ServiceExample =
 
 export interface Service {
   slug: ServiceSlug;
-  href: `/${ServiceSlug}`;
+  /** Internal page path, or the full URL of a separate site (AI Voice Agents). */
+  href: string;
+  /** Short label shown above the name on cards, e.g. "Workflows". */
+  tag: string;
   name: string;
   icon: LucideIcon;
   /** One line, plain words. Used on cards and in the page hero. */
@@ -79,6 +83,7 @@ export const services: Service[] = [
   {
     slug: 'automation',
     href: '/automation',
+    tag: 'Workflows',
     name: 'AI Automation',
     icon: Workflow,
     definition: 'Custom AI workflows that take repetitive manual work off your team.',
@@ -209,6 +214,7 @@ export const services: Service[] = [
   {
     slug: 'voice-chat',
     href: '/voice-chat',
+    tag: 'Website & WhatsApp',
     name: 'AI Voice Chat',
     icon: AudioLines,
     definition: 'A voice assistant on your website, app or WhatsApp that visitors can simply talk to.',
@@ -334,7 +340,9 @@ export const services: Service[] = [
   // ─── AI Voice Agents ────────────────────────────────────────────
   {
     slug: 'voice-agents',
-    href: '/voice-agents',
+    // This tab opens the dedicated voice site; the page content below is kept for reference.
+    href: voiceSiteUrl,
+    tag: 'Phone calls',
     name: 'AI Voice Agents',
     icon: PhoneCall,
     definition: 'AI agents that make and answer real phone calls for your business, 24/7.',
@@ -463,6 +471,9 @@ export const services: Service[] = [
     ],
   },
 ];
+
+/** True when a service link points to a separate site (opens the voice site). */
+export const isExternalHref = (href: string) => /^https?:\/\//.test(href);
 
 export function getService(slug: ServiceSlug): Service {
   const service = services.find((s) => s.slug === slug);

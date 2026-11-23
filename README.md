@@ -4,13 +4,15 @@ The marketing website for [Nexus AI](https://www.nexus-aisolution.com). It expla
 
 - **AI Automation** (`/automation`): WhatsApp Business automation, lead routing, CRM updates, document extraction, reports and internal assistants.
 - **AI Voice Chat** (`/voice-chat`): a voice assistant on a website, app or WhatsApp.
-- **AI Voice Agents** (`/voice-agents`): AI that makes and answers real phone calls.
+- **AI Voice Agents**: AI that makes and answers real phone calls. This tab opens the dedicated Nexus AI Voice site, https://voice.nexus-aisolution.com (a separate Vercel project); `/voice-agents` redirects there.
 
 Visitors book a free consultation at `/contact`. Each request is saved to Supabase, emailed to the team via Resend, and optionally sent to the team on WhatsApp.
 
 ## Tech stack
 
 Next.js 13.5 (App Router), TypeScript, Tailwind CSS, shadcn/ui primitives, lucide-react icons, react-hook-form + zod, Supabase, Resend, WhatsApp Cloud API, Anthropic (Claude) for WhatsApp replies. Hosted on Vercel (pages are served worldwide from Vercel's CDN; server functions run in the region set in `vercel.json`).
+
+The visual theme (colours, fonts, glass cards, starfield) matches the voice site; design tokens are in `tailwind.config.ts` and `app/globals.css`.
 
 ## Run it locally
 
@@ -71,7 +73,7 @@ WhatsApp setup steps are in [`WHATSAPP_SETUP.md`](./WHATSAPP_SETUP.md).
 ```
 app/
   page.tsx                 Homepage
-  automation/ voice-chat/ voice-agents/   Service pages (one shared template)
+  automation/ voice-chat/   Service pages (one shared template)
   contact/                 Consultation form
   api/contact/             Form handler: validate → Supabase → Resend → WhatsApp alert
   api/chat/                Website chat → Lyzr agent (keeps the API key on the server)

@@ -2,26 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme matched to the Nexus AI Voice site: deep navy, stars, blue glass. */
+
 /* ─── shadcn/ui variables (used by components/ui/*) ─────────────── */
 @layer base {
   :root {
-    --background: 222 49% 8%; /* #0B1120 */
-    --foreground: 210 40% 98%; /* #F8FAFC */
-    --card: 221 39% 11%; /* #111827 */
-    --card-foreground: 210 40% 98%;
-    --popover: 221 39% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 190 100% 50%; /* #00D4FF */
-    --primary-foreground: 222 49% 8%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%; /* #94A3B8 */
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --background: 222 64% 2%; /* #020409 */
+    --foreground: 240 5% 96%; /* #F4F4F5 */
+    --card: 224 40% 7%;
+    --card-foreground: 240 5% 96%;
+    --popover: 224 40% 7%;
+    --popover-foreground: 240 5% 96%;
+    --primary: 221 83% 53%; /* #2563EB */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 224 30% 14%;
+    --secondary-foreground: 240 5% 96%;
+    --muted: 224 30% 14%;
+    --muted-foreground: 240 5% 65%; /* #A1A1AA */
+    --accent: 224 30% 14%;
+    --accent-foreground: 240 5% 96%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --ring: 190 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 218 100% 65%; /* #4C8DFF */
     --radius: 0.75rem;
   }
 
@@ -32,10 +34,18 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    background-color: #020409;
+    color-scheme: dark;
   }
 
   body {
-    @apply bg-ink font-inter text-fg antialiased;
+    @apply font-inter text-fg antialiased;
+    background:
+      radial-gradient(900px 520px at 12% 18%, rgba(37, 99, 235, 0.1), transparent 60%),
+      radial-gradient(800px 600px at 88% 46%, rgba(76, 141, 255, 0.08), transparent 60%),
+      radial-gradient(900px 700px at 30% 82%, rgba(37, 99, 235, 0.08), transparent 60%),
+      #020409;
+    background-attachment: fixed;
     text-rendering: optimizeLegibility;
   }
 
@@ -43,20 +53,21 @@
   h2,
   h3,
   h4 {
-    @apply font-space tracking-tight text-fg;
+    @apply font-space text-fg;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
 
   /* Visible keyboard focus everywhere */
   :focus-visible {
-    outline: 2px solid #00d4ff;
+    outline: 2px solid #4c8dff;
     outline-offset: 3px;
     border-radius: 6px;
   }
 
   ::selection {
-    background: rgb(0 212 255 / 0.25);
-    color: #f8fafc;
+    background: rgb(76 141 255 / 0.3);
+    color: #f4f4f5;
   }
 
   /* Native <details> FAQ: hide the default marker */
@@ -66,6 +77,102 @@
   summary::-webkit-details-marker {
     display: none;
   }
+}
+
+/* ─── Reusable theme pieces (same recipes as the voice site) ────── */
+@layer components {
+  /* Small monospace section label, e.g. "OUR SERVICES" */
+  .label-mono {
+    @apply font-mono text-[0.7rem] font-medium uppercase leading-none tracking-[0.14em] text-brand;
+  }
+
+  /* Translucent blue glass card */
+  .glass-card {
+    background: linear-gradient(145deg, rgba(76, 141, 255, 0.13), rgba(76, 141, 255, 0.035) 55%, rgba(255, 255, 255, 0.015));
+    border: 1px solid rgba(140, 180, 255, 0.22);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 24px 60px -30px rgba(0, 0, 0, 0.7),
+      0 0 50px -24px rgba(76, 141, 255, 0.45);
+  }
+  .glass-card-hover {
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+  .glass-card-hover:hover {
+    border-color: rgba(160, 200, 255, 0.45);
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      0 30px 70px -30px rgba(0, 0, 0, 0.75),
+      0 0 60px -18px rgba(76, 141, 255, 0.6);
+  }
+
+  /* Glowing icon tile */
+  .icon-tile {
+    background: linear-gradient(145deg, rgba(76, 141, 255, 0.35), rgba(37, 99, 235, 0.12));
+    border: 1px solid rgba(150, 190, 255, 0.45);
+    box-shadow: 0 0 20px rgba(76, 141, 255, 0.35);
+  }
+
+  /* Glass pill chip */
+  .glass-chip {
+    background: linear-gradient(145deg, rgba(76, 141, 255, 0.12), rgba(76, 141, 255, 0.03));
+    border: 1px solid rgba(140, 180, 255, 0.24);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Small bordered mono tag, e.g. "SAMPLE", durations */
+  .tag-mono {
+    @apply rounded font-mono text-[0.72rem] text-ice;
+    border: 1px solid rgba(140, 180, 255, 0.28);
+    background: rgba(76, 141, 255, 0.08);
+  }
+
+  /* Transparent frosted-glass button */
+  .btn-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 30px rgba(0, 0, 0, 0.28);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-glass:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Transparent glass with a blue glow (chat launcher) */
+  .btn-glass-glow {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03) 60%, rgba(120, 170, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    backdrop-filter: blur(18px) saturate(170%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+      0 10px 40px rgba(0, 0, 0, 0.35),
+      0 0 46px rgba(76, 141, 255, 0.28);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-glass-glow:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.06) 60%, rgba(120, 170, 255, 0.14));
+  }
+
+  /* Alternating section band */
+  .band {
+    background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.07) 50%, transparent);
+    border-block: 1px solid rgba(120, 160, 255, 0.1);
+  }
+}
+
+/* Fade the page out when leaving for the voice site (see VoiceTransition). */
+html.is-leaving body {
+  opacity: 0;
+  transition: opacity 0.22s ease;
 }
 
 /* ─── Reduced motion ──────────────────────────────────────────────── */
@@ -79,5 +186,8 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .glass-card-hover:hover {
+    transform: none;
   }
 }

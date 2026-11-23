@@ -13,7 +13,7 @@ import { Why } from '@/components/home/why';
 import { JsonLd } from '@/components/json-ld';
 import { Section, SectionHeading } from '@/components/section';
 import { homeFaqs } from '@/lib/faqs';
-import { services } from '@/lib/services';
+import { isExternalHref, services } from '@/lib/services';
 import { siteConfig } from '@/lib/site';
 
 const organizationJsonLd = {
@@ -32,7 +32,12 @@ const organizationJsonLd = {
   },
   makesOffer: services.map((s) => ({
     '@type': 'Offer',
-    itemOffered: { '@type': 'Service', name: s.name, description: s.definition, url: `${siteConfig.url}${s.href}` },
+    itemOffered: {
+      '@type': 'Service',
+      name: s.name,
+      description: s.definition,
+      url: isExternalHref(s.href) ? s.href : `${siteConfig.url}${s.href}`,
+    },
   })),
 };
 
@@ -50,9 +55,9 @@ export default function HomePage() {
       <Integrations />
       <Trust />
       <Pricing />
-      <Section id="faq" tone="surface" labelledBy="faq-heading">
-        <SectionHeading id="faq-heading" title="Frequently asked questions" />
-        <div className="mt-10">
+      <Section id="faq" tone="band" labelledBy="faq-heading">
+        <SectionHeading id="faq-heading" eyebrow="FAQ" title="Questions before you book" />
+        <div className="mt-12">
           <Faq items={homeFaqs} withSchema />
         </div>
       </Section>

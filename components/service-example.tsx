@@ -1,27 +1,26 @@
-import { ArrowRight, CircleCheck } from 'lucide-react';
 import type { ServiceExample as Example } from '@/lib/services';
 import { cn } from '@/lib/utils';
 
-function SampleLabel() {
-  return (
-    <span className="rounded-full border border-brand/40 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-brand">
-      Sample
-    </span>
-  );
+/** Small green status dot, as on the voice site's "Live call" panel. */
+function LiveDot() {
+  return <span className="h-2 w-2 shrink-0 rounded-full bg-ok shadow-[0_0_0_4px_rgba(74,222,128,0.12)]" aria-hidden="true" />;
 }
 
 function Outcome({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="border-t border-line p-5 sm:p-6">
-      <p className="text-sm font-semibold text-fg">{title}</p>
-      <ul className="mt-3 space-y-2 text-sm">
-        {items.map((item) => (
-          <li key={item} className="flex gap-2.5 text-body">
-            <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
-            {item}
-          </li>
-        ))}
-      </ul>
+    <div className="grid content-start gap-2.5 border-t border-line bg-[rgba(2,6,20,0.35)] p-5 md:border-l md:border-t-0">
+      <h4 className="mb-1 font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-muted">{title}</h4>
+      {items.map((item) => (
+        <p key={item} className="flex items-start gap-2.5 text-[0.86rem] text-fg">
+          <span
+            className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-[rgba(74,222,128,0.12)] shadow-[inset_0_0_0_1px_#4ADE80]"
+            aria-hidden="true"
+          >
+            <span className="h-1.5 w-1.5 bg-ok" />
+          </span>
+          {item}
+        </p>
+      ))}
     </div>
   );
 }
@@ -34,20 +33,20 @@ function Transcript({
   labels: Record<string, string>;
 }) {
   return (
-    <ol className="space-y-4 p-5 sm:p-6">
+    <ol className="grid content-start gap-3.5 p-5 text-[0.93rem]">
       {lines.map((line, i) => {
         const isAi = line.from === 'ai';
         return (
-          <li key={i} className={cn('flex flex-col', isAi ? 'items-start' : 'items-end')}>
-            <span className="mb-1 text-xs font-medium text-muted">{labels[line.from]}</span>
-            <p
+          <li key={i} className="grid gap-0.5 sm:grid-cols-[104px_1fr] sm:gap-3">
+            <span
               className={cn(
-                'max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed sm:max-w-[75%]',
-                isAi ? 'rounded-tl-md border border-brand/25 bg-brand/[0.06] text-fg' : 'rounded-tr-md bg-white/[0.06] text-body',
+                'font-mono text-[0.7rem] font-medium uppercase leading-[1.9] tracking-[0.08em]',
+                isAi ? 'text-brand' : 'text-muted',
               )}
             >
-              {line.text}
-            </p>
+              {labels[line.from]}
+            </span>
+            <p className={cn('leading-relaxed', isAi ? 'text-fg' : 'text-muted')}>{line.text}</p>
           </li>
         );
       })}
@@ -56,25 +55,34 @@ function Transcript({
 }
 
 export function ServiceExample({ example }: { example: Example }) {
+  const kindLabel = example.kind === 'rules' ? 'Sample automations' : example.kind === 'chat' ? 'Sample voice chat' : 'Sample call';
   return (
-    <figure className="overflow-hidden rounded-2xl border border-line bg-surface">
-      <figcaption className="flex flex-wrap items-center gap-3 border-b border-line px-5 py-4 sm:px-6">
-        <SampleLabel />
-        <span className="font-medium text-fg">{example.title}</span>
-        <span className="text-sm text-muted">Illustrative example, not a real customer.</span>
+    <figure className="glass-card mx-auto max-w-[900px] overflow-hidden rounded-[14px] text-left">
+      <figcaption className="flex flex-wrap items-center gap-x-[18px] gap-y-2 border-b border-line px-5 py-3.5 font-mono text-[0.76rem] text-muted">
+        <span className="flex items-center gap-2 text-ok">
+          <LiveDot />
+          {kindLabel}
+        </span>
+        <span className="text-body">{example.title}</span>
+        <span className="ml-auto rounded border border-[rgba(76,141,255,0.38)] px-[7px] py-[3px] text-[0.68rem] uppercase tracking-[0.08em] text-brand">
+          Example
+        </span>
+        <span className="w-full font-inter text-[0.8rem] text-muted">Illustrative example, not a real customer.</span>
       </figcaption>
 
       {example.kind === 'rules' && (
         <ul className="divide-y divide-line">
           {example.rules.map((rule) => (
-            <li key={rule.when} className="grid gap-2 p-5 sm:p-6 md:grid-cols-[1fr_auto_1.3fr] md:items-start md:gap-6">
-              <p className="text-body">
-                <span className="mr-2 text-xs font-semibold uppercase tracking-wide text-muted">When</span>
+            <li key={rule.when} className="grid gap-2 p-5 md:grid-cols-[1fr_auto_1.3fr] md:items-start md:gap-6">
+              <p className="text-muted">
+                <span className="mr-2 font-mono text-[0.7rem] font-medium uppercase tracking-[0.08em] text-muted">When</span>
                 {rule.when}
               </p>
-              <ArrowRight className="hidden h-5 w-5 text-brand md:mt-0.5 md:block" aria-hidden="true" />
-              <p className="text-body">
-                <span className="mr-2 text-xs font-semibold uppercase tracking-wide text-brand">We</span>
+              <span className="hidden font-mono text-brand md:block" aria-hidden="true">
+                →
+              </span>
+              <p className="text-fg">
+                <span className="mr-2 font-mono text-[0.7rem] font-medium uppercase tracking-[0.08em] text-brand">We</span>
                 {rule.then.charAt(0).toLowerCase() + rule.then.slice(1)}
               </p>
             </li>
@@ -83,17 +91,17 @@ export function ServiceExample({ example }: { example: Example }) {
       )}
 
       {example.kind === 'chat' && (
-        <>
-          <Transcript lines={example.messages} labels={{ ai: 'AI assistant', visitor: 'Website visitor (speaking)' }} />
+        <div className="grid md:grid-cols-[1.35fr_1fr]">
+          <Transcript lines={example.messages} labels={{ ai: 'AI assistant', visitor: 'Visitor' }} />
           <Outcome title="What happened next" items={example.outcome} />
-        </>
+        </div>
       )}
 
       {example.kind === 'call' && (
-        <>
-          <Transcript lines={example.lines} labels={{ ai: 'AI voice agent', caller: 'Lead' }} />
+        <div className="grid md:grid-cols-[1.35fr_1fr]">
+          <Transcript lines={example.lines} labels={{ ai: 'AI agent', caller: 'Caller' }} />
           <Outcome title="After the call" items={example.outcome} />
-        </>
+        </div>
       )}
     </figure>
   );

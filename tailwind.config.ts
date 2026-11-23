@@ -1,10 +1,8 @@
 import type { Config } from 'tailwindcss';
 
 /**
- * Nexus AI design tokens.
- * - One accent colour (brand #00D4FF), used only for buttons, links and small highlights.
- * - Dark background, slightly lighter surfaces, thin white borders at ~8% opacity.
- * - Spacing uses Tailwind's default scale in 8px steps (2, 4, 6, 8, 12, 16, 24…).
+ * Nexus AI design tokens, matched to the Nexus AI Voice site (voice.nexus-aisolution.com):
+ * deep navy-black background, blue accent, blue-tinted hairlines and translucent "glass" cards.
  */
 const config: Config = {
   darkMode: ['class'],
@@ -18,26 +16,33 @@ const config: Config = {
     extend: {
       fontFamily: {
         inter: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
-        space: ['var(--font-space)', 'Space Grotesk', 'system-ui', 'sans-serif'],
+        space: ['var(--font-space)', 'Space Grotesk', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'ui-monospace', 'Menlo', 'Consolas', 'monospace'],
       },
       maxWidth: {
-        content: '1100px',
+        content: '1120px',
       },
       colors: {
-        // Brand palette
-        ink: '#0B1120', // page background
-        surface: '#111827', // cards and alternating sections
-        fg: '#F8FAFC', // headings and primary text
-        body: '#CBD5E1', // list items and longer copy (AA on ink and surface)
+        // Brand palette (same values as the voice site)
+        ink: '#020409', // page background
+        panel: 'rgb(2 4 12 / 0.96)', // solid overlays: mobile menu, chat window
+        fg: '#F4F4F5', // headings and primary text
+        body: '#DFE6F3', // longer copy and list items
         muted: {
-          DEFAULT: '#94A3B8', // secondary copy (AA on ink and surface)
+          DEFAULT: '#A1A1AA', // secondary copy (AA on ink)
           foreground: 'hsl(var(--muted-foreground))',
         },
+        ice: '#C9D8F5', // small mono text on glass chips
         brand: {
-          DEFAULT: '#00D4FF',
-          hover: '#5CE3FF',
+          DEFAULT: '#4C8DFF', // text accents, links, labels
+          hover: '#6FA4FF',
+          solid: '#2563EB', // solid buttons (white text)
+          'solid-hover': '#3B76F0',
+          num: '#8FB4FF',
         },
-        line: 'rgb(255 255 255 / 0.08)',
+        ok: '#4ADE80',
+        line: 'rgb(120 160 255 / 0.14)',
+        'line-2': 'rgb(140 180 255 / 0.24)',
 
         // shadcn/ui tokens (kept for components/ui/*)
         background: 'hsl(var(--background))',
@@ -66,8 +71,8 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
-        border: 'rgb(255 255 255 / 0.08)',
-        input: 'rgb(255 255 255 / 0.14)',
+        border: 'rgb(120 160 255 / 0.14)',
+        input: 'rgb(140 180 255 / 0.24)',
         ring: 'hsl(var(--ring))',
         chart: {
           '1': 'hsl(var(--chart-1))',

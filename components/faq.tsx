@@ -1,4 +1,3 @@
-import { Plus } from 'lucide-react';
 import type { FaqItem } from '@/lib/faqs';
 import { JsonLd } from '@/components/json-ld';
 
@@ -15,17 +14,17 @@ interface FaqProps {
 export function Faq({ items, withSchema = false }: FaqProps) {
   return (
     <>
-      <div className="divide-y divide-line rounded-2xl border border-line bg-surface">
+      <div className="glass-card mx-auto max-w-[780px] rounded-2xl px-5 py-1 text-left sm:px-[26px]">
         {items.map((item) => (
-          <details key={item.question} className="group px-5 sm:px-6">
-            <summary className="flex min-h-[44px] cursor-pointer items-center justify-between gap-4 rounded-lg py-5 text-left">
-              <h3 className="font-inter text-base font-medium text-fg">{item.question}</h3>
-              <Plus
-                className="h-5 w-5 shrink-0 text-muted transition-transform duration-200 group-open:rotate-45"
-                aria-hidden="true"
-              />
+          <details key={item.question} className="group border-b border-line last:border-b-0">
+            <summary className="flex min-h-[44px] cursor-pointer items-start justify-between gap-4 rounded-md py-5 sm:py-[22px]">
+              <h3 className="text-[1.05rem] font-semibold leading-snug tracking-[-0.01em]">{item.question}</h3>
+              <span className="-mt-0.5 font-mono text-[1.4rem] leading-none text-brand" aria-hidden="true">
+                <span className="group-open:hidden">+</span>
+                <span className="hidden group-open:inline">−</span>
+              </span>
             </summary>
-            <p className="pb-5 pr-6 leading-relaxed text-muted sm:pr-10">{item.answer}</p>
+            <p className="max-w-[66ch] pb-[22px] leading-relaxed text-muted">{item.answer}</p>
           </details>
         ))}
       </div>
