@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import dynamic from 'next/dynamic';
+import { SiteFooter } from '@/components/layout/site-footer';
+import { SiteHeader } from '@/components/layout/site-header';
+import { siteConfig } from '@/lib/site';
 import './globals.css';
 
-const Cursor = dynamic(() => import('@/components/cursor'), { ssr: false });
-
-// ─── Fonts (self-hosted — no Google Fonts network call at build time) ──
+// Self-hosted fonts (no network call at build time)
 const inter = localFont({
   src: './fonts/Inter.woff2',
   variable: '--font-inter',
@@ -20,91 +20,59 @@ const spaceGrotesk = localFont({
   display: 'swap',
 });
 
-// ─── Metadata (Next.js 13 compatible) ─────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nexusai.com'),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'Nexus AI — Enterprise AI Solutions & Transformation',
+    default: siteConfig.title,
     template: '%s | Nexus AI',
   },
-  description:
-    'Nexus AI builds intelligent automation systems, AI agents, and enterprise transformation platforms that accelerate growth, cut costs, and drive productivity across every vertical.',
+  description: siteConfig.description,
   keywords: [
-    'enterprise AI',
-    'AI automation',
-    'workflow automation',
-    'AI consulting',
-    'enterprise transformation',
-    'AI payroll',
-    'AI PMO',
-    'machine learning',
+    'AI automation India',
+    'AI voice agents',
+    'AI voice agent India',
+    'AI voice chat for websites',
+    'Hindi voice AI',
+    'Hinglish voice AI',
+    'AI calling agent',
+    'WhatsApp Business automation',
+    'AI phone answering',
+    'voice AI for Indian businesses',
   ],
-  authors: [{ name: 'Nexus AI', url: 'https://nexusai.com' }],
+  authors: [{ name: 'Nexus AI', url: siteConfig.url }],
   creator: 'Nexus AI',
-  // themeColor lives in metadata in Next.js 13 (not a separate viewport export)
   themeColor: '#0B1120',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
+  viewport: 'width=device-width, initial-scale=1',
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
-    url: 'https://nexusai.com',
-    siteName: 'Nexus AI',
-    title: 'Nexus AI — Enterprise AI Solutions & Transformation',
-    description:
-      'Intelligent automation systems, AI agents, and enterprise platforms that accelerate growth across every vertical.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Nexus AI — Enterprise AI Platform',
-      },
-    ],
+    locale: 'en_IN',
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nexus AI — Enterprise AI Solutions',
-    description: 'Intelligent automation and AI transformation for enterprise.',
-    images: ['/og-image.png'],
-    creator: '@nexusai',
+    title: siteConfig.title,
+    description: siteConfig.description,
   },
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
-// ─── Layout ────────────────────────────────────────────────────────
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <head>
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon.svg" />
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={inter.className}>
-        <Cursor />
-        {/* Skip-to-content link for keyboard / screen-reader users */}
+    <html lang="en-IN" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <body>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#00D4FF] focus:text-[#0B1120] focus:font-semibold focus:rounded-lg focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:font-semibold focus:text-ink"
         >
           Skip to main content
         </a>
-        {children}
+        <SiteHeader />
+        <main id="main-content">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

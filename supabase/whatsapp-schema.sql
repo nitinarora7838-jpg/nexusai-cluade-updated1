@@ -25,6 +25,7 @@ create index if not exists idx_conversations_lead_phone on whatsapp_conversation
 create index if not exists idx_conversations_created_at on whatsapp_conversations(created_at desc);
 create index if not exists idx_leads_last_seen on whatsapp_leads(last_seen desc);
 
--- Row Level Security (enable in production)
--- alter table whatsapp_leads enable row level security;
--- alter table whatsapp_conversations enable row level security;
+-- Row level security is ON, with no public policies.
+-- The anon key cannot read or write these tables; only the server (service role key) can.
+alter table whatsapp_leads enable row level security;
+alter table whatsapp_conversations enable row level security;

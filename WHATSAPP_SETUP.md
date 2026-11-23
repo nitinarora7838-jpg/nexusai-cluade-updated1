@@ -25,7 +25,7 @@ WHATSAPP_VERIFY_TOKEN=any_random_secret_string_you_choose
 WHATSAPP_APP_SECRET=your_meta_app_secret
 
 # Your team's WhatsApp number for contact form alerts (E.164 format, no +)
-# e.g. 14155552671 for +1 (415) 555-2671
+# e.g. 919876543210 for +91 98765 43210
 WHATSAPP_TEAM_PHONE=your_team_whatsapp_number
 
 # Admin key to protect the /send and /broadcast endpoints
@@ -41,7 +41,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  # NOT the anon key
 
 ## Step 3: Supabase Schema
 
-Run the SQL in `supabase/whatsapp-schema.sql` in your Supabase SQL editor.
+Run the SQL in `supabase/whatsapp-schema.sql` (and `supabase/leads-schema.sql` for the contact form) in your Supabase SQL editor. Row level security is enabled with no public policies, so only the server can read or write these tables.
 
 ## Step 4: Configure Webhook in Meta Dashboard
 
@@ -59,21 +59,26 @@ GET  /api/whatsapp/webhook   ← Meta verification
 POST /api/whatsapp/webhook   ← Incoming messages → AI reply + lead capture
 ```
 
+Both admin endpoints need the admin key in a header (not the body):
+`Authorization: Bearer <WHATSAPP_ADMIN_KEY>`. If `WHATSAPP_ADMIN_KEY` isn't set,
+they always return 401.
+
 ### Send a single message
 ```
 POST /api/whatsapp/send
-Body: { "to": "14155552671", "message": "Hello!", "apiKey": "WHATSAPP_ADMIN_KEY" }
+Authorization: Bearer <WHATSAPP_ADMIN_KEY>
+Body: { "to": "919876543210", "message": "Hello!" }
 ```
 
 ### Broadcast to all leads (or active leads from last 7 days)
 ```
 POST /api/whatsapp/broadcast
+Authorization: Bearer <WHATSAPP_ADMIN_KEY>
 Body: {
-  "message": "🚀 New feature alert!",
+  "message": "Your appointment is confirmed.",
   "segment": "all",          // "all" or "active" (last 7 days)
-  // OR provide explicit list:
-  "phones": ["14155552671", "447911123456"],
-  "apiKey": "WHATSAPP_ADMIN_KEY"
+  // OR provide explicit list (digits only, with country code):
+  "phones": ["919876543210"]
 }
 ```
 

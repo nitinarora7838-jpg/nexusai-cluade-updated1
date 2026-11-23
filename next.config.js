@@ -1,33 +1,47 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Production performance & image optimisation
   images: {
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
   },
-  // Compress output
   compress: true,
-  // Transpile three.js / R3F ESM packages for the 3D hero scene
-  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-  // Stricter build — catch TS/lint errors at deploy time
   typescript: { ignoreBuildErrors: false },
-  eslint:     { ignoreDuringBuilds: true },
-  // Disable x-powered-by header
+  eslint: { ignoreDuringBuilds: true },
   poweredByHeader: false,
-  // Security headers
+
+  // Old pages that no longer exist → the most relevant new page (permanent 308).
+  async redirects() {
+    return [
+      { source: '/monitoring', destination: '/', permanent: true },
+      { source: '/monitoring/:path*', destination: '/', permanent: true },
+      { source: '/dashboard', destination: '/', permanent: true },
+      { source: '/dashboard/:path*', destination: '/', permanent: true },
+      { source: '/products/ai-customer-support-agent', destination: '/voice-agents', permanent: true },
+      {
+        source:
+          '/products/:slug(ai-workflow-engine|ai-automation-studio|ai-reporting-system|ai-productivity-assistant)',
+        destination: '/automation',
+        permanent: true,
+      },
+      { source: '/products', destination: '/', permanent: true },
+      { source: '/products/:path*', destination: '/', permanent: true },
+      { source: '/case-studies', destination: '/', permanent: true },
+      { source: '/case-studies/:path*', destination: '/', permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
-          { key: 'X-Content-Type-Options',    value: 'nosniff' },
-          { key: 'X-Frame-Options',            value: process.env.NODE_ENV === 'development' ? 'SAMEORIGIN' : 'DENY' },
-          { key: 'X-XSS-Protection',          value: '1; mode=block' },
-          { key: 'Referrer-Policy',            value: 'strict-origin-when-cross-origin' },
-          { key: 'Permissions-Policy',         value: 'camera=(), microphone=(), geolocation=()' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: process.env.NODE_ENV === 'development' ? 'SAMEORIGIN' : 'DENY' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
         ],
       },
     ];
   },
 };
+
 module.exports = nextConfig;

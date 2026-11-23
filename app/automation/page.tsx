@@ -1,11 +1,10 @@
-import AutomationPageClient from './AutomationPageClient';
+import { ServicePage, serviceMetadata } from '@/components/service-page';
+import { getService } from '@/lib/services';
 
-export const metadata = {
-  title: 'AI-Powered Enterprise Orchestration | Nexus AI',
-  description:
-    'Autonomous enterprise workflows connecting Slack, ERP, Payroll, CRM, HRMS and Finance systems — powered by Nexus AI.',
-};
+const service = getService('automation');
+
+export const metadata = serviceMetadata(service);
 
 export default function AutomationPage() {
-  return <AutomationPageClient />;
+  return <ServicePage service={service} />;
 }

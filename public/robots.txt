@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://nexusai.com/sitemap.xml
+Sitemap: https://www.nexus-aisolution.com/sitemap.xml
