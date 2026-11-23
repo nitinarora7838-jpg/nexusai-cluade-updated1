@@ -4,9 +4,9 @@ import {
   CalendarCheck,
   CalendarClock,
   Compass,
+  CreditCard,
   Headset,
   Inbox,
-  IndianRupee,
   Languages,
   MessageCircle,
   Mic,
@@ -92,7 +92,7 @@ export const services: Service[] = [
     meta: {
       title: 'AI Automation for Business: WhatsApp, CRM & Document Workflows',
       description:
-        'Custom AI workflows for Indian businesses: WhatsApp Business automation, lead capture and routing, CRM updates, invoice data extraction, scheduled reports and internal AI assistants. Built and run for you.',
+        'Custom AI workflows for growing businesses: WhatsApp Business automation, lead capture and routing, CRM updates, invoice data extraction, scheduled reports and internal AI assistants. Built and run for you.',
     },
     capabilities: [
       {
@@ -162,7 +162,7 @@ export const services: Service[] = [
         },
         {
           when: 'A vendor emails an invoice PDF',
-          then: 'AI reads the invoice number, amount, GST and due date and adds them to your accounts sheet for approval.',
+          then: 'AI reads the invoice number, amount, tax and due date and adds them to your accounts sheet for approval.',
         },
         {
           when: 'It’s 9 am on Monday',
@@ -221,9 +221,9 @@ export const services: Service[] = [
     ],
     bestFor: 'Websites and WhatsApp numbers where visitors leave without asking.',
     meta: {
-      title: 'AI Voice Chat for Websites & WhatsApp in Hindi, English and Hinglish',
+      title: 'AI Voice Chat for Websites, Apps & WhatsApp',
       description:
-        'Add a voice assistant to your website, app or WhatsApp. Visitors talk to it in English, Hindi or Hinglish; it answers questions, guides them, collects details and books appointments.',
+        'Add a voice assistant to your website, app or WhatsApp. Visitors simply talk to it; it answers questions, guides them, collects details and books appointments.',
     },
     capabilities: [
       {
@@ -232,8 +232,8 @@ export const services: Service[] = [
         icon: Mic,
       },
       {
-        title: 'English, Hindi and Hinglish',
-        text: 'Visitors can switch languages mid-sentence, the way people actually talk.',
+        title: 'Multiple languages',
+        text: 'Talks with visitors in the languages you choose, and copes when they switch mid-sentence.',
         icon: Languages,
       },
       {
@@ -279,20 +279,20 @@ export const services: Service[] = [
       kind: 'chat',
       title: 'Voice chat on a clinic’s website',
       messages: [
-        { from: 'visitor', text: 'Hi, mujhe knee pain ke liye doctor se milna hai. Kal ka appointment mil sakta hai?' },
+        { from: 'visitor', text: 'Hi, I need to see a doctor about knee pain. Can I get an appointment tomorrow?' },
         {
           from: 'ai',
-          text: 'Ji bilkul. Hamare orthopaedic doctor kal subah 11 baje aur shaam 4 baje available hain. Aapke liye kaunsa time theek rahega?',
+          text: 'Of course. Our orthopaedic doctor has openings tomorrow at 11 am and 4 pm. Which works better for you?',
         },
-        { from: 'visitor', text: '4 baje theek hai. Consultation fee kitni hai?' },
+        { from: 'visitor', text: '4 pm is good. Is there parking at the clinic?' },
         {
           from: 'ai',
-          text: 'Consultation fee ₹800 hai. Booking ke liye bas aapka naam aur mobile number bata dijiye.',
+          text: 'Yes, there’s free parking right outside. To book, could you tell me your name and phone number?',
         },
-        { from: 'visitor', text: 'Rahul Sharma, 98XXX XXXXX.' },
+        { from: 'visitor', text: 'Sam Taylor, 555-0142.' },
         {
           from: 'ai',
-          text: 'Thank you, Rahul ji. Kal shaam 4 baje ka appointment book ho gaya hai. Confirmation aur clinic ki location WhatsApp par bhej di hai.',
+          text: 'Thanks, Sam. You’re booked for 4 pm tomorrow. I’ve sent the confirmation and the clinic’s location to your WhatsApp.',
         },
       ],
       outcome: [
@@ -303,7 +303,7 @@ export const services: Service[] = [
     },
     goodFit: [
       'Many people visit your website but few fill in the form',
-      'Your customers prefer speaking to typing, or are more comfortable in Hindi',
+      'Your customers would rather speak than type',
       'Your team answers the same questions on chat and WhatsApp all day',
       'You want enquiries captured and appointments booked after office hours',
     ],
@@ -311,7 +311,7 @@ export const services: Service[] = [
       {
         question: 'How is this different from a chatbot?',
         answer:
-          'Visitors speak instead of typing, and the assistant replies by voice, with the text shown on screen too. It understands natural speech, including Hinglish, instead of making people pick from menus.',
+          'Visitors speak instead of typing, and the assistant replies by voice, with the text shown on screen too. It understands natural speech, including people mixing languages, instead of making people pick from menus.',
       },
       {
         question: 'Does it work on mobile?',
@@ -346,9 +346,9 @@ export const services: Service[] = [
     ],
     bestFor: 'Businesses that miss calls or can’t call every lead back quickly.',
     meta: {
-      title: 'AI Voice Agents for Phone Calls in Hindi, English and Hinglish',
+      title: 'AI Voice Agents for Inbound and Outbound Phone Calls',
       description:
-        'AI voice agents that answer and make real phone calls 24/7: inbound support, lead follow-up, appointment booking, EMI and payment reminders and order confirmation, with warm handoff to your team.',
+        'AI voice agents that answer and make real phone calls 24/7: inbound support, lead follow-up, appointment booking, payment reminders and order confirmation, with warm handoff to your team.',
     },
     capabilities: [
       {
@@ -367,9 +367,9 @@ export const services: Service[] = [
         icon: CalendarCheck,
       },
       {
-        title: 'Payment and EMI reminders',
+        title: 'Payment reminders',
         text: 'Polite reminder calls before and after due dates, with a payment link sent on WhatsApp or SMS.',
-        icon: IndianRupee,
+        icon: CreditCard,
       },
       {
         title: 'Order confirmation',
@@ -389,7 +389,7 @@ export const services: Service[] = [
       },
       {
         title: 'Connect your phone system',
-        text: 'We set up a number through Exotel, Twilio or your current provider, and connect your CRM and calendar.',
+        text: 'We set up a number through Twilio, Exotel or your current provider, and connect your CRM and calendar.',
       },
       {
         title: 'Test calls, then pilot',
@@ -406,23 +406,23 @@ export const services: Service[] = [
       lines: [
         {
           from: 'ai',
-          text: 'Namaste! Main [Your company] ka AI assistant hoon. Aapne abhi 2BHK flat ke baare mein enquiry ki thi. Kya 2 minute baat kar sakte hain?',
+          text: 'Hi, this is the AI assistant from [Your company]. You just asked about a two-bedroom apartment. Do you have two minutes?',
         },
-        { from: 'caller', text: 'Haan, boliye. Budget around 80 lakh hai, Whitefield side chahiye.' },
+        { from: 'caller', text: 'Sure. My budget is around 500K, and I’d like something near the city centre.' },
         {
           from: 'ai',
-          text: 'Ji, noted. Whitefield mein aapke budget mein do projects available hain. Kya aap is weekend site visit karna chahenge?',
+          text: 'Got it. We have two projects near the centre in your budget. Would you like to visit one this weekend?',
         },
-        { from: 'caller', text: 'Saturday ko ho sakta hai, subah.' },
-        { from: 'ai', text: 'Saturday subah 11 baje ka slot available hai. Book kar doon?' },
-        { from: 'caller', text: 'Haan, kar dijiye.' },
+        { from: 'caller', text: 'Saturday works, in the morning.' },
+        { from: 'ai', text: 'There’s a slot on Saturday at 11 am. Shall I book it?' },
+        { from: 'caller', text: 'Yes, please.' },
         {
           from: 'ai',
-          text: 'Done! Site visit Saturday 11 baje book ho gayi hai. Location aur project details aapko WhatsApp par bhej rahe hain. Hamari sales team kal aapko confirm karne ke liye call karegi.',
+          text: 'Done. Your visit is booked for Saturday at 11 am. I’m sending the location and project details to your WhatsApp, and our sales team will call you tomorrow to confirm.',
         },
       ],
       outcome: [
-        'Lead marked “hot” in the CRM: 2BHK, Whitefield, ₹80 lakh budget',
+        'Lead marked “hot” in the CRM: two-bedroom, near the city centre, 500K budget',
         'Site visit booked for Saturday, 11 am',
         'Location and project details sent on WhatsApp',
         'Sales team notified with the call summary and recording',
@@ -451,14 +451,14 @@ export const services: Service[] = [
           'It transfers the call to your team with a short summary, so the caller doesn’t have to repeat themselves. If no one is free, it takes a message and schedules a callback.',
       },
       {
-        question: 'Do outbound calls follow TRAI rules?',
+        question: 'Do outbound calls follow calling regulations?',
         answer:
-          'Yes. Outbound calls are scheduled within permitted calling hours and checked against DND preferences. We recommend calling only people who have enquired with you or are existing customers.',
+          'Yes. Outbound calls are scheduled within the calling hours allowed where your customers are, and checked against do-not-call lists. We recommend calling only people who have enquired with you or are existing customers.',
       },
       {
         question: 'How natural does it sound?',
         answer:
-          'It uses natural-sounding voices, handles English, Hindi and Hinglish, and copes with interruptions. You listen to test calls and approve the voice before anything goes live.',
+          'It uses natural-sounding voices, handles multiple languages and accents, and copes with interruptions. You listen to test calls and approve the voice before anything goes live.',
       },
     ],
   },

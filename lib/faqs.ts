@@ -12,7 +12,7 @@ export const homeFaqs: FaqItem[] = [
   {
     question: 'Which languages do you support?',
     answer:
-      'English, Hindi and Hinglish, including switching between them mid-sentence. If you need another Indian language, ask us on the free call and we’ll tell you honestly what works well today.',
+      'English and other languages, including people switching languages mid-sentence. Tell us which languages your customers speak, and on the free call we’ll tell you honestly what works well today.',
   },
   {
     question: 'Will people know they’re talking to AI?',
@@ -52,6 +52,6 @@ export const homeFaqs: FaqItem[] = [
   {
     question: 'Is our data safe?',
     answer:
-      'Recordings and transcripts are visible only to your authorised team. We handle personal data in line with the principles of India’s DPDP Act and use it only to run your service.',
+      'Recordings and transcripts are visible only to your authorised team. We handle personal data in line with the data-protection laws that apply to your business and use it only to run your service.',
   },
 ];

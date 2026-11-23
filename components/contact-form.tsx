@@ -164,13 +164,12 @@ export function ContactForm() {
             {...register('email')}
           />
         </Field>
-        <Field id={fid('phone')} label="Phone / WhatsApp" error={errors.phone?.message}>
+        <Field id={fid('phone')} label="Phone / WhatsApp (with country code)" error={errors.phone?.message}>
           <input
             id={fid('phone')}
             type="tel"
             autoComplete="tel"
             inputMode="tel"
-            placeholder="+91 98XXX XXXXX"
             className={inputClass}
             aria-invalid={!!errors.phone}
             aria-describedby={describedBy('phone')}

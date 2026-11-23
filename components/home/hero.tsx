@@ -14,7 +14,7 @@ export function Hero() {
       />
       <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-content animate-fade-up flex-col justify-center px-4 pb-24 pt-16 sm:px-6 sm:pb-32 sm:pt-24 lg:min-h-[680px]">
         <p className="inline-flex self-start rounded-full border border-line bg-ink/60 px-3 py-1 text-sm text-body backdrop-blur-sm">
-          Done-for-you AI for Indian businesses
+          Done-for-you AI for growing businesses
         </p>
         <h1
           id="hero-heading"
@@ -23,8 +23,8 @@ export function Hero() {
           AI that talks to your customers and does the work for you.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-body">
-          Nexus AI builds AI voice agents, website voice chat and business automation for Indian companies, in
-          English, Hindi and Hinglish. We set it up, connect it to your tools and run it for you.
+          Nexus AI builds AI voice agents, website voice chat and business automation for growing businesses. We
+          set it up, connect it to your tools and run it for you.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <ButtonLink href={ctaHref}>{ctaLabel}</ButtonLink>
