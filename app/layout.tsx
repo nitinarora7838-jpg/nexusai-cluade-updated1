@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { ChatWidget } from '@/components/chat/chat-widget';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { siteConfig } from '@/lib/site';
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <ChatWidget />
       </body>
     </html>
   );
