@@ -1,29 +1,44 @@
 import Link from 'next/link';
 
-/** Same mark as the Nexus AI Voice site: blue tile with sound bars. */
-export function LogoMark({ className = 'h-7 w-7' }: { className?: string }) {
-  return (
-    <span className={`grid shrink-0 place-items-center rounded-md bg-brand-solid ${className}`} aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16">
-        <rect x="1.5" y="6" width="2" height="4" rx="1" fill="#fff" />
-        <rect x="5" y="3.5" width="2" height="9" rx="1" fill="#fff" />
-        <rect x="8.5" y="1.5" width="2" height="13" rx="1" fill="#fff" />
-        <rect x="12" y="5" width="2" height="6" rx="1" fill="#fff" />
-      </svg>
-    </span>
-  );
-}
+/*
+ * Nexus AI "Pulse mark" logo, primary version for dark backgrounds, from the
+ * Nexus AI Logo design canvas: five rounded bars that form an N, then the
+ * wordmark. The wordmark is Syne Bold (SIL Open Font License 1.1) converted
+ * to outlines, so the logo needs no extra web font and renders identically
+ * everywhere.
+ */
+const BARS = [
+  { x: 0, y: 0, height: 100, fill: '#22E3F2' },
+  { x: 21.25, y: 0, height: 56, fill: '#2DB9FF' },
+  { x: 42.5, y: 22, height: 56, fill: '#3D8BFF' },
+  { x: 63.75, y: 44, height: 56, fill: '#6670FF' },
+  { x: 85, y: 0, height: 100, fill: '#9160FF' },
+];
 
-export function Logo() {
+const NEXUS_PATH =
+  'M217.12 71.23 212.54 73.08V14.96H227.07V85.65H212.54L155.39 29.82L159.98 27.96V85.65H145.45V14.96H159.98ZM288.25 67.62H302.02Q301.14 73.19 297.38 77.56Q293.61 81.93 287.16 84.45Q280.71 86.96 271.43 86.96Q261.05 86.96 253.07 83.63Q245.09 80.29 240.61 73.96Q236.14 67.62 236.14 58.66Q236.14 49.7 240.51 43.31Q244.88 36.92 252.69 33.53Q260.5 30.14 270.99 30.14Q281.7 30.14 288.8 33.53Q295.9 36.92 299.34 43.75Q302.78 50.58 302.24 61.17H250.45Q250.99 65.33 253.56 68.71Q256.13 72.1 260.55 74.07Q264.98 76.03 271.1 76.03Q277.87 76.03 282.41 73.68Q286.94 71.34 288.25 67.62ZM270.33 40.96Q262.47 40.96 257.55 44.4Q252.63 47.84 251.21 52.87H288.14Q287.6 47.41 282.95 44.18Q278.31 40.96 270.33 40.96ZM368.56 31.35 340.37 61.61 320.05 85.65H302.67L332.06 53.85L351.29 31.35ZM302.67 31.35H320.05L340.59 53.64L370.09 85.65H352.71L331.63 61.94ZM438.37 85.65H424.17V31.35H438.37ZM424.94 59.54 425.04 63.25Q424.83 64.78 423.95 67.68Q423.08 70.57 421.27 73.85Q419.47 77.13 416.63 80.13Q413.79 83.14 409.64 85.05Q405.49 86.96 399.81 86.96Q395.33 86.96 391.01 85.87Q386.69 84.77 383.2 82.21Q379.7 79.64 377.63 75.27Q375.55 70.9 375.55 64.23V31.35H389.75V61.83Q389.75 67.07 391.45 70.08Q393.14 73.08 396.42 74.29Q399.7 75.49 404.18 75.49Q410.08 75.49 414.34 72.92Q418.6 70.35 421.28 66.64Q423.95 62.92 424.94 59.54ZM445.8 67.62H458.91Q460.12 71.34 463.89 73.68Q467.66 76.03 473.77 76.03Q477.93 76.03 480.22 75.27Q482.51 74.5 483.39 73.03Q484.26 71.55 484.26 69.7Q484.26 67.4 482.84 66.15Q481.42 64.89 478.47 64.12Q475.52 63.36 470.93 62.7Q466.34 61.94 462.08 60.85Q457.82 59.75 454.54 57.95Q451.27 56.15 449.35 53.36Q447.44 50.58 447.44 46.53Q447.44 42.6 449.35 39.54Q451.27 36.48 454.71 34.41Q458.15 32.33 462.79 31.24Q467.44 30.14 472.79 30.14Q480.88 30.14 486.23 32.49Q491.58 34.84 494.26 39.05Q496.94 43.26 496.94 48.72H484.37Q483.5 44.68 480.88 42.87Q478.25 41.07 472.79 41.07Q467.44 41.07 464.71 42.71Q461.97 44.35 461.97 47.19Q461.97 49.48 463.67 50.74Q465.36 52 468.69 52.76Q472.03 53.53 477.05 54.4Q481.31 55.27 485.19 56.37Q489.07 57.46 492.13 59.15Q495.19 60.85 496.99 63.63Q498.79 66.42 498.79 70.68Q498.79 75.92 495.79 79.53Q492.79 83.14 487.21 85.05Q481.64 86.96 473.88 86.96Q467 86.96 462.03 85.48Q457.06 84.01 453.78 81.66Q450.5 79.31 448.7 76.63Q446.9 73.96 446.24 71.55Q445.59 69.15 445.8 67.62Z';
+const AI_PATH = 'M542.28 70.24V58.11H589.04V70.24ZM524.69 85.65 557.9 14.96H573.64L607.18 85.65H591.34L562.27 21.95H569.27L540.42 85.65ZM616.25 14.96H630.78V85.65H616.25Z';
+
+/** Width of the full logo relative to its height. */
+const RATIO = 6.3078;
+
+export function Logo({ height = 24 }: { height?: number }) {
   return (
-    <Link
-      href="/"
-      className="inline-flex items-center gap-2.5 rounded-md font-space text-[1.08rem] font-bold tracking-[-0.01em] text-fg"
-    >
-      <LogoMark />
-      <span>
-        Nexus <span className="font-semibold text-brand">AI</span>
-      </span>
+    <Link href="/" className="inline-flex shrink-0 items-center rounded-md">
+      <svg
+        viewBox="0 0 630.78 100"
+        width={Math.round(height * RATIO * 10) / 10}
+        height={height}
+        className="block"
+        aria-hidden="true"
+      >
+        {BARS.map((bar) => (
+          <rect key={bar.x} x={bar.x} y={bar.y} width={15} height={bar.height} rx={7.5} fill={bar.fill} />
+        ))}
+        <path fill="#F4F6FB" d={NEXUS_PATH} />
+        <path fill="#2DB9FF" d={AI_PATH} />
+      </svg>
+      <span className="sr-only">Nexus AI</span>
     </Link>
   );
 }
