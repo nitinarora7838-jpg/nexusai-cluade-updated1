@@ -2,17 +2,18 @@ import Link from 'next/link';
 
 /*
  * Nexus AI "Pulse mark" logo, primary version for dark backgrounds, from the
- * Nexus AI Logo design canvas: five rounded bars that form an N, then the
+ * Nexus AI Logo design canvas: five rounded bars that form an N, shaded in
+ * the site's own blues (#8FB4FF to the #2563EB button blue), then the
  * wordmark. The wordmark is Syne Bold (SIL Open Font License 1.1) converted
  * to outlines, so the logo needs no extra web font and renders identically
  * everywhere.
  */
 const BARS = [
-  { x: 0, y: 0, height: 100, fill: '#22E3F2' },
-  { x: 21.25, y: 0, height: 56, fill: '#2DB9FF' },
-  { x: 42.5, y: 22, height: 56, fill: '#3D8BFF' },
-  { x: 63.75, y: 44, height: 56, fill: '#6670FF' },
-  { x: 85, y: 0, height: 100, fill: '#9160FF' },
+  { x: 0, y: 0, height: 100, fill: '#8FB4FF' },
+  { x: 21.25, y: 0, height: 56, fill: '#6BA0FF' },
+  { x: 42.5, y: 22, height: 56, fill: '#4C8DFF' },
+  { x: 63.75, y: 44, height: 56, fill: '#3A78F2' },
+  { x: 85, y: 0, height: 100, fill: '#2563EB' },
 ];
 
 const NEXUS_PATH =
@@ -35,8 +36,8 @@ export function Logo({ height = 24 }: { height?: number }) {
         {BARS.map((bar) => (
           <rect key={bar.x} x={bar.x} y={bar.y} width={15} height={bar.height} rx={7.5} fill={bar.fill} />
         ))}
-        <path fill="#F4F6FB" d={NEXUS_PATH} />
-        <path fill="#2DB9FF" d={AI_PATH} />
+        <path fill="#F4F4F5" d={NEXUS_PATH} />
+        <path fill="#4C8DFF" d={AI_PATH} />
       </svg>
       <span className="sr-only">Nexus AI</span>
     </Link>
